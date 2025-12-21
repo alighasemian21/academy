@@ -1,26 +1,26 @@
 import Link from 'next/link';
 
-export default function CompanyPage() {
+export default function StudioPage() {
   return (
     <div className="py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">شرکت ما</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">استودیو آکادمی</h1>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            ارائه بهترین خدمات تخصصی با کیفیت بالا و پشتیبانی مستمر
+            دپارتمان استودیو آکادمی - ارائه بهترین خدمات تخصصی با کیفیت بالا و پشتیبانی مستمر
           </p>
         </div>
 
         <div className="bg-primary-50 rounded-lg p-8 mb-16">
-          <h2 className="text-2xl font-bold mb-4 text-center">درباره شرکت</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center">درباره استودیو</h2>
           <p className="text-gray-700 leading-relaxed max-w-3xl mx-auto text-center">
-            شرکت ما با سال‌ها تجربه در زمینه ارائه خدمات تخصصی، آماده خدمت‌رسانی به کسب‌وکارها و سازمان‌ها است. ما با تیمی متخصص و با تجربه، بهترین راه‌حل‌ها را برای شما ارائه می‌دهیم.
+            استودیو آکادمی با سال‌ها تجربه در زمینه ارائه خدمات تخصصی، به عنوان بخشی از آکادمی علی قاسمیان، آماده خدمت‌رسانی به کسب‌وکارها و سازمان‌ها است. ما با تیمی متخصص و با تجربه، بهترین راه‌حل‌ها را برای شما ارائه می‌دهیم.
           </p>
         </div>
 
         <div className="text-center mb-12">
           <Link
-            href="/company/services"
+            href="/academy/studio/services"
             className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
           >
             مشاهده خدمات

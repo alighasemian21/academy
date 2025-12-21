@@ -56,7 +56,7 @@ export const students: Student[] = [
     name: 'زهرا نوری',
     course: 'طراحی UI/UX',
     projectTitle: 'طراحی وبسایت',
-    projectDescription: 'طراحی رابط کاربری یک وبسایت شرکتی',
+    projectDescription: 'طراحی رابط کاربری یک وبسایت استودیویی',
     image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
 ];

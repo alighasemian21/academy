@@ -6,7 +6,7 @@ export default function Hero() {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            خوش آمدید به آکادمی و شرکت علی قاسمیان
+            خوش آمدید به آکادمی علی قاسمیان
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-100">
             ارائه بهترین خدمات آموزشی و تخصصی با بالاترین کیفیت
@@ -19,10 +19,10 @@ export default function Hero() {
               مشاهده دوره‌ها
             </Link>
             <Link
-              href="/company/services"
+              href="/academy/studio/services"
               className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors"
             >
-              خدمات شرکت
+              استودیو
             </Link>
           </div>
         </div>

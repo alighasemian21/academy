@@ -2,7 +2,7 @@ import ContactForm from '@/components/ContactForm';
 
 export const metadata = {
   title: 'تماس با ما',
-  description: 'تماس با آکادمی و شرکت علی قاسمیان',
+  description: 'تماس با آکادمی علی قاسمیان',
 };
 
 export default function ContactPage() {
