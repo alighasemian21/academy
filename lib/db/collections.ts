@@ -1,4 +1,5 @@
-import getDatabase from '@/lib/mongodb';
+import { getDatabase } from '@/lib/mongodb';
+import { Document, Collection } from 'mongodb';
 
 /**
  * Collection names
@@ -16,7 +17,7 @@ export const COLLECTIONS = {
 /**
  * Get a collection by name
  */
-export async function getCollection<T = any>(collectionName: string) {
+export async function getCollection<T extends Document = Document>(collectionName: string): Promise<Collection<T>> {
   const db = await getDatabase();
   return db.collection<T>(collectionName);
 }

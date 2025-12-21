@@ -22,6 +22,9 @@ export default function CourseCard({ course }: CourseCardProps) {
             fill
             className="object-cover"
             onError={() => setImgError(true)}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            loading="lazy"
+            unoptimized
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500">

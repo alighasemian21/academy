@@ -18,7 +18,7 @@ export const services: Service[] = [
       'سرعت بالا',
       'پشتیبانی کامل',
     ],
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     featured: true,
   },
   {
@@ -31,7 +31,7 @@ export const services: Service[] = [
       'برنامه‌ریزی',
       'مشاوره مستمر',
     ],
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     featured: true,
   },
   {
@@ -44,7 +44,7 @@ export const services: Service[] = [
       'طراحی کاتالوگ',
       'راهنمای برند',
     ],
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     featured: true,
   },
   {
@@ -57,7 +57,7 @@ export const services: Service[] = [
       'مدیریت شبکه‌های اجتماعی',
       'تحلیل و گزارش',
     ],
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     featured: false,
   },
 ];

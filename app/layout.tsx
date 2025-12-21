@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     description: 'آکادمی و شرکت علی قاسمیان - ارائه خدمات آموزشی و تخصصی با کیفیت',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80',
+        url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
         width: 1200,
         height: 630,
         alt: 'آکادمی و شرکت علی قاسمیان',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'آکادمی و شرکت - علی قاسمیان',
     description: 'آکادمی و شرکت علی قاسمیان - ارائه خدمات آموزشی و تخصصی با کیفیت',
-    images: ['https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80'],
+    images: ['https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'],
   },
   robots: {
     index: true,
