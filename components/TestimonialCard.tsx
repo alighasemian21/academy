@@ -44,7 +44,7 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
       {/* Author */}
       <div className="flex items-center gap-4 pt-6 border-t border-primary-100">
         <div className="relative w-14 h-14 rounded-full overflow-hidden bg-primary-100 flex-shrink-0">
-          {!imgError ? (
+          {!imgError && !testimonial.image.startsWith('data:') && !testimonial.image.includes('placeholder') ? (
             <Image
               src={testimonial.image}
               alt={testimonial.name}
@@ -52,6 +52,7 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
               className="object-cover"
               onError={() => setImgError(true)}
               sizes="56px"
+              unoptimized={testimonial.image.endsWith('.svg')}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-primary-200 text-primary-600 font-bold text-lg">
