@@ -57,7 +57,7 @@ export default function Hero() {
               </Link>
               <Link
                 href="/academy/enrollment"
-                className="px-8 py-4 bg-white text-primary-900 border-2 border-primary-900 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:scale-105 active:scale-95 transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2 touch-manipulation min-h-[52px]"
+                className="group px-8 py-4 bg-white text-primary-900 border-2 border-primary-900 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:scale-105 active:scale-95 transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2 touch-manipulation min-h-[52px]"
               >
                 شروع یادگیری
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,34 +68,32 @@ export default function Hero() {
           </AnimatedSection>
           
           {/* Stats */}
-          <AnimatedSection animation="fade-in-up" delay={400}>
-            <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-8 border-t border-primary-200">
-              <div>
-                <CountUp 
-                  end={10} 
-                  suffix="+" 
-                  className="text-3xl sm:text-4xl font-bold text-primary-900 mb-1"
-                />
-                <div className="text-sm text-primary-600">سال تجربه</div>
-              </div>
-              <div>
-                <CountUp 
-                  end={500} 
-                  suffix="+" 
-                  className="text-3xl sm:text-4xl font-bold text-primary-900 mb-1"
-                />
-                <div className="text-sm text-primary-600">دانشجوی موفق</div>
-              </div>
-              <div>
-                <CountUp 
-                  end={20} 
-                  suffix="+" 
-                  className="text-3xl sm:text-4xl font-bold text-primary-900 mb-1"
-                />
-                <div className="text-sm text-primary-600">دوره تخصصی</div>
-              </div>
+          <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-8 border-t border-primary-200">
+            <div>
+              <CountUp 
+                end={10} 
+                suffix="+" 
+                className="text-3xl sm:text-4xl font-bold text-primary-900 mb-1"
+              />
+              <div className="text-sm text-primary-600">سال تجربه</div>
             </div>
-          </AnimatedSection>
+            <div>
+              <CountUp 
+                end={500} 
+                suffix="+" 
+                className="text-3xl sm:text-4xl font-bold text-primary-900 mb-1"
+              />
+              <div className="text-sm text-primary-600">دانشجوی موفق</div>
+            </div>
+            <div>
+              <CountUp 
+                end={20} 
+                suffix="+" 
+                className="text-3xl sm:text-4xl font-bold text-primary-900 mb-1"
+              />
+              <div className="text-sm text-primary-600">دوره تخصصی</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -20,6 +20,7 @@ export default function CountUp({
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
   const countRef = useRef<HTMLDivElement>(null);
+  const animationFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (hasAnimated) return;
@@ -42,13 +43,14 @@ export default function CountUp({
         setCount(currentValue);
 
         if (progress < 1) {
-          requestAnimationFrame(animate);
+          animationFrameRef.current = requestAnimationFrame(animate);
         } else {
           setCount(end);
+          animationFrameRef.current = null;
         }
       };
 
-      requestAnimationFrame(animate);
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     const observer = new IntersectionObserver(
@@ -56,24 +58,33 @@ export default function CountUp({
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated) {
             setHasAnimated(true);
-            animateCount();
+            setTimeout(() => {
+              animateCount();
+            }, 100);
           }
         });
       },
-      { threshold: 0.5 }
+      { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
     );
 
     observer.observe(currentRef);
 
     return () => {
-      observer.unobserve(currentRef);
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
   }, [hasAnimated, end, duration]);
 
-
   return (
     <div ref={countRef} className={className}>
-      {prefix}{count}{suffix}
+      {prefix}{count.toLocaleString('fa-IR')}{suffix}
     </div>
   );
 }
