@@ -40,12 +40,12 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-8 max-w-2xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6">فرم تماس</h2>
+    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-soft-lg p-8 md:p-12 max-w-2xl mx-auto border border-primary-100">
+      <h2 className="text-3xl font-bold text-primary-900 mb-8 text-center">فرم تماس</h2>
 
       <div className="space-y-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="name" className="block text-sm font-semibold text-primary-900 mb-2">
             نام و نام خانوادگی *
           </label>
           <input
@@ -55,13 +55,13 @@ export default function ContactForm() {
             required
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full px-4 py-3 border-2 border-primary-200 rounded-xl focus:ring-2 focus:ring-primary-900 focus:border-primary-900 transition-all outline-none text-primary-900"
             placeholder="نام خود را وارد کنید"
           />
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="email" className="block text-sm font-semibold text-primary-900 mb-2">
             ایمیل *
           </label>
           <input
@@ -71,13 +71,13 @@ export default function ContactForm() {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full px-4 py-3 border-2 border-primary-200 rounded-xl focus:ring-2 focus:ring-primary-900 focus:border-primary-900 transition-all outline-none text-primary-900"
             placeholder="email@example.com"
           />
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="phone" className="block text-sm font-semibold text-primary-900 mb-2">
             شماره تماس *
           </label>
           <input
@@ -87,13 +87,13 @@ export default function ContactForm() {
             required
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full px-4 py-3 border-2 border-primary-200 rounded-xl focus:ring-2 focus:ring-primary-900 focus:border-primary-900 transition-all outline-none text-primary-900"
             placeholder="09123456789"
           />
         </div>
 
         <div>
-          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="subject" className="block text-sm font-semibold text-primary-900 mb-2">
             موضوع *
           </label>
           <input
@@ -103,13 +103,13 @@ export default function ContactForm() {
             required
             value={formData.subject}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full px-4 py-3 border-2 border-primary-200 rounded-xl focus:ring-2 focus:ring-primary-900 focus:border-primary-900 transition-all outline-none text-primary-900"
             placeholder="موضوع پیام"
           />
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="message" className="block text-sm font-semibold text-primary-900 mb-2">
             پیام *
           </label>
           <textarea
@@ -119,27 +119,37 @@ export default function ContactForm() {
             required
             value={formData.message}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full px-4 py-3 border-2 border-primary-200 rounded-xl focus:ring-2 focus:ring-primary-900 focus:border-primary-900 transition-all outline-none resize-none text-primary-900"
             placeholder="پیام خود را بنویسید..."
           />
         </div>
 
         {submitStatus === 'success' && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
-            پیام شما با موفقیت ارسال شد! در اسرع وقت با شما تماس خواهیم گرفت.
+          <div className="bg-green-50 border-2 border-green-200 text-green-800 px-4 py-3 rounded-xl">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span>پیام شما با موفقیت ارسال شد! در اسرع وقت با شما تماس خواهیم گرفت.</span>
+            </div>
           </div>
         )}
 
         {submitStatus === 'error' && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-            خطایی رخ داد. لطفاً دوباره تلاش کنید.
+          <div className="bg-red-50 border-2 border-red-200 text-red-800 px-4 py-3 rounded-xl">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              </svg>
+              <span>خطایی رخ داد. لطفاً دوباره تلاش کنید.</span>
+            </div>
           </div>
         )}
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="w-full bg-primary-900 text-white px-6 py-4 rounded-xl font-semibold hover:bg-primary-800 transition-all duration-200 shadow-soft hover:shadow-soft-lg disabled:bg-primary-400 disabled:cursor-not-allowed disabled:shadow-none"
         >
           {isSubmitting ? 'در حال ارسال...' : 'ارسال پیام'}
         </button>
