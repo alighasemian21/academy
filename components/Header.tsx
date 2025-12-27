@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function Header() {
     { href: '/academy', label: 'آکادمی' },
     { href: '/academy/courses', label: 'دوره‌ها' },
     { href: '/academy/teachers', label: 'اساتید' },
-    { href: '/academy/studio', label: 'استودیو' },
+    { href: '/company', label: 'شرکت' },
     { href: '/blog', label: 'وبلاگ' },
     { href: '/contact', label: 'تماس با ما' },
   ];
@@ -22,11 +23,17 @@ export default function Header() {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-reverse space-x-2">
-            <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">ع</span>
+            <div className="w-10 h-10 flex items-center justify-center">
+              <Image
+                src="/images/logos/logo-84.png"
+                alt="آکادمی 84"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
             </div>
-            <span className="text-2xl font-bold text-primary-600 hidden sm:inline">علی قاسمیان</span>
-            <span className="text-xl font-bold text-primary-600 sm:hidden">ع.ق</span>
+            <span className="text-2xl font-bold text-primary-600 hidden sm:inline">آکادمی 84</span>
+            <span className="text-xl font-bold text-primary-600 sm:hidden">84</span>
           </Link>
 
           {/* Desktop Menu */}

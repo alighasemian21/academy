@@ -8,7 +8,7 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">درباره ما</h3>
             <p className="text-gray-400">
-              آکادمی علی قاسمیان - ارائه خدمات آموزشی و تخصصی با کیفیت
+              آکادمی 84 - ارائه خدمات آموزشی و تخصصی با کیفیت
             </p>
           </div>
 
@@ -26,8 +26,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/academy/studio/services" className="hover:text-white transition-colors">
-                  استودیو
+                <Link href="/company/services" className="hover:text-white transition-colors">
+                  خدمات شرکت
                 </Link>
               </li>
               <li>
@@ -49,7 +49,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} تمام حقوق محفوظ است - علی قاسمیان</p>
+          <p>&copy; {new Date().getFullYear()} تمام حقوق محفوظ است - آکادمی 84</p>
         </div>
       </div>
     </footer>

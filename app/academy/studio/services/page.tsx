@@ -2,8 +2,8 @@ import ServiceCard from '@/components/ServiceCard';
 import { getAllServices } from '@/lib/data/services';
 
 export const metadata = {
-  title: 'خدمات استودیو',
-  description: 'خدمات تخصصی استودیو آکادمی',
+  title: 'خدمات شرکت',
+  description: 'خدمات تخصصی شرکت',
 };
 
 export default function ServicesPage() {
