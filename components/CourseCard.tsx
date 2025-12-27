@@ -15,7 +15,7 @@ export default function CourseCard({ course }: CourseCardProps) {
   return (
     <Link 
       href={`/academy/courses/${course.slug}`}
-      className="group block bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 border border-primary-100"
+      className="group block bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] border border-primary-100 active:scale-[0.98]"
     >
       <div className="relative h-48 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
         {!imgError ? (
@@ -65,9 +65,9 @@ export default function CourseCard({ course }: CourseCardProps) {
             </svg>
             {course.instructor}
           </span>
-          <span className="flex items-center gap-1 text-accent-600 font-semibold group-hover:gap-2 transition-all">
+          <span className="flex items-center gap-1 text-accent-600 font-semibold group-hover:gap-2 group-hover:text-accent-700 transition-all">
             مشاهده دوره
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </span>

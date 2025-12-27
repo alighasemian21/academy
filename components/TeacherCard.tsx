@@ -13,13 +13,13 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="relative h-64 bg-gray-200">
+      <div className="relative h-64 bg-gray-200 overflow-hidden">
         {!imgError ? (
           <Image
             src={teacher.image}
             alt={teacher.name}
             fill
-            className="object-cover"
+            className="object-cover teacher-image-offset"
             onError={() => setImgError(true)}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             loading="lazy"

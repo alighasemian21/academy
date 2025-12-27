@@ -32,7 +32,7 @@ export const posts: BlogPost[] = [
 
       و نکات دیگر...
     `,
-    author: 'آکادمی 84',
+    author: 'علی قاسمیان',
     date: '2024-01-15',
     image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
     slug: '10-tips-for-successful-business',
@@ -53,7 +53,7 @@ export const posts: BlogPost[] = [
 
       و ادامه مطلب...
     `,
-    author: 'آکادمی 84',
+    author: 'علی قاسمیان',
     date: '2024-01-10',
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
     slug: 'react-for-beginners',
@@ -74,7 +74,7 @@ export const posts: BlogPost[] = [
 
       و ادامه مطلب...
     `,
-    author: 'آکادمی 84',
+    author: 'علی قاسمیان',
     date: '2024-01-05',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
     slug: 'seo-guide',

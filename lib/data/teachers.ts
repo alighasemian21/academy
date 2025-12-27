@@ -10,7 +10,7 @@ export interface Teacher {
 export const teachers: Teacher[] = [
   {
     id: '1',
-    name: 'آکادمی 84',
+    name: 'علی قاسمیان',
     title: 'مدیر و مدرس اصلی',
     bio: 'با بیش از 10 سال تجربه در مدیریت و آموزش، متخصص در زمینه کسب‌وکار و تکنولوژی',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',

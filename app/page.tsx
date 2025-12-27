@@ -3,8 +3,11 @@ import Link from 'next/link';
 import Hero from '@/components/Hero';
 import CourseCard from '@/components/CourseCard';
 import ServiceCard from '@/components/ServiceCard';
+import TestimonialCard from '@/components/TestimonialCard';
+import AnimatedSection from '@/components/AnimatedSection';
 import { getFeaturedCourses } from '@/lib/data/courses';
 import { getFeaturedServices } from '@/lib/data/services';
+import { getFeaturedTestimonials } from '@/lib/data/testimonials';
 
 export const metadata: Metadata = {
   title: 'خانه',
@@ -18,6 +21,7 @@ export const metadata: Metadata = {
 export default function Home() {
   const featuredCourses = getFeaturedCourses(3);
   const featuredServices = getFeaturedServices(3);
+  const featuredTestimonials = getFeaturedTestimonials(3);
 
   return (
     <div>
@@ -27,11 +31,13 @@ export default function Home() {
       <section className="section-padding bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-900 mb-6 tracking-tight">
-                چرا آکادمی 84؟
-              </h2>
-            </div>
+            <AnimatedSection animation="fade-in-up">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-900 mb-6 tracking-tight">
+                  چرا آکادمی 84؟
+                </h2>
+              </div>
+            </AnimatedSection>
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <div className="p-6 rounded-2xl bg-primary-50 border border-primary-100">
                 <h3 className="text-xl font-bold text-primary-900 mb-3">آموزش عملی و پروژه‌محور</h3>
@@ -65,14 +71,16 @@ export default function Home() {
       {/* Featured Courses */}
       <section className="section-padding bg-primary-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-900 mb-4 tracking-tight">
-              دوره‌های محبوب
-            </h2>
-            <p className="text-lg text-primary-700 max-w-2xl mx-auto">
-              دوره‌هایی که بیشترین استقبال را داشته‌اند و دانشجویان با آن‌ها به نتایج عالی رسیده‌اند
-            </p>
-          </div>
+          <AnimatedSection animation="fade-in-up">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-900 mb-4 tracking-tight">
+                دوره‌های محبوب
+              </h2>
+              <p className="text-lg text-primary-700 max-w-2xl mx-auto">
+                دوره‌هایی که بیشترین استقبال را داشته‌اند و دانشجویان با آن‌ها به نتایج عالی رسیده‌اند
+              </p>
+            </div>
+          </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
             {featuredCourses.map((course) => (
               <CourseCard key={course.id} course={course} />
@@ -92,17 +100,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Testimonials Section */}
       <section className="section-padding bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-900 mb-4 tracking-tight">
-              خدمات تخصصی
-            </h2>
-            <p className="text-lg text-primary-700 max-w-2xl mx-auto">
-              علاوه بر آموزش، خدمات تخصصی برای کسب‌وکارها و پروژه‌های حرفه‌ای ارائه می‌دهیم
-            </p>
+          <AnimatedSection animation="fade-in-up">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-900 mb-4 tracking-tight">
+                نظرات دانشجویان
+              </h2>
+              <p className="text-lg text-primary-700 max-w-2xl mx-auto">
+                تجربه‌های واقعی دانشجویانی که با ما همراه شده‌اند و به نتایج عالی رسیده‌اند
+              </p>
+            </div>
+          </AnimatedSection>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+            {featuredTestimonials.map((testimonial) => (
+              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="section-padding bg-primary-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection animation="fade-in-up">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-900 mb-4 tracking-tight">
+                خدمات تخصصی
+              </h2>
+              <p className="text-lg text-primary-700 max-w-2xl mx-auto">
+                علاوه بر آموزش، خدمات تخصصی برای کسب‌وکارها و پروژه‌های حرفه‌ای ارائه می‌دهیم
+              </p>
+            </div>
+          </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
             {featuredServices.map((service) => (
               <ServiceCard key={service.id} service={service} />

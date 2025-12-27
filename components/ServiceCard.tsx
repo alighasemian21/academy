@@ -13,7 +13,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="group bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 border border-primary-100">
+    <div className="group bg-white rounded-2xl shadow-soft overflow-hidden hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] border border-primary-100 active:scale-[0.98]">
       <div className="relative h-48 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
         {!imgError ? (
           <Image
@@ -56,7 +56,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         </ul>
         <Link
           href="/contact"
-          className="block w-full bg-primary-900 text-white text-center py-3 rounded-xl font-semibold hover:bg-primary-800 transition-all duration-200 shadow-soft hover:shadow-soft-lg"
+          className="block w-full bg-primary-900 text-white text-center py-3 rounded-xl font-semibold hover:bg-primary-800 hover:scale-105 active:scale-95 transition-all duration-200 shadow-soft hover:shadow-soft-lg"
         >
           دریافت مشاوره
         </Link>
