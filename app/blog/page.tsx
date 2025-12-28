@@ -1,9 +1,19 @@
+import { Metadata } from 'next';
 import BlogCard from '@/components/BlogCard';
 import { getAllPosts } from '@/lib/data/posts';
 
-export const metadata = {
-  title: 'وبلاگ - مقالات آموزشی',
-  description: 'مقالات و مطالب آموزشی در زمینه کسب‌وکار، برنامه‌نویسی و بازاریابی',
+export const metadata: Metadata = {
+  title: 'وبلاگ',
+  description: 'مقالات و مطالب آموزشی آکادمی 84 در زمینه کسب‌وکار، برنامه‌نویسی، بازاریابی دیجیتال، طراحی و توسعه وب. آموزش‌های رایگان و نکات حرفه‌ای.',
+  keywords: ['مقالات آموزشی', 'وبلاگ آکادمی 84', 'آموزش رایگان', 'نکات برنامه‌نویسی', 'مقالات بازاریابی', 'مقالات کسب‌وکار'],
+  openGraph: {
+    title: 'وبلاگ | آکادمی 84',
+    description: 'مقالات و مطالب آموزشی در زمینه کسب‌وکار، برنامه‌نویسی و بازاریابی',
+    url: 'https://www.academy84.ir/blog',
+  },
+  alternates: {
+    canonical: 'https://www.academy84.ir/blog',
+  },
 };
 
 export default function BlogPage() {

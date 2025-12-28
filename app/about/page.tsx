@@ -1,6 +1,17 @@
-export const metadata = {
-  title: 'درباره ما - آکادمی 84',
-  description: 'آکادمی 84 - آموزش تخصصی تصویر و رسانه با بیش از ۱۰ سال تجربه. دوره‌های عملی و پروژه‌محور',
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'درباره ما',
+  description: 'آکادمی 84 - مرکز تخصصی آموزش تصویر و رسانه با بیش از 10 سال تجربه. دوره‌های عملی و پروژه‌محور. بیش از 500 دانشجوی موفق. ماموریت ما آماده کردن شما برای ورود به بازار کار واقعی است.',
+  keywords: ['درباره آکادمی 84', 'تاریخچه آکادمی 84', 'ماموریت آکادمی 84', 'ارزش‌های آکادمی 84', 'آموزش تصویر و رسانه'],
+  openGraph: {
+    title: 'درباره ما | آکادمی 84',
+    description: 'آکادمی 84 - مرکز تخصصی آموزش تصویر و رسانه با بیش از 10 سال تجربه. دوره‌های عملی و پروژه‌محور',
+    url: 'https://www.academy84.ir/about',
+  },
+  alternates: {
+    canonical: 'https://www.academy84.ir/about',
+  },
 };
 
 export default function AboutPage() {

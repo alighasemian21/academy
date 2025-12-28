@@ -1,19 +1,21 @@
 # وبسایت آکادمی 84
 
-وبسایت رسمی آکادمی 84 - مرکز تخصصی آموزش تصویر و رسانه. طراحی شده با Next.js 14 و React.
+وبسایت رسمی آکادمی 84 - مرکز تخصصی آموزش تصویر و رسانه. طراحی شده با Next.js 14، React و Tailwind CSS.
 
 ## ویژگی‌ها
 
-- ✨ طراحی مدرن، مینیمال و حرفه‌ای
-- 🎨 استفاده از Tailwind CSS با پالت رنگی مینیمال
+- ✨ طراحی مدرن، مینیمال، خاص و حرفه‌ای
+- 🎨 استفاده از Tailwind CSS با پالت رنگی حرفه‌ای (خاکستری + نارنجی)
 - 📱 کاملاً Responsive - سازگار با موبایل، تبلت و دسکتاپ
 - ⚡ عملکرد سریع با Next.js 14 App Router
 - 🔍 بهینه‌سازی شده برای SEO
 - 🌐 پشتیبانی کامل از زبان فارسی (RTL)
-- 🎬 انیمیشن‌های نرم و حرفه‌ای (Count-up، Scroll animations)
-- 💫 Micro-interactions پیشرفته
-- ⭐ سکشن نظرات دانشجویان (Testimonials)
+- 🎬 انیمیشن‌های نرم و حرفه‌ای با Framer Motion
+- 💫 Micro-interactions پیشرفته (Hover effects، Scroll animations)
+- ⭐ سکشن نظرات دانشجویان با تصاویر (Testimonials)
 - 📊 آمار پویا با Count-up animation
+- 🎯 Hero Section حرفه‌ای با انیمیشن‌های پیشرفته
+- 🏆 بخش Stats با آمارهای تعاملی
 
 ## بخش‌های سایت
 
@@ -98,13 +100,15 @@ yarn start
 │   ├── page.tsx           # صفحه اصلی
 │   └── globals.css        # استایل‌های عمومی و انیمیشن‌ها
 ├── components/            # کامپوننت‌های React
-│   ├── Header.tsx         # هدر با CTA button
-│   ├── Hero.tsx          # Hero section با Count-up
-│   ├── CourseCard.tsx    # کارت دوره
-│   ├── ServiceCard.tsx   # کارت خدمات
-│   ├── TestimonialCard.tsx # کارت نظرات
+│   ├── Header.tsx         # هدر با انیمیشن‌های scroll و موبایل
+│   ├── Hero.tsx          # Hero section با Framer Motion و Count-up
+│   ├── StatsSection.tsx  # بخش نمایش آمار با Count-up animations
+│   ├── CourseCard.tsx    # کارت دوره با hover animations پیشرفته
+│   ├── ServiceCard.tsx   # کارت خدمات با micro-interactions
+│   ├── TestimonialCard.tsx # کارت نظرات با انیمیشن‌های ظریف
 │   ├── CountUp.tsx       # کامپوننت Count-up animation
-│   └── AnimatedSection.tsx # کامپوننت برای scroll animations
+│   ├── AnimatedSection.tsx # کامپوننت wrapper برای scroll animations با Framer Motion
+│   └── Footer.tsx        # Footer با لینک‌ها و اطلاعات تماس
 ├── hooks/                 # Custom hooks
 │   └── useScrollAnimation.ts # Hook برای scroll animations
 ├── lib/                   # توابع و داده‌های کمکی
@@ -134,6 +138,53 @@ yarn start
 # API_KEY=your_api_key
 ```
 
+## دامنه و URL
+
+سایت روی دامنه اصلی **https://www.academy84.ir/** در دسترس است.
+
+### تنظیم متغیر محیطی
+
+برای استفاده از دامنه در development، فایل `.env.local` ایجاد کنید:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://www.academy84.ir
+```
+
+## SEO و بهینه‌سازی
+
+### فایل‌های SEO
+
+پروژه شامل فایل‌های SEO زیر است:
+
+- **`app/sitemap.ts`** - تولید خودکار sitemap.xml با تمام صفحات
+- **`app/robots.ts`** - تولید خودکار robots.txt
+
+این فایل‌ها به طور خودکار در مسیرهای زیر در دسترس هستند:
+- `https://www.academy84.ir/sitemap.xml`
+- `https://www.academy84.ir/robots.txt`
+
+### Meta Tags
+
+همه صفحات شامل meta tags کامل هستند:
+- Title و Description فارسی حرفه‌ای
+- Keywords مرتبط
+- Open Graph tags
+- Twitter Cards
+- Canonical URLs
+
+### Alt Text تصاویر
+
+همه تصاویر دارای alt text فارسی و SEO-friendly هستند.
+
+### ثبت در Google Search Console
+
+برای ثبت سایت در Google Search Console:
+
+1. به [Google Search Console](https://search.google.com/search-console) بروید
+2. دامنه `academy84.ir` را اضافه کنید
+3. Sitemap را ثبت کنید: `https://www.academy84.ir/sitemap.xml`
+4. منتظر بمانید تا گوگل سایت را crawl کند
+
 ## دیپلوی
 
 ### دیپلوی روی Vercel (پیشنهادی)
@@ -143,7 +194,8 @@ yarn start
 3. روی "Add New Project" کلیک کنید
 4. ریپازیتوری خود را انتخاب کنید
 5. تنظیمات را تایید کنید (Vercel به طور خودکار Next.js را تشخیص می‌دهد)
-6. روی "Deploy" کلیک کنید
+6. **متغیر محیطی `NEXT_PUBLIC_SITE_URL` را تنظیم کنید**: `https://www.academy84.ir`
+7. روی "Deploy" کلیک کنید
 
 ### دیپلوی روی سایر پلتفرم‌ها
 
@@ -153,18 +205,22 @@ yarn start
 - AWS
 - سرور شخصی با Node.js
 
+**نکته مهم**: حتماً متغیر محیطی `NEXT_PUBLIC_SITE_URL=https://www.academy84.ir` را تنظیم کنید.
+
 ## سفارشی‌سازی
 
 ### تغییر محتوا
 
 برای تغییر محتوا، فایل‌های زیر را ویرایش کنید:
 
-- `lib/data/courses.ts` - دوره‌ها
+- `lib/data/courses.ts` - دوره‌ها (عنوان، توضیحات، قیمت، مدت زمان)
 - `lib/data/teachers.ts` - اساتید
 - `lib/data/students.ts` - دانشجویان
-- `lib/data/services.ts` - خدمات
+- `lib/data/services.ts` - خدمات (عنوان، توضیحات، ویژگی‌ها)
 - `lib/data/posts.ts` - پست‌های وبلاگ
-- `lib/data/testimonials.ts` - نظرات دانشجویان
+- `lib/data/testimonials.ts` - نظرات دانشجویان (نام، نقش، متن، رتبه)
+
+**نکته**: تمام متن‌های فارسی به صورت حرفه‌ای، ارزش‌محور و SEO-friendly نوشته شده‌اند.
 
 ### کامپوننت‌های جدید
 
@@ -175,17 +231,37 @@ yarn start
 
 ### انیمیشن‌ها
 
-انیمیشن‌های موجود در `app/globals.css`:
+این پروژه از **Framer Motion** برای انیمیشن‌های پیشرفته استفاده می‌کند.
+
+انیمیشن‌های موجود در `AnimatedSection`:
 - `fade-in-up`: fade + slide up
+- `fade-in-down`: fade + slide down
 - `fade-in`: فقط fade
 - `slide-in-right`: slide از راست (RTL)
+- `slide-in-left`: slide از چپ (RTL)
 - `scale-in`: scale animation
 
 استفاده:
 ```tsx
-<AnimatedSection animation="fade-in-up" delay={100}>
+<AnimatedSection animation="fade-in-up" delay={100} duration={600}>
   {/* محتوا */}
 </AnimatedSection>
+```
+
+### Framer Motion در کامپوننت‌ها
+
+برای انیمیشن‌های سفارشی:
+```tsx
+import { motion } from 'framer-motion';
+
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  whileHover={{ scale: 1.05 }}
+  transition={{ duration: 0.3 }}
+>
+  {/* محتوا */}
+</motion.div>
 ```
 
 ### تغییر رنگ‌ها
@@ -202,33 +278,160 @@ yarn start
 
 ## کامپوننت‌های کلیدی
 
+### Hero
+Hero Section حرفه‌ای با انیمیشن‌های Framer Motion:
+```tsx
+<Hero />
+```
+
+### StatsSection
+بخش نمایش آمار با Count-up animations:
+```tsx
+<StatsSection />
+```
+
 ### CountUp
 کامپوننت برای نمایش آمار با انیمیشن شمارش:
 ```tsx
-<CountUp end={500} suffix="+" className="text-4xl font-bold" />
+<CountUp 
+  end={500} 
+  suffix="+" 
+  duration={2000}
+  className="text-4xl font-bold" 
+/>
 ```
 
 ### AnimatedSection
-کامپوننت wrapper برای scroll animations:
+کامپوننت wrapper برای scroll animations با Framer Motion:
 ```tsx
-<AnimatedSection animation="fade-in-up" delay={200}>
+<AnimatedSection 
+  animation="fade-in-up" 
+  delay={200}
+  duration={600}
+>
   <h2>عنوان</h2>
 </AnimatedSection>
+```
+
+### CourseCard
+کارت دوره با hover animations پیشرفته:
+```tsx
+<CourseCard 
+  course={course} 
+  index={0}  // برای stagger animation
+/>
+```
+
+### ServiceCard
+کارت خدمات با micro-interactions:
+```tsx
+<ServiceCard 
+  service={service} 
+  index={0}
+/>
 ```
 
 ### TestimonialCard
 کارت نمایش نظرات دانشجویان:
 ```tsx
-<TestimonialCard testimonial={testimonial} />
+<TestimonialCard 
+  testimonial={testimonial} 
+  index={0}
+/>
 ```
 
-## تصاویر
+## تصاویر و مدیا
+
+### ساختار پوشه تصاویر
 
 تصاویر باید در پوشه‌های زیر قرار گیرند:
-- `public/images/logos/` - لوگوها
-- `public/images/testimonials/` - تصاویر نظرات
-- `public/images/courses/` - تصاویر دوره‌ها
-- `public/images/services/` - تصاویر خدمات
+
+```
+public/images/
+├── logos/              # لوگوها
+│   ├── logo-84.png
+│   └── logo-84.svg
+├── hero/              # تصاویر Hero Section (در صورت نیاز)
+├── courses/           # تصاویر دوره‌ها
+├── services/          # تصاویر خدمات
+├── teachers/          # تصاویر اساتید
+├── students/          # تصاویر دانشجویان
+├── testimonials/      # تصاویر نظرات (آواتارهای دانشجویان)
+│   └── placeholder.svg
+└── blog/              # تصاویر پست‌های وبلاگ
+```
+
+### استفاده از تصاویر
+
+در حال حاضر، تصاویر از Unsplash استفاده می‌شوند. برای استفاده از تصاویر محلی:
+
+1. تصویر را در پوشه مناسب قرار دهید
+2. مسیر را در فایل data مربوطه به‌روز کنید:
+
+```typescript
+// lib/data/courses.ts
+image: '/images/courses/web-development.jpg'
+```
+
+### بهینه‌سازی تصاویر
+
+Next.js به طور خودکار تصاویر را بهینه می‌کند:
+- استفاده از `<Image>` component از `next/image`
+- Lazy loading خودکار
+- Responsive images با `sizes` prop
+- WebP format (در صورت پشتیبانی مرورگر)
+
+مثال:
+```tsx
+<Image
+  src="/images/courses/web-dev.jpg"
+  alt="دوره برنامه‌نویسی وب"
+  width={800}
+  height={600}
+  className="rounded-xl"
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+/>
+```
+
+## تکنولوژی‌ها و کتابخانه‌ها
+
+- **Next.js 14** - Framework اصلی با App Router
+- **React 18** - کتابخانه UI
+- **TypeScript** - Type safety
+- **Tailwind CSS** - استایل‌دهی
+- **Framer Motion** - انیمیشن‌های پیشرفته
+- **Next/Image** - بهینه‌سازی تصاویر
+
+## نکات توسعه
+
+### Performance
+- استفاده از `next/image` برای تصاویر
+- Lazy loading برای کامپوننت‌ها و تصاویر
+- Code splitting خودکار Next.js
+- بهینه‌سازی فونت‌ها
+
+### Accessibility
+- استفاده از semantic HTML
+- Labels و aria-labels مناسب
+- Navigation keyboard-friendly
+- Touch-friendly buttons (min-height: 44px)
+
+### SEO
+- Metadata کامل در `layout.tsx` و `page.tsx`
+- Open Graph tags
+- Twitter Cards
+- Structured data (در صورت نیاز)
+
+## بررسی‌های مهم قبل از دیپلوی
+
+قبل از دیپلوی، مطمئن شوید:
+
+- [ ] متغیر محیطی `NEXT_PUBLIC_SITE_URL` به `https://www.academy84.ir` تنظیم شده
+- [ ] همه تصاویر دارای alt text هستند
+- [ ] Sitemap و Robots.txt در دسترس هستند
+- [ ] همه لینک‌های داخلی از مسیرهای نسبی استفاده می‌کنند
+- [ ] همه منابع خارجی از HTTPS استفاده می‌کنند
+- [ ] Meta tags همه صفحات کامل هستند
 
 ## لایسنس
 

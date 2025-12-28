@@ -1,100 +1,186 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 import CountUp from './CountUp';
-import AnimatedSection from './AnimatedSection';
 
 export default function Hero() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const badgeVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
   return (
-    <section className="relative bg-gradient-to-br from-primary-50 via-white to-primary-50 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #171717 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }}></div>
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-primary-50">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50/95 via-white/90 to-primary-50/95 z-10"></div>
+        <div 
+          className="absolute inset-0 opacity-[0.03] z-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, #171717 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }}
+        ></div>
       </div>
       
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 section-padding">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 z-20">
+        <motion.div 
+          className="max-w-5xl mx-auto text-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {/* Badge */}
-          <AnimatedSection animation="fade-in" delay={0}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-900 text-white rounded-full text-sm font-medium mb-8">
+          <motion.div variants={badgeVariants}>
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-900 text-white rounded-full text-sm font-medium mb-8 shadow-soft-lg">
               <span className="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></span>
-              آکادمی تخصصی آموزش تصویر و رسانه
+              <span>آکادمی 84 | آموزش تخصصی تصویر و رسانه</span>
             </div>
-          </AnimatedSection>
+          </motion.div>
           
           {/* Main Heading */}
-          <AnimatedSection animation="fade-in-up" delay={100}>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-900 mb-6 leading-tight tracking-tight">
-              مهارت‌هایت را
-              <span className="block text-accent-600 mt-2">به سطح حرفه‌ای برسان</span>
+          <motion.div variants={itemVariants}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-primary-900 mb-6 leading-[1.1] tracking-tight">
+              <span className="block mb-3">مسیر حرفه‌ای‌شدنت</span>
+              <span className="block bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600 bg-clip-text text-transparent animate-gradient">
+                از همین امروز شروع می‌شود
+              </span>
             </h1>
-          </AnimatedSection>
+          </motion.div>
           
           {/* Description */}
-          <AnimatedSection animation="fade-in-up" delay={200}>
-            <p className="text-lg sm:text-xl md:text-2xl text-primary-700 mb-10 max-w-2xl mx-auto leading-relaxed">
-              در آکادمی 84، با روش‌های عملی و پروژه‌محور، از اصول اولیه تا تکنیک‌های پیشرفته را یاد می‌گیری و نمونه کارهای واقعی می‌سازی.
+          <motion.div variants={itemVariants}>
+            <p className="text-lg sm:text-xl md:text-2xl text-primary-700 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
+              در آکادمی 84، مهارت‌هایت را با روش‌های عملی و پروژه‌محور، از صفر تا حرفه‌ای یاد می‌گیری. 
+              <span className="block mt-2 font-medium text-primary-900">هزاران دانشجو موفقیت خود را به ما مدیونند.</span>
             </p>
-          </AnimatedSection>
+          </motion.div>
           
           {/* CTA Buttons */}
-          <AnimatedSection animation="fade-in-up" delay={300}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Link
-                href="/academy/courses"
-                className="group relative px-8 py-4 bg-primary-900 text-white rounded-xl font-semibold text-lg shadow-soft-lg hover:shadow-soft transition-all duration-300 hover:scale-105 active:scale-95 w-full sm:w-auto touch-manipulation min-h-[52px] flex items-center justify-center"
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  مشاهده دوره‌ها
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-primary-800 to-primary-900 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              </Link>
-              <Link
-                href="/academy/enrollment"
-                className="group px-8 py-4 bg-white text-primary-900 border-2 border-primary-900 rounded-xl font-semibold text-lg hover:bg-primary-50 hover:scale-105 active:scale-95 transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2 touch-manipulation min-h-[52px]"
-              >
-                شروع یادگیری
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <motion.div 
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+          >
+            <Link
+              href="/academy/courses"
+              className="group relative px-10 py-5 bg-primary-900 text-white rounded-2xl font-bold text-lg shadow-soft-lg hover:shadow-soft-xl transition-all duration-300 hover:scale-105 active:scale-95 w-full sm:w-auto touch-manipulation min-h-[56px] flex items-center justify-center overflow-hidden"
+              aria-label="مشاهده دوره‌های آکادمی 84"
+            >
+              <span className="relative z-10 flex items-center justify-center gap-3">
+                مشاهده دوره‌ها
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                 </svg>
-              </Link>
-            </div>
-          </AnimatedSection>
+              </span>
+              <span className="absolute inset-0 bg-gradient-to-r from-primary-800 via-primary-900 to-primary-800 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"></span>
+            </Link>
+            <Link
+              href="/academy/enrollment"
+              className="group px-10 py-5 bg-white text-primary-900 border-2 border-primary-900 rounded-2xl font-bold text-lg hover:bg-primary-50 hover:border-primary-800 hover:scale-105 active:scale-95 transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-3 touch-manipulation min-h-[56px] shadow-soft hover:shadow-soft-lg"
+              aria-label="شروع یادگیری رایگان در آکادمی 84"
+            >
+              شروع رایگان
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </Link>
+          </motion.div>
           
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-8 border-t border-primary-200">
-            <div>
+          <motion.div 
+            variants={itemVariants}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 max-w-3xl mx-auto pt-8 sm:pt-12 border-t border-primary-200"
+          >
+            <div className="group">
               <CountUp 
                 end={10} 
                 suffix="+" 
-                className="text-3xl sm:text-4xl font-bold text-primary-900 mb-1"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-2 group-hover:text-accent-600 transition-colors duration-300"
               />
-              <div className="text-sm text-primary-600">سال تجربه</div>
+              <div className="text-base sm:text-lg text-primary-600 font-medium">سال تجربه</div>
             </div>
-            <div>
+            <div className="group">
               <CountUp 
                 end={500} 
                 suffix="+" 
-                className="text-3xl sm:text-4xl font-bold text-primary-900 mb-1"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-2 group-hover:text-accent-600 transition-colors duration-300"
               />
-              <div className="text-sm text-primary-600">دانشجوی موفق</div>
+              <div className="text-base sm:text-lg text-primary-600 font-medium">دانشجوی موفق</div>
             </div>
-            <div>
+            <div className="group">
               <CountUp 
                 end={20} 
                 suffix="+" 
-                className="text-3xl sm:text-4xl font-bold text-primary-900 mb-1"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-2 group-hover:text-accent-600 transition-colors duration-300"
               />
-              <div className="text-sm text-primary-600">دوره تخصصی</div>
+              <div className="text-base sm:text-lg text-primary-600 font-medium">دوره تخصصی</div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Floating Elements Animation */}
+      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+        <motion.div
+          className="absolute top-20 right-10 w-20 h-20 bg-accent-200/30 rounded-full blur-2xl"
+          animate={{
+            y: [0, -20, 0],
+            x: [0, 10, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-10 w-32 h-32 bg-primary-200/20 rounded-full blur-3xl"
+          animate={{
+            y: [0, 30, 0],
+            x: [0, -15, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
       </div>
     </section>
   );

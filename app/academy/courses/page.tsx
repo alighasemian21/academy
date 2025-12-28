@@ -1,9 +1,19 @@
+import { Metadata } from 'next';
 import CourseCard from '@/components/CourseCard';
 import { getAllCourses } from '@/lib/data/courses';
 
-export const metadata = {
-  title: 'دوره‌های آموزشی - آکادمی',
-  description: 'مشاهده تمام دوره‌های آموزشی آکادمی',
+export const metadata: Metadata = {
+  title: 'دوره‌های آموزشی',
+  description: 'مشاهده تمام دوره‌های آموزشی آکادمی 84. دوره‌های حرفه‌ای شامل مدیریت کسب‌وکار، برنامه‌نویسی وب، بازاریابی دیجیتال و طراحی UI/UX. آموزش عملی و پروژه‌محور.',
+  keywords: ['دوره‌های آموزشی', 'دوره‌های آکادمی 84', 'آموزش حرفه‌ای', 'دوره برنامه‌نویسی', 'دوره بازاریابی', 'دوره طراحی', 'دوره مدیریت کسب‌وکار'],
+  openGraph: {
+    title: 'دوره‌های آموزشی | آکادمی 84',
+    description: 'مشاهده تمام دوره‌های آموزشی آکادمی 84. دوره‌های حرفه‌ای و پروژه‌محور',
+    url: 'https://www.academy84.ir/academy/courses',
+  },
+  alternates: {
+    canonical: 'https://www.academy84.ir/academy/courses',
+  },
 };
 
 export default function CoursesPage() {

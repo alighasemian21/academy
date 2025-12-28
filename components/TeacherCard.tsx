@@ -17,7 +17,7 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
         {!imgError ? (
           <Image
             src={teacher.image}
-            alt={teacher.name}
+            alt={`عکس استاد ${teacher.name} - ${teacher.title} - آکادمی 84`}
             fill
             className="object-cover teacher-image-offset"
             onError={() => setImgError(true)}

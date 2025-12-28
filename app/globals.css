@@ -57,6 +57,20 @@ a {
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
   
   .section-padding {
     padding-top: 5rem;
@@ -166,6 +180,22 @@ a {
     button, a {
       min-height: 44px;
       min-width: 44px;
+    }
+    
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+    
+    h2 {
+      font-size: 1.75rem;
+      line-height: 1.3;
     }
   }
   

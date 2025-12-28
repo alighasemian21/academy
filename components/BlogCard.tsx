@@ -23,7 +23,7 @@ export default function BlogCard({ post }: BlogCardProps) {
         {!imgError ? (
           <Image
             src={post.image}
-            alt={post.title}
+            alt={`تصویر مقاله ${post.title} - وبلاگ آکادمی 84`}
             fill
             className="object-cover"
             onError={() => setImgError(true)}

@@ -1,8 +1,18 @@
+import { Metadata } from 'next';
 import ContactForm from '@/components/ContactForm';
 
-export const metadata = {
-  title: 'تماس با ما - آکادمی 84',
-  description: 'تماس با آکادمی 84 - سوالات، پیشنهادات و درخواست مشاوره',
+export const metadata: Metadata = {
+  title: 'تماس با ما',
+  description: 'تماس با آکادمی 84 - سوالات، پیشنهادات و درخواست مشاوره. آدرس: قم، زنبیل آباد، خیابان عطاران. تلفن: 09375640513',
+  keywords: ['تماس با آکادمی 84', 'آدرس آکادمی 84', 'شماره تماس آکادمی 84', 'ایمیل آکادمی 84', 'مشاوره رایگان'],
+  openGraph: {
+    title: 'تماس با ما | آکادمی 84',
+    description: 'تماس با آکادمی 84 - سوالات، پیشنهادات و درخواست مشاوره',
+    url: 'https://www.academy84.ir/contact',
+  },
+  alternates: {
+    canonical: 'https://www.academy84.ir/contact',
+  },
 };
 
 export default function ContactPage() {

@@ -7,8 +7,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
           <div className="lg:col-span-2">
             <h3 className="text-2xl font-bold mb-4">آکادمی 84</h3>
-            <p className="text-white/70 leading-relaxed mb-6 max-w-md">
-              مرکز تخصصی آموزش تصویر و رسانه. جایی که مهارت‌هایت را به سطح حرفه‌ای می‌رسانی.
+            <p className="text-white/80 leading-relaxed mb-6 max-w-md text-base">
+              مرکز تخصصی آموزش تصویر و رسانه. ما اینجاییم تا مسیر حرفه‌ای‌شدنت را هموار کنیم و مهارت‌هایت را به سطح جهانی برسانیم.
             </p>
             <div className="flex items-center gap-3">
               <a 

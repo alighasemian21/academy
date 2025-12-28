@@ -17,7 +17,7 @@ export default function StudentGallery({ student }: StudentGalleryProps) {
         {!imgError ? (
           <Image
             src={student.image}
-            alt={student.projectTitle}
+            alt={`نمونه کار ${student.projectTitle} توسط ${student.name} - دانشجوی دوره ${student.course} - آکادمی 84`}
             fill
             className="object-cover"
             onError={() => setImgError(true)}
