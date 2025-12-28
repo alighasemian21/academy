@@ -30,7 +30,7 @@ export default function Header() {
     { href: '/academy', label: 'آکادمی' },
     { href: '/academy/courses', label: 'دوره‌ها' },
     { href: '/academy/teachers', label: 'اساتید' },
-    { href: '/company', label: 'شرکت' },
+    { href: '/academy/studio', label: 'استودیو' },
     { href: '/blog', label: 'وبلاگ' },
     { href: '/contact', label: 'تماس با ما' },
   ];

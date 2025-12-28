@@ -1,35 +1,17 @@
 'use client';
 
-import Image from 'next/image';
-import { useState } from 'react';
 import { Student } from '@/lib/data/students';
+import PlaceholderImage from './PlaceholderImage';
 
 interface StudentGalleryProps {
   student: Student;
 }
 
 export default function StudentGallery({ student }: StudentGalleryProps) {
-  const [imgError, setImgError] = useState(false);
-
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <div className="relative h-48 bg-gray-200">
-        {!imgError ? (
-          <Image
-            src={student.image}
-            alt={`نمونه کار ${student.projectTitle} توسط ${student.name} - دانشجوی دوره ${student.course} - آکادمی 84`}
-            fill
-            className="object-cover"
-            onError={() => setImgError(true)}
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px"
-            loading="lazy"
-            quality={85}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500">
-            <span className="text-center px-4 text-sm">{student.projectTitle}</span>
-          </div>
-        )}
+        <PlaceholderImage type="student" className="w-full h-full absolute inset-0" text={student.projectTitle} />
         {student.achievement && (
           <div className="absolute top-2 left-2 bg-yellow-400 text-gray-900 text-xs px-2 py-1 rounded">
             {student.achievement}

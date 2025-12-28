@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import SafeImage from '@/components/SafeImage';
+import PlaceholderImage from '@/components/PlaceholderImage';
 import { getPostBySlug, getAllPosts } from '@/lib/data/posts';
 
 export async function generateStaticParams() {
@@ -22,13 +23,16 @@ export async function generateMetadata({
     return {};
   }
 
+  const baseUrl = 'https://www.academy84.ir';
+
   return {
     title: post.title,
     description: post.excerpt,
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: [post.image],
+      url: `${baseUrl}/blog/${post.slug}`,
+      images: [`https://www.academy84.ir${post.image.startsWith('/') ? post.image : '/' + post.image}`],
       type: 'article',
       publishedTime: post.date,
       authors: [post.author],
@@ -37,7 +41,10 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      images: [post.image],
+      images: [`https://www.academy84.ir${post.image.startsWith('/') ? post.image : '/' + post.image}`],
+    },
+    alternates: {
+      canonical: `${baseUrl}/blog/${post.slug}`,
     },
   };
 }
@@ -71,12 +78,7 @@ export default function BlogPostPage({
 
         <article className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="relative h-96">
-            <SafeImage
-              src={post.image}
-              alt={post.title}
-              fill
-              className="object-cover"
-            />
+            <PlaceholderImage type="blog" className="w-full h-full absolute inset-0" text={post.title} />
           </div>
 
           <div className="p-8">

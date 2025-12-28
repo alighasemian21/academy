@@ -1,4 +1,19 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'استودیو',
+  description: 'استودیو آکادمی 84 - ارائه خدمات تخصصی طراحی وب، برندینگ، مشاوره کسب‌وکار و بازاریابی دیجیتال با کیفیت جهانی',
+  keywords: ['استودیو', 'خدمات', 'طراحی', 'برندینگ', 'مشاوره'],
+  openGraph: {
+    title: 'استودیو | آکادمی 84',
+    description: 'استودیو آکادمی 84 - ارائه خدمات تخصصی با کیفیت جهانی',
+    url: 'https://www.academy84.ir/academy/studio',
+  },
+  alternates: {
+    canonical: 'https://www.academy84.ir/academy/studio',
+  },
+};
 
 export default function CompanyPage() {
   return (
@@ -20,7 +35,7 @@ export default function CompanyPage() {
 
         <div className="text-center mb-12">
           <Link
-            href="/company/services"
+            href="/academy/studio/services"
             className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
           >
             مشاهده خدمات

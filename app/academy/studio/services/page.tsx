@@ -1,9 +1,19 @@
+import { Metadata } from 'next';
 import ServiceCard from '@/components/ServiceCard';
 import { getAllServices } from '@/lib/data/services';
 
-export const metadata = {
-  title: 'خدمات شرکت',
-  description: 'خدمات تخصصی شرکت',
+export const metadata: Metadata = {
+  title: 'خدمات',
+  description: 'خدمات تخصصی آکادمی 84 شامل طراحی و توسعه وبسایت، مشاوره کسب‌وکار، برندینگ و بازاریابی دیجیتال. خدمات حرفه‌ای برای رشد و توسعه کسب‌وکار شما.',
+  keywords: ['خدمات', 'طراحی وبسایت', 'مشاوره کسب‌وکار', 'برندینگ', 'بازاریابی دیجیتال'],
+  openGraph: {
+    title: 'خدمات | آکادمی 84',
+    description: 'خدمات تخصصی آکادمی 84 برای رشد و توسعه کسب‌وکار شما',
+    url: 'https://www.academy84.ir/academy/studio/services',
+  },
+  alternates: {
+    canonical: 'https://www.academy84.ir/academy/studio/services',
+  },
 };
 
 export default function ServicesPage() {

@@ -2,11 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirfont@v30.1.0/dist/font-face.css');
+/* Vazir Font - Self-hosted */
+@font-face {
+  font-family: 'Vazir';
+  src: url('/fonts/Vazir-Regular.woff2') format('woff2'),
+       url('/fonts/Vazir-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('/fonts/Vazir-Bold.woff2') format('woff2'),
+       url('/fonts/Vazir-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Iranian Sans Font - Self-hosted */
 @font-face {
   font-family: 'Iranian Sans';
-  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/iranian-sans@master/dist/IranianSans.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/rastikerdar/iranian-sans@master/dist/IranianSans.woff') format('woff');
+  src: url('/fonts/IranianSans.woff2') format('woff2'),
+       url('/fonts/IranianSans.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -254,6 +273,18 @@ a {
     );
     background-size: 1000px 100%;
     animation: shimmer 2s infinite;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

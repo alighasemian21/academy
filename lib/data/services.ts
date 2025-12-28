@@ -18,7 +18,7 @@ export const services: Service[] = [
       'سرعت فوق‌العاده بالا',
       'پشتیبانی و نگهداری 24/7',
     ],
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: '/images/services/placeholder-service.svg',
     featured: true,
   },
   {
@@ -31,7 +31,7 @@ export const services: Service[] = [
       'برنامه‌ریزی دقیق و اجرایی',
       'مشاوره مستمر و پشتیبانی',
     ],
-    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: '/images/services/placeholder-service.svg',
     featured: true,
   },
   {
@@ -44,7 +44,7 @@ export const services: Service[] = [
       'طراحی کاتالوگ و بروشور',
       'راهنمای برند کامل',
     ],
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: '/images/services/placeholder-service.svg',
     featured: true,
   },
   {
@@ -57,7 +57,7 @@ export const services: Service[] = [
       'مدیریت حرفه‌ای شبکه‌های اجتماعی',
       'تحلیل و گزارش عملکرد',
     ],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: '/images/services/placeholder-service.svg',
     featured: false,
   },
 ];

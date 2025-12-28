@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FontPreload from "@/components/FontPreload";
+import StructuredData from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
     description: 'آکادمی 84 - مرکز تخصصی آموزش تصویر و رسانه. دوره‌های حرفه‌ای، پروژه‌محور و کاربردی برای تبدیل شدن به یک حرفه‌ای',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        url: 'https://www.academy84.ir/images/og-image.svg',
         width: 1200,
         height: 630,
         alt: 'لوگو و تصویر شاخص آکادمی 84 - مرکز تخصصی آموزش تصویر و رسانه',
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'آکادمی 84 | مرکز تخصصی آموزش تصویر و رسانه',
     description: 'آکادمی 84 - مرکز تخصصی آموزش تصویر و رسانه. دوره‌های حرفه‌ای، پروژه‌محور و کاربردی',
-    images: ['https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://www.academy84.ir/images/og-image.svg'],
   },
   robots: {
     index: true,
@@ -59,6 +61,8 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body>
+        <StructuredData />
+        <FontPreload />
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />

@@ -1,9 +1,19 @@
+import { Metadata } from 'next';
 import TeacherCard from '@/components/TeacherCard';
 import { getAllTeachers } from '@/lib/data/teachers';
 
-export const metadata = {
-  title: 'اساتید - آکادمی',
-  description: 'معرفی اساتید مجرب آکادمی',
+export const metadata: Metadata = {
+  title: 'اساتید',
+  description: 'معرفی اساتید مجرب و با تجربه آکادمی 84. مدرسان حرفه‌ای که سال‌ها در صنعت فعالیت داشته‌اند و تجربه‌های عملی خود را با دانشجویان به اشتراک می‌گذارند.',
+  keywords: ['اساتید آکادمی 84', 'مدرس', 'آموزش', 'حرفه‌ای', 'تجربه'],
+  openGraph: {
+    title: 'اساتید | آکادمی 84',
+    description: 'معرفی اساتید مجرب و با تجربه آکادمی 84',
+    url: 'https://www.academy84.ir/academy/teachers',
+  },
+  alternates: {
+    canonical: 'https://www.academy84.ir/academy/teachers',
+  },
 };
 
 export default function TeachersPage() {

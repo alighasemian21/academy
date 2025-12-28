@@ -15,7 +15,7 @@ export const students: Student[] = [
     course: 'برنامه‌نویسی وب',
     projectTitle: 'سایت فروشگاهی',
     projectDescription: 'پیاده‌سازی یک سایت فروشگاهی کامل با React و Next.js',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: '/images/students/placeholder-student.svg',
     achievement: 'پروژه برتر دوره',
   },
   {
@@ -24,7 +24,7 @@ export const students: Student[] = [
     course: 'طراحی UI/UX',
     projectTitle: 'طراحی اپلیکیشن موبایل',
     projectDescription: 'طراحی کامل رابط کاربری یک اپلیکیشن موبایل',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: '/images/students/placeholder-student.svg',
     achievement: 'طراحی خلاقانه',
   },
   {
@@ -33,7 +33,7 @@ export const students: Student[] = [
     course: 'بازاریابی دیجیتال',
     projectTitle: 'کمپین تبلیغاتی',
     projectDescription: 'راه‌اندازی و مدیریت یک کمپین تبلیغاتی موفق',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: '/images/students/placeholder-student.svg',
   },
   {
     id: '4',
@@ -41,7 +41,7 @@ export const students: Student[] = [
     course: 'مدیریت کسب‌وکار',
     projectTitle: 'بیزینس پلن',
     projectDescription: 'تهیه بیزینس پلن کامل برای استارتاپ',
-    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: '/images/students/placeholder-student.svg',
   },
   {
     id: '5',
@@ -49,7 +49,7 @@ export const students: Student[] = [
     course: 'برنامه‌نویسی وب',
     projectTitle: 'پنل مدیریت',
     projectDescription: 'ساخت پنل مدیریت با React و TypeScript',
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: '/images/students/placeholder-student.svg',
   },
   {
     id: '6',
@@ -57,7 +57,7 @@ export const students: Student[] = [
     course: 'طراحی UI/UX',
     projectTitle: 'طراحی وبسایت',
     projectDescription: 'طراحی رابط کاربری یک وبسایت شرکتی',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    image: '/images/students/placeholder-student.svg',
   },
 ];
 

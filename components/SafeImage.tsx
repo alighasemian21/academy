@@ -46,7 +46,7 @@ export default function SafeImage({
         priority={priority}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         loading={priority ? undefined : 'lazy'}
-        unoptimized
+        unoptimized={src.endsWith('.svg')}
       />
     );
   }
@@ -59,7 +59,7 @@ export default function SafeImage({
       height={height}
       className={className}
       onError={() => setImgError(true)}
-      unoptimized
+      unoptimized={src.endsWith('.svg')}
       priority={priority}
     />
   );

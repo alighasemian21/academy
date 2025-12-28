@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import SafeImage from '@/components/SafeImage';
+import PlaceholderImage from '@/components/PlaceholderImage';
 import { getCourseBySlug, getAllCourses } from '@/lib/data/courses';
 
 export async function generateStaticParams() {
@@ -22,19 +23,26 @@ export async function generateMetadata({
     return {};
   }
 
+  const baseUrl = 'https://www.academy84.ir';
+
   return {
     title: course.title,
     description: course.description,
     openGraph: {
       title: course.title,
       description: course.description,
-      images: [course.image],
+      url: `${baseUrl}/academy/courses/${course.slug}`,
+      images: [`https://www.academy84.ir${course.image.startsWith('/') ? course.image : '/' + course.image}`],
+      type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
       title: course.title,
       description: course.description,
-      images: [course.image],
+      images: [`https://www.academy84.ir${course.image.startsWith('/') ? course.image : '/' + course.image}`],
+    },
+    alternates: {
+      canonical: `${baseUrl}/academy/courses/${course.slug}`,
     },
   };
 }
@@ -62,12 +70,7 @@ export default function CourseDetailPage({
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="relative h-96">
-            <SafeImage
-              src={course.image}
-              alt={course.title}
-              fill
-              className="object-cover"
-            />
+            <PlaceholderImage type="course" className="w-full h-full absolute inset-0" text={course.title} />
           </div>
 
           <div className="p-8">

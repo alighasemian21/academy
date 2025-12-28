@@ -1,8 +1,18 @@
+import { Metadata } from 'next';
 import EnrollmentForm from '@/components/EnrollmentForm';
 
-export const metadata = {
-  title: 'ثبت‌نام در دوره - آکادمی',
-  description: 'ثبت‌نام آنلاین در دوره‌های آموزشی',
+export const metadata: Metadata = {
+  title: 'ثبت‌نام در دوره',
+  description: 'ثبت‌نام آنلاین در دوره‌های آموزشی آکادمی 84. فرم ثبت‌نام را پر کنید تا با شما تماس بگیریم و در مورد دوره‌های مناسب شما راهنمایی‌تان کنیم.',
+  keywords: ['ثبت‌نام', 'ثبت‌نام آنلاین', 'دوره آموزشی', 'فرم ثبت‌نام'],
+  openGraph: {
+    title: 'ثبت‌نام در دوره | آکادمی 84',
+    description: 'ثبت‌نام آنلاین در دوره‌های آموزشی آکادمی 84',
+    url: 'https://www.academy84.ir/academy/enrollment',
+  },
+  alternates: {
+    canonical: 'https://www.academy84.ir/academy/enrollment',
+  },
 };
 
 export default function EnrollmentPage() {

@@ -1,4 +1,19 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'آکادمی',
+  description: 'آکادمی 84 - مرکز تخصصی آموزش تصویر و رسانه. دوره‌های حرفه‌ای، معرفی اساتید، گالری دانشجویان و نمونه کارها. شروع مسیر حرفه‌ای‌شدنت از اینجا.',
+  keywords: ['آکادمی 84', 'آموزش تصویر و رسانه', 'دوره‌های آموزشی', 'اساتید', 'دانشجویان', 'نمونه کار'],
+  openGraph: {
+    title: 'آکادمی | آکادمی 84',
+    description: 'مرکز تخصصی آموزش تصویر و رسانه. دوره‌های حرفه‌ای، پروژه‌محور و کاربردی',
+    url: 'https://www.academy84.ir/academy',
+  },
+  alternates: {
+    canonical: 'https://www.academy84.ir/academy',
+  },
+};
 
 export default function AcademyPage() {
   return (

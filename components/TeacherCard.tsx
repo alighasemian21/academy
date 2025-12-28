@@ -1,35 +1,17 @@
 'use client';
 
-import Image from 'next/image';
-import { useState } from 'react';
 import { Teacher } from '@/lib/data/teachers';
+import PlaceholderImage from './PlaceholderImage';
 
 interface TeacherCardProps {
   teacher: Teacher;
 }
 
 export default function TeacherCard({ teacher }: TeacherCardProps) {
-  const [imgError, setImgError] = useState(false);
-
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <div className="relative h-64 bg-gray-200 overflow-hidden">
-        {!imgError ? (
-          <Image
-            src={teacher.image}
-            alt={`عکس استاد ${teacher.name} - ${teacher.title} - آکادمی 84`}
-            fill
-            className="object-cover teacher-image-offset"
-            onError={() => setImgError(true)}
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 300px"
-            loading="lazy"
-            quality={85}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500">
-            <span className="text-center px-4 text-sm">{teacher.name}</span>
-          </div>
-        )}
+        <PlaceholderImage type="teacher" className="w-full h-full absolute inset-0" text={teacher.name} />
       </div>
       <div className="p-6">
         <h3 className="text-xl font-bold mb-1">{teacher.name}</h3>

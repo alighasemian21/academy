@@ -1,9 +1,19 @@
+import { Metadata } from 'next';
 import StudentGallery from '@/components/StudentGallery';
 import { getAllStudents } from '@/lib/data/students';
 
-export const metadata = {
-  title: 'دانشجویان و نمونه کارها - آکادمی',
-  description: 'گالری دانشجویان و پروژه‌های موفق',
+export const metadata: Metadata = {
+  title: 'دانشجویان و نمونه کارها',
+  description: 'گالری نمونه کارها و پروژه‌های موفق دانشجویان آکادمی 84. مشاهده دستاوردها و موفقیت‌های دانشجویانی که مسیر حرفه‌ای‌شدن خود را با ما آغاز کرده‌اند.',
+  keywords: ['نمونه کار', 'پروژه دانشجویان', 'گالری', 'دستاورد', 'موفقیت'],
+  openGraph: {
+    title: 'دانشجویان و نمونه کارها | آکادمی 84',
+    description: 'گالری نمونه کارها و پروژه‌های موفق دانشجویان آکادمی 84',
+    url: 'https://www.academy84.ir/academy/students',
+  },
+  alternates: {
+    canonical: 'https://www.academy84.ir/academy/students',
+  },
 };
 
 export default function StudentsPage() {

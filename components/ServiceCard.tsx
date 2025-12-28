@@ -1,10 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Service } from '@/lib/data/services';
+import PlaceholderImage from './PlaceholderImage';
 
 interface ServiceCardProps {
   service: Service;
@@ -12,8 +11,6 @@ interface ServiceCardProps {
 }
 
 export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
-  const [imgError, setImgError] = useState(false);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -24,28 +21,7 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
     >
       <div className="group bg-white rounded-2xl shadow-soft overflow-hidden border border-primary-100 h-full flex flex-col transition-all duration-300 hover:shadow-soft-xl hover:border-accent-200">
         <div className="relative h-48 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
-          {!imgError ? (
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full h-full"
-            >
-              <Image
-                src={service.image}
-                alt={`تصویر خدمت ${service.title} - آکادمی 84`}
-                fill
-                className="object-cover"
-                onError={() => setImgError(true)}
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px"
-                loading={index === 0 ? 'eager' : 'lazy'}
-                quality={85}
-              />
-            </motion.div>
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-100 to-primary-200">
-              <span className="text-center px-4 text-sm text-primary-700 font-medium">{service.title}</span>
-            </div>
-          )}
+          <PlaceholderImage type="service" className="w-full h-full absolute inset-0" text={service.title} />
           {service.featured && (
             <motion.div 
               className="absolute top-4 right-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg"
