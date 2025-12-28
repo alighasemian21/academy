@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import SafeImage from '@/components/SafeImage';
 import { motion } from 'framer-motion';
 import { BlogPost } from '@/lib/data/posts';
-import PlaceholderImage from './PlaceholderImage';
 
 interface BlogCardProps {
   post: BlogPost;
@@ -29,7 +29,13 @@ export default function BlogCard({ post }: BlogCardProps) {
       }}
     >
       <div className="relative h-48 bg-gray-200">
-        <PlaceholderImage type="blog" className="w-full h-full absolute inset-0" text={post.title} />
+        <SafeImage
+          src={post.image}
+          alt={`تصویر مقاله ${post.title} - وبلاگ آکادمی 84`}
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px"
+        />
         <div className="absolute top-2 left-2 bg-primary-600 text-white text-sm px-3 py-1 rounded">
           {post.category}
         </div>

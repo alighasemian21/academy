@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import SafeImage from '@/components/SafeImage';
-import PlaceholderImage from '@/components/PlaceholderImage';
 import { getCourseBySlug, getAllCourses } from '@/lib/data/courses';
 
 export async function generateStaticParams() {
@@ -32,14 +31,14 @@ export async function generateMetadata({
       title: course.title,
       description: course.description,
       url: `${baseUrl}/academy/courses/${course.slug}`,
-      images: [`https://www.academy84.ir${course.image.startsWith('/') ? course.image : '/' + course.image}`],
+      images: [course.image.startsWith('http') ? course.image : `https://www.academy84.ir${course.image.startsWith('/') ? course.image : '/' + course.image}`],
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
       title: course.title,
       description: course.description,
-      images: [`https://www.academy84.ir${course.image.startsWith('/') ? course.image : '/' + course.image}`],
+      images: [course.image.startsWith('http') ? course.image : `https://www.academy84.ir${course.image.startsWith('/') ? course.image : '/' + course.image}`],
     },
     alternates: {
       canonical: `${baseUrl}/academy/courses/${course.slug}`,
@@ -69,8 +68,15 @@ export default function CourseDetailPage({
         </Link>
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="relative h-96">
-            <PlaceholderImage type="course" className="w-full h-full absolute inset-0" text={course.title} />
+          <div className="relative h-96 bg-gray-200">
+            <SafeImage
+              src={course.image}
+              alt={`تصویر دوره ${course.title} - آکادمی 84`}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 1200px"
+              priority
+            />
           </div>
 
           <div className="p-8">

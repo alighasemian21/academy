@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import CountUp from './CountUp';
+import CountUpWithDelay from './CountUpWithDelay';
 import AnimatedSection from './AnimatedSection';
 
 export default function StatsSection() {
@@ -64,11 +64,11 @@ export default function StatsSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <AnimatedSection animation="fade-in-up">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 tracking-tight">
               اعداد حرف می‌زنند
             </h2>
-            <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light">
               اعتماد هزاران دانشجو و سال‌ها تجربه در زمینه آموزش، آکادمی 84 را به برترین مرکز آموزش تبدیل کرده است
             </p>
           </div>
@@ -76,7 +76,7 @@ export default function StatsSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
           {stats.map((stat, index) => (
-            <AnimatedSection key={index} animation="scale-in" delay={index * 100}>
+            <AnimatedSection key={index} animation="scale-in" delay={index * 150}>
               <motion.div
                 className="text-center group"
                 whileHover={{ y: -8 }}
@@ -91,9 +91,10 @@ export default function StatsSection() {
                     {stat.icon}
                   </div>
                 </motion.div>
-                <CountUp
+                <CountUpWithDelay
                   end={stat.number}
                   suffix={stat.suffix}
+                  delay={index * 200}
                   className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-2 sm:mb-3 block group-hover:text-accent-300 transition-colors duration-300"
                 />
                 <div className="text-xl font-bold text-white mb-2">{stat.label}</div>

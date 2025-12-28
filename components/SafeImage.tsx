@@ -11,6 +11,7 @@ interface SafeImageProps {
   height?: number;
   className?: string;
   priority?: boolean;
+  sizes?: string;
 }
 
 export default function SafeImage({
@@ -21,8 +22,44 @@ export default function SafeImage({
   height,
   className,
   priority,
+  sizes,
 }: SafeImageProps) {
   const [imgError, setImgError] = useState(false);
+  const isSVG = src.endsWith('.svg');
+
+  // For SVG files, use regular <img> tag to avoid CSP and Next.js Image issues
+  if (isSVG) {
+    if (fill) {
+      return (
+        <img
+          src={src}
+          alt={alt}
+          className={className}
+          onError={() => setImgError(true)}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+          loading={priority ? 'eager' : 'lazy'}
+        />
+      );
+    }
+
+    return (
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={className}
+        onError={() => setImgError(true)}
+        loading={priority ? 'eager' : 'lazy'}
+      />
+    );
+  }
 
   if (imgError) {
     return (
@@ -44,9 +81,8 @@ export default function SafeImage({
         className={className}
         onError={() => setImgError(true)}
         priority={priority}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        sizes={sizes || "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
         loading={priority ? undefined : 'lazy'}
-        unoptimized={src.endsWith('.svg')}
       />
     );
   }
@@ -59,7 +95,6 @@ export default function SafeImage({
       height={height}
       className={className}
       onError={() => setImgError(true)}
-      unoptimized={src.endsWith('.svg')}
       priority={priority}
     />
   );

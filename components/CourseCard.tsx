@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import SafeImage from '@/components/SafeImage';
 import { motion } from 'framer-motion';
 import { Course } from '@/lib/data/courses';
-import PlaceholderImage from './PlaceholderImage';
 
 interface CourseCardProps {
   course: Course;
@@ -23,7 +23,14 @@ export default function CourseCard({ course, index = 0 }: CourseCardProps) {
         className="group block bg-white rounded-2xl shadow-soft overflow-hidden border border-primary-100 h-full flex flex-col transition-all duration-300 hover:shadow-soft-xl hover:border-accent-200"
       >
         <div className="relative h-52 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
-          <PlaceholderImage type="course" className="w-full h-full absolute inset-0" text={course.title} />
+          <SafeImage
+            src={course.image}
+            alt={`تصویر دوره ${course.title} - آکادمی 84`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px"
+            priority={index === 0}
+          />
           {course.featured && (
             <motion.div 
               className="absolute top-4 right-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg"

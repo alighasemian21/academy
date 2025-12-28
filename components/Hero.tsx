@@ -3,19 +3,17 @@
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import CountUp from './CountUp';
+import CountUpWithDelay from './CountUpWithDelay';
 import MagneticButton from './MagneticButton';
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLElement>(null!);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   });
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -52,7 +50,7 @@ export default function Hero() {
   };
 
   return (
-    <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-primary-50">
+    <section ref={sectionRef} className="relative min-h-[95vh] flex items-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-primary-50">
       {/* Background Image with Overlay - Parallax */}
       <motion.div 
         className="absolute inset-0 z-0"
@@ -76,10 +74,7 @@ export default function Hero() {
         ></motion.div>
       </motion.div>
       
-      <motion.div 
-        className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 z-20"
-        style={{ y: contentY, opacity }}
-      >
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 z-20">
         <motion.div 
           className="max-w-5xl mx-auto text-center"
           variants={containerVariants}
@@ -96,12 +91,12 @@ export default function Hero() {
           
           {/* Main Heading */}
           <motion.div variants={itemVariants}>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-primary-900 mb-6 leading-[1.1] tracking-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-primary-900 mb-8 leading-[1.1] tracking-tight">
               <motion.span 
-                className="block mb-3"
+                className="block mb-4"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
               >
                 مسیر حرفه‌ای‌شدنت
               </motion.span>
@@ -109,7 +104,7 @@ export default function Hero() {
                 className="block bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600 bg-clip-text text-transparent animate-gradient"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
                 از همین امروز شروع می‌شود
               </motion.span>
@@ -118,9 +113,9 @@ export default function Hero() {
           
           {/* Description */}
           <motion.div variants={itemVariants}>
-            <p className="text-lg sm:text-xl md:text-2xl text-primary-700 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="text-xl sm:text-2xl md:text-3xl text-primary-700 mb-14 max-w-4xl mx-auto leading-relaxed font-light">
               در آکادمی 84، مهارت‌هایت را با روش‌های عملی و پروژه‌محور، از صفر تا حرفه‌ای یاد می‌گیری. 
-              <span className="block mt-2 font-medium text-primary-900">هزاران دانشجو موفقیت خود را به ما مدیونند.</span>
+              <span className="block mt-3 font-semibold text-primary-900">هزاران دانشجو موفقیت خود را به ما مدیونند.</span>
             </p>
           </motion.div>
           
@@ -186,35 +181,38 @@ export default function Hero() {
           {/* Stats */}
           <motion.div 
             variants={itemVariants}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 max-w-3xl mx-auto pt-8 sm:pt-12 border-t border-primary-200"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 lg:gap-16 max-w-4xl mx-auto pt-12 sm:pt-16 border-t-2 border-primary-200/50"
           >
-            <div className="group">
-              <CountUp 
+            <div className="group min-h-[120px] flex flex-col justify-center">
+              <CountUpWithDelay 
                 end={10} 
                 suffix="+" 
+                delay={400}
                 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-2 group-hover:text-accent-600 transition-colors duration-300"
               />
               <div className="text-base sm:text-lg text-primary-600 font-medium">سال تجربه</div>
             </div>
-            <div className="group">
-              <CountUp 
+            <div className="group min-h-[120px] flex flex-col justify-center">
+              <CountUpWithDelay 
                 end={500} 
                 suffix="+" 
+                delay={600}
                 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-2 group-hover:text-accent-600 transition-colors duration-300"
               />
               <div className="text-base sm:text-lg text-primary-600 font-medium">دانشجوی موفق</div>
             </div>
-            <div className="group">
-              <CountUp 
+            <div className="group min-h-[120px] flex flex-col justify-center">
+              <CountUpWithDelay 
                 end={20} 
                 suffix="+" 
+                delay={800}
                 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-2 group-hover:text-accent-600 transition-colors duration-300"
               />
               <div className="text-base sm:text-lg text-primary-600 font-medium">دوره تخصصی</div>
             </div>
           </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Floating Elements Animation */}
       <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">

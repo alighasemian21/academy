@@ -12,7 +12,7 @@ interface CountUpProps {
 
 export default function CountUp({ 
   end, 
-  duration = 2000, 
+  duration = 3500, 
   suffix = '', 
   prefix = '',
   className = '' 
@@ -60,13 +60,13 @@ export default function CountUp({
             setHasAnimated(true);
             setTimeout(() => {
               animateCount();
-            }, 100);
+            }, 300);
           }
         });
       },
       { 
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.3,
+        rootMargin: '0px 0px -150px 0px'
       }
     );
 

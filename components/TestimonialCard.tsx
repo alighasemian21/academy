@@ -1,7 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-import { useState } from 'react';
+import SafeImage from '@/components/SafeImage';
 import { motion } from 'framer-motion';
 import { Testimonial } from '@/lib/data/testimonials';
 
@@ -11,7 +10,6 @@ interface TestimonialCardProps {
 }
 
 export default function TestimonialCard({ testimonial, index = 0 }: TestimonialCardProps) {
-  const [imgError, setImgError] = useState(false);
 
   return (
     <motion.div
@@ -68,17 +66,13 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.2 }}
         >
-          {!imgError && !testimonial.image.startsWith('data:') && !testimonial.image.includes('placeholder') ? (
-            <Image
+          {!testimonial.image.startsWith('data:') && !testimonial.image.includes('placeholder') ? (
+            <SafeImage
               src={testimonial.image}
               alt={`عکس ${testimonial.name} - دانشجوی ${testimonial.course || 'آکادمی 84'}`}
               fill
               className="object-cover"
-              onError={() => setImgError(true)}
               sizes="56px"
-              loading="lazy"
-              quality={90}
-              unoptimized={testimonial.image.includes('placeholder') || testimonial.image.endsWith('.svg')}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-accent-400 to-accent-500 text-white font-bold text-lg">

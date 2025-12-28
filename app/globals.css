@@ -2,30 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Vazir Font - Self-hosted */
-@font-face {
-  font-family: 'Vazir';
-  src: url('/fonts/Vazir-Regular.woff2') format('woff2'),
-       url('/fonts/Vazir-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+/* Vazir Font - Using CDN until local files are available */
+/* TODO: Download font files and place in public/fonts/ directory */
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirfont@v30.1.0/dist/font-face.css');
 
-@font-face {
-  font-family: 'Vazir';
-  src: url('/fonts/Vazir-Bold.woff2') format('woff2'),
-       url('/fonts/Vazir-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Iranian Sans Font - Self-hosted */
+/* Iranian Sans Font - Using CDN until local files are available */
 @font-face {
   font-family: 'Iranian Sans';
-  src: url('/fonts/IranianSans.woff2') format('woff2'),
-       url('/fonts/IranianSans.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/iranian-sans@latest/IranianSans.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/rastikerdar/iranian-sans@latest/IranianSans.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

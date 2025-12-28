@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import SafeImage from '@/components/SafeImage';
-import PlaceholderImage from '@/components/PlaceholderImage';
 import { getPostBySlug, getAllPosts } from '@/lib/data/posts';
 
 export async function generateStaticParams() {
@@ -32,7 +31,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       url: `${baseUrl}/blog/${post.slug}`,
-      images: [`https://www.academy84.ir${post.image.startsWith('/') ? post.image : '/' + post.image}`],
+      images: [post.image.startsWith('http') ? post.image : `https://www.academy84.ir${post.image.startsWith('/') ? post.image : '/' + post.image}`],
       type: 'article',
       publishedTime: post.date,
       authors: [post.author],
@@ -41,7 +40,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      images: [`https://www.academy84.ir${post.image.startsWith('/') ? post.image : '/' + post.image}`],
+      images: [post.image.startsWith('http') ? post.image : `https://www.academy84.ir${post.image.startsWith('/') ? post.image : '/' + post.image}`],
     },
     alternates: {
       canonical: `${baseUrl}/blog/${post.slug}`,
@@ -77,8 +76,15 @@ export default function BlogPostPage({
         </Link>
 
         <article className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="relative h-96">
-            <PlaceholderImage type="blog" className="w-full h-full absolute inset-0" text={post.title} />
+          <div className="relative h-96 bg-gray-200">
+            <SafeImage
+              src={post.image}
+              alt={`تصویر مقاله ${post.title} - وبلاگ آکادمی 84`}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 1200px"
+              priority
+            />
           </div>
 
           <div className="p-8">

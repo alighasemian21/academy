@@ -44,13 +44,13 @@ export default function AnimatedSection({
   animation = 'fade-in-up',
   className = '',
   delay = 0,
-  duration = 0.6,
+  duration = 0.8,
 }: AnimatedSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
     once: true, 
-    margin: '0px 0px -100px 0px',
-    amount: 0.2,
+    margin: '0px 0px -200px 0px',
+    amount: 0.4,
   });
 
   const variants = animationVariants[animation] || animationVariants['fade-in-up'];
