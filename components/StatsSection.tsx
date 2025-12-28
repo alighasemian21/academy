@@ -82,11 +82,15 @@ export default function StatsSection() {
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-white/10 rounded-3xl mb-4 sm:mb-6 group-hover:bg-white/20 transition-all duration-300 group-hover:scale-110">
+                <motion.div 
+                  className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-white/10 rounded-3xl mb-4 sm:mb-6 group-hover:bg-white/20 transition-all duration-300"
+                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                >
                   <div className="text-white">
                     {stat.icon}
                   </div>
-                </div>
+                </motion.div>
                 <CountUp
                   end={stat.number}
                   suffix={stat.suffix}

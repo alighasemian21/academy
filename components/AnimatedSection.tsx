@@ -14,28 +14,28 @@ interface AnimatedSectionProps {
 
 const animationVariants = {
   'fade-in-up': {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0 },
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1 },
   },
   'fade-in-down': {
-    hidden: { opacity: 0, y: -40 },
-    visible: { opacity: 1, y: 0 },
+    hidden: { opacity: 0, y: -50, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1 },
   },
   'fade-in': {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
   },
   'slide-in-right': {
-    hidden: { opacity: 0, x: 40 },
-    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: 50, scale: 0.95 },
+    visible: { opacity: 1, x: 0, scale: 1 },
   },
   'slide-in-left': {
-    hidden: { opacity: 0, x: -40 },
-    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: -50, scale: 0.95 },
+    visible: { opacity: 1, x: 0, scale: 1 },
   },
   'scale-in': {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1 },
+    hidden: { opacity: 0, scale: 0.8, rotate: -5 },
+    visible: { opacity: 1, scale: 1, rotate: 0 },
   },
 };
 

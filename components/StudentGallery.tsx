@@ -21,9 +21,9 @@ export default function StudentGallery({ student }: StudentGalleryProps) {
             fill
             className="object-cover"
             onError={() => setImgError(true)}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px"
             loading="lazy"
-            unoptimized
+            quality={85}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500">

@@ -22,7 +22,7 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="h-full"
     >
-      <div className="group bg-white rounded-2xl shadow-soft overflow-hidden border border-primary-100 h-full flex flex-col">
+      <div className="group bg-white rounded-2xl shadow-soft overflow-hidden border border-primary-100 h-full flex flex-col transition-all duration-300 hover:shadow-soft-xl hover:border-accent-200">
         <div className="relative h-48 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
           {!imgError ? (
             <motion.div
@@ -36,9 +36,9 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
                 fill
                 className="object-cover"
                 onError={() => setImgError(true)}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                loading="lazy"
-                unoptimized
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                quality={85}
               />
             </motion.div>
           ) : (
@@ -61,8 +61,8 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
         
         <motion.div 
           className="p-6 flex-grow flex flex-col"
-          whileHover={{ y: -4 }}
-          transition={{ duration: 0.3 }}
+          whileHover={{ y: -6 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           <h3 className="text-xl font-bold text-primary-900 mb-3 group-hover:text-accent-600 transition-colors">
             {service.title}
@@ -91,12 +91,16 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
           
           <Link href="/contact">
             <motion.div
-              className="w-full bg-primary-900 text-white text-center py-3.5 rounded-xl font-bold shadow-soft"
-              whileHover={{ scale: 1.02, boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.1)' }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.2 }}
+              className="w-full bg-primary-900 text-white text-center py-3.5 rounded-xl font-bold shadow-soft relative overflow-hidden group/button"
+              whileHover={{ scale: 1.03, y: -2, boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.2)' }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
-              دریافت مشاوره
+              <span className="relative z-10">دریافت مشاوره</span>
+              <motion.span
+                className="absolute inset-0 bg-gradient-to-r from-primary-800 to-primary-900 opacity-0 group-hover/button:opacity-100"
+                transition={{ duration: 0.3 }}
+              />
             </motion.div>
           </Link>
         </motion.div>

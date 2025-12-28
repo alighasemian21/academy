@@ -1,11 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import CountUp from './CountUp';
+import MagneticButton from './MagneticButton';
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -42,20 +52,34 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-primary-50">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
+    <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-primary-50">
+      {/* Background Image with Overlay - Parallax */}
+      <motion.div 
+        className="absolute inset-0 z-0"
+        style={{ y: backgroundY }}
+      >
         <div className="absolute inset-0 bg-gradient-to-br from-primary-50/95 via-white/90 to-primary-50/95 z-10"></div>
-        <div 
+        <motion.div 
           className="absolute inset-0 opacity-[0.03] z-0"
           style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, #171717 1px, transparent 0)`,
             backgroundSize: '40px 40px'
           }}
-        ></div>
-      </div>
+          animate={{
+            backgroundPosition: ['0px 0px', '40px 40px'],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+        ></motion.div>
+      </motion.div>
       
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 z-20">
+      <motion.div 
+        className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 z-20"
+        style={{ y: contentY, opacity }}
+      >
         <motion.div 
           className="max-w-5xl mx-auto text-center"
           variants={containerVariants}
@@ -73,10 +97,22 @@ export default function Hero() {
           {/* Main Heading */}
           <motion.div variants={itemVariants}>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-primary-900 mb-6 leading-[1.1] tracking-tight">
-              <span className="block mb-3">مسیر حرفه‌ای‌شدنت</span>
-              <span className="block bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600 bg-clip-text text-transparent animate-gradient">
+              <motion.span 
+                className="block mb-3"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                مسیر حرفه‌ای‌شدنت
+              </motion.span>
+              <motion.span 
+                className="block bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600 bg-clip-text text-transparent animate-gradient"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
                 از همین امروز شروع می‌شود
-              </span>
+              </motion.span>
             </h1>
           </motion.div>
           
@@ -93,30 +129,58 @@ export default function Hero() {
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
-            <Link
-              href="/academy/courses"
-              className="group relative px-10 py-5 bg-primary-900 text-white rounded-2xl font-bold text-lg shadow-soft-lg hover:shadow-soft-xl transition-all duration-300 hover:scale-105 active:scale-95 w-full sm:w-auto touch-manipulation min-h-[56px] flex items-center justify-center overflow-hidden"
-              aria-label="مشاهده دوره‌های آکادمی 84"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-3">
-                مشاهده دوره‌ها
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-                </svg>
-              </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-primary-800 via-primary-900 to-primary-800 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <span className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"></span>
-            </Link>
-            <Link
-              href="/academy/enrollment"
-              className="group px-10 py-5 bg-white text-primary-900 border-2 border-primary-900 rounded-2xl font-bold text-lg hover:bg-primary-50 hover:border-primary-800 hover:scale-105 active:scale-95 transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-3 touch-manipulation min-h-[56px] shadow-soft hover:shadow-soft-lg"
-              aria-label="شروع یادگیری رایگان در آکادمی 84"
-            >
-              شروع رایگان
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </Link>
+            <MagneticButton strength={0.15}>
+              <Link
+                href="/academy/courses"
+                className="group relative px-10 py-5 bg-primary-900 text-white rounded-2xl font-bold text-lg shadow-soft-lg hover:shadow-soft-xl transition-all duration-300 w-full sm:w-auto touch-manipulation min-h-[56px] flex items-center justify-center overflow-hidden"
+                aria-label="مشاهده دوره‌های آکادمی 84"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  مشاهده دوره‌ها
+                  <motion.svg 
+                    className="w-5 h-5" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                  </motion.svg>
+                </span>
+                <motion.span 
+                  className="absolute inset-0 bg-gradient-to-r from-primary-800 via-primary-900 to-primary-800 rounded-2xl"
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.span 
+                  className="absolute inset-0 bg-white/10 rounded-2xl"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '100%' }}
+                  transition={{ duration: 0.7, ease: 'easeInOut' }}
+                />
+              </Link>
+            </MagneticButton>
+            <MagneticButton strength={0.15}>
+              <Link
+                href="/academy/enrollment"
+                className="group px-10 py-5 bg-white text-primary-900 border-2 border-primary-900 rounded-2xl font-bold text-lg hover:bg-primary-50 hover:border-primary-800 transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-3 touch-manipulation min-h-[56px] shadow-soft hover:shadow-soft-lg"
+                aria-label="شروع یادگیری رایگان در آکادمی 84"
+              >
+                شروع رایگان
+                <motion.svg 
+                  className="w-5 h-5" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </motion.svg>
+              </Link>
+            </MagneticButton>
           </motion.div>
           
           {/* Stats */}
@@ -150,7 +214,7 @@ export default function Hero() {
             </div>
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Floating Elements Animation */}
       <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">

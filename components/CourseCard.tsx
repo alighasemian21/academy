@@ -23,7 +23,7 @@ export default function CourseCard({ course, index = 0 }: CourseCardProps) {
     >
       <Link 
         href={`/academy/courses/${course.slug}`}
-        className="group block bg-white rounded-2xl shadow-soft overflow-hidden border border-primary-100 h-full flex flex-col"
+        className="group block bg-white rounded-2xl shadow-soft overflow-hidden border border-primary-100 h-full flex flex-col transition-all duration-300 hover:shadow-soft-xl hover:border-accent-200"
       >
         <div className="relative h-52 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
           {!imgError ? (
@@ -38,9 +38,9 @@ export default function CourseCard({ course, index = 0 }: CourseCardProps) {
                 fill
                 className="object-cover"
                 onError={() => setImgError(true)}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                loading="lazy"
-                unoptimized
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                quality={85}
               />
             </motion.div>
           ) : (
@@ -63,8 +63,8 @@ export default function CourseCard({ course, index = 0 }: CourseCardProps) {
         
         <motion.div 
           className="p-6 flex-grow flex flex-col"
-          whileHover={{ y: -4 }}
-          transition={{ duration: 0.3 }}
+          whileHover={{ y: -6 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           <h3 className="text-xl font-bold text-primary-900 mb-3 group-hover:text-accent-600 transition-colors line-clamp-2 min-h-[3.5rem]">
             {course.title}

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { BlogPost } from '@/lib/data/posts';
 
 interface BlogCardProps {
@@ -18,7 +19,17 @@ export default function BlogCard({ post }: BlogCardProps) {
   });
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <motion.div 
+      className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ 
+        y: -8, 
+        boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.15)',
+      }}
+    >
       <div className="relative h-48 bg-gray-200">
         {!imgError ? (
           <Image
@@ -27,9 +38,9 @@ export default function BlogCard({ post }: BlogCardProps) {
             fill
             className="object-cover"
             onError={() => setImgError(true)}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px"
             loading="lazy"
-            unoptimized
+            quality={85}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500">
@@ -54,6 +65,6 @@ export default function BlogCard({ post }: BlogCardProps) {
           ادامه مطلب →
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }

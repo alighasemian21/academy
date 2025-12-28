@@ -93,18 +93,17 @@ export default function Header() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: navLinks.length * 0.05 }}
             >
-              <Link
-                href="/academy/enrollment"
-                className="mr-2 xl:mr-4 px-5 xl:px-6 py-2.5 bg-primary-900 text-white rounded-xl font-semibold text-sm whitespace-nowrap shadow-soft"
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <motion.span
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="block"
+                <Link
+                  href="/academy/enrollment"
+                  className="mr-2 xl:mr-4 px-5 xl:px-6 py-2.5 bg-primary-900 text-white rounded-xl font-semibold text-sm whitespace-nowrap shadow-soft hover:shadow-soft-lg transition-all duration-300 block"
                 >
                   ثبت‌نام
-                </motion.span>
-              </Link>
+                </Link>
+              </motion.div>
             </motion.div>
           </div>
 

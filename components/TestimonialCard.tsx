@@ -21,7 +21,15 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="h-full"
     >
-      <div className="bg-white rounded-2xl shadow-soft p-8 border border-primary-100 hover:shadow-soft-lg transition-all duration-300 h-full flex flex-col group">
+      <motion.div 
+        className="bg-white rounded-2xl shadow-soft p-8 border border-primary-100 h-full flex flex-col group transition-all duration-300"
+        whileHover={{ 
+          y: -8, 
+          boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 20px -5px rgba(0, 0, 0, 0.1)',
+          borderColor: '#fb923c'
+        }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
       {/* Rating */}
       <div className="flex items-center gap-1 mb-6">
         {[...Array(5)].map((_, i) => (
@@ -68,7 +76,9 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
               className="object-cover"
               onError={() => setImgError(true)}
               sizes="56px"
-              unoptimized={testimonial.image.endsWith('.svg')}
+              loading="lazy"
+              quality={90}
+              unoptimized={testimonial.image.includes('placeholder') || testimonial.image.endsWith('.svg')}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-accent-400 to-accent-500 text-white font-bold text-lg">
@@ -80,8 +90,8 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
           <h4 className="font-bold text-primary-900 text-lg group-hover:text-accent-600 transition-colors duration-300">{testimonial.name}</h4>
           <p className="text-sm text-primary-600">{testimonial.role}</p>
         </div>
-      </div>
-      </div>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
