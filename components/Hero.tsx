@@ -115,7 +115,7 @@ export default function Hero() {
           <motion.div variants={itemVariants}>
             <p className="text-xl sm:text-2xl md:text-3xl text-primary-700 mb-14 max-w-4xl mx-auto leading-relaxed font-light">
               در آکادمی 84، مهارت‌هایت را با روش‌های عملی و پروژه‌محور، از صفر تا حرفه‌ای یاد می‌گیری. 
-              <span className="block mt-3 font-semibold text-primary-900">هزاران دانشجو موفقیت خود را به ما مدیونند.</span>
+              <span className="block mt-3 font-semibold text-primary-900">ما ابزار آموزش نمی‌دهیم؛ ما انسان‌هایی می‌سازیم که می‌توانند در دنیای دیجیتال و هوش مصنوعی تصمیم درست بگیرند و خروجی واقعی بسازند.</span>
             </p>
           </motion.div>
           

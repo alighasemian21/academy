@@ -2,11 +2,11 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'درباره ما',
-  description: 'آکادمی 84 - مرکز تخصصی آموزش تصویر و رسانه با بیش از 10 سال تجربه. دوره‌های عملی و پروژه‌محور. بیش از 500 دانشجوی موفق. ماموریت ما آماده کردن شما برای ورود به بازار کار واقعی است.',
-  keywords: ['درباره آکادمی 84', 'تاریخچه آکادمی 84', 'ماموریت آکادمی 84', 'ارزش‌های آکادمی 84', 'آموزش تصویر و رسانه'],
+  description: 'آکادمی 84 - مرکز آموزش حضوری و پرمیوم مهارت‌های دیجیتال و تصویری. ما ابزار آموزش نمی‌دهیم؛ ما انسان‌هایی می‌سازیم که می‌توانند در دنیای دیجیتال و هوش مصنوعی تصمیم درست بگیرند و خروجی واقعی بسازند.',
+  keywords: ['درباره آکادمی 84', 'معرفی آکادمی 84', 'آکادمی 84', 'آموزش دیجیتال', 'آموزش تصویر و رسانه', 'آموزش حضوری', 'مهارت‌های دیجیتال'],
   openGraph: {
     title: 'درباره ما | آکادمی 84',
-    description: 'آکادمی 84 - مرکز تخصصی آموزش تصویر و رسانه با بیش از 10 سال تجربه. دوره‌های عملی و پروژه‌محور',
+    description: 'آکادمی 84 - مرکز آموزش حضوری و پرمیوم مهارت‌های دیجیتال و تصویری',
     url: 'https://www.academy84.ir/about',
   },
   alternates: {
@@ -29,16 +29,17 @@ export default function AboutPage() {
           </div>
 
           <div className="bg-primary-50 rounded-2xl p-8 md:p-12 mb-12 border border-primary-100">
-            <h2 className="text-3xl font-bold text-primary-900 mb-6">ما کی هستیم؟</h2>
+            <h2 className="text-3xl font-bold text-primary-900 mb-6">معرفی آکادمی ۸۴</h2>
             <div className="space-y-6 text-primary-700 leading-relaxed text-lg">
               <p>
-                آکادمی 84 یک مرکز تخصصی آموزش تصویر و رسانه است که از سال ۱۳۹۴ فعالیت خود را آغاز کرده. در این سال‌ها، بیش از ۵۰۰ دانشجو با ما همراه شده‌اند و مهارت‌های خود را به سطح حرفه‌ای رسانده‌اند.
+                آکادمی ۸۴، مرکز آموزش حضوری و پرمیوم مهارت‌های دیجیتال و تصویری است.
               </p>
               <p>
-                تفاوت ما در این است که فقط تئوری یاد نمی‌دهیم. هر دوره با پروژه‌های واقعی همراه است و در پایان، نمونه کارهایی داری که می‌توانی در رزومه و پورتفولیو قرار دهی.
+                ما ابزار آموزش نمی‌دهیم؛ ما انسان‌هایی می‌سازیم که می‌توانند در دنیای دیجیتال و هوش مصنوعی تصمیم درست بگیرند و خروجی واقعی بسازند.
               </p>
               <p>
-                اساتید ما سال‌ها در پروژه‌های واقعی کار کرده‌اند و تجربه‌های عملی خود را با تو به اشتراک می‌گذارند. این یعنی یاد می‌گیری که در دنیای واقعی چطور کار می‌کند، نه فقط در کتاب‌ها.
+                در آکادمی ۸۴، خلاقیت، تصمیم‌گیری و تجربه عملی محور اصلی آموزش است.
+                AI تنها دستیار شماست، نه معلم. شما در مسیر تصمیم‌سازی حرفه‌ای، پروژه واقعی و مهارت غیرقابل جایگزینی با ماشین حرکت می‌کنید.
               </p>
             </div>
           </div>
@@ -71,39 +72,50 @@ export default function AboutPage() {
           </div>
 
           <div className="bg-primary-900 rounded-2xl p-8 md:p-12 text-white">
-            <h3 className="text-3xl font-bold mb-8 text-center">ارزش‌های ما</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h4 className="text-xl font-bold mb-3">کیفیت</h4>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  هر دوره با دقت طراحی شده و محتوای آن مرتب به‌روزرسانی می‌شود تا با آخرین استانداردهای صنعت هماهنگ باشد.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h4 className="text-xl font-bold mb-3">عملگرایی</h4>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  تمرکز روی مهارت‌های عملی که در دنیای واقعی به کار می‌آیند. نه تئوری محض، بلکه کاربرد واقعی.
-                </p>
-              </div>
+            <h3 className="text-3xl font-bold mb-8 text-center">چرا آکادمی ۸۴؟</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
-                <h4 className="text-xl font-bold mb-3">پشتیبانی</h4>
+                <h4 className="text-xl font-bold mb-3">حضوری و پرمیوم</h4>
                 <p className="text-white/80 text-sm leading-relaxed">
-                  بعد از پایان دوره هم تنها نمی‌مانی. تیم ما برای پاسخ به سوالات و راهنمایی‌های بیشتر کنارت است.
+                  تمرین عملی و نقد انسانی
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <h4 className="text-xl font-bold mb-3">خلاقیت محور</h4>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  یادگیری ابزار نیست، یادگیری تصمیم‌سازی است
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                  </svg>
+                </div>
+                <h4 className="text-xl font-bold mb-3">ضد AI</h4>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  مهارت‌هایی که ماشین جایگزینش نمی‌شود
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-xl font-bold mb-3">خروجی واقعی</h4>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  پروژه‌هایی که آماده انتشار یا استفاده حرفه‌ای هستند
                 </p>
               </div>
             </div>
