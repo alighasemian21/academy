@@ -57,8 +57,36 @@ export default function CourseDetailPage({
     notFound();
   }
 
+  const courseJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: course.title,
+    description: course.description,
+    provider: {
+      '@type': 'EducationalOrganization',
+      name: 'آکادمی 84',
+      url: 'https://www.academy84.ir',
+    },
+    image: course.image.startsWith('http')
+      ? course.image
+      : `https://www.academy84.ir${course.image.startsWith('/') ? course.image : '/' + course.image}`,
+    instructor: {
+      '@type': 'Person',
+      name: course.instructor,
+    },
+    offers: {
+      '@type': 'Offer',
+      price: course.price,
+      priceCurrency: 'IRR',
+    },
+  };
+
   return (
     <div className="py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
+      />
       <div className="container mx-auto px-4">
         <Link
           href="/academy/courses"

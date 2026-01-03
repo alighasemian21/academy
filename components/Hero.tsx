@@ -7,7 +7,7 @@ import CountUpWithDelay from './CountUpWithDelay';
 import MagneticButton from './MagneticButton';
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null!);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],

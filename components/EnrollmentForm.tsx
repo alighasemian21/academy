@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { getAllCourses } from '@/lib/data/courses';
+import { trackFormSubmission, trackEnrollment } from '@/lib/analytics';
 
 export default function EnrollmentForm() {
   const [formData, setFormData] = useState({
@@ -13,6 +15,7 @@ export default function EnrollmentForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const courses = getAllCourses();
 
@@ -21,17 +24,37 @@ export default function EnrollmentForm() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    if (submitStatus === 'error') {
+      setSubmitStatus('idle');
+      setErrorMessage('');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setErrorMessage('');
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch('/api/enrollments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'خطا در ثبت‌نام');
+      }
+
       setSubmitStatus('success');
+      toast.success('ثبت‌نام شما با موفقیت انجام شد!');
+      trackFormSubmission('enrollment');
+      trackEnrollment(formData.course);
       setFormData({
         name: '',
         email: '',
@@ -39,7 +62,14 @@ export default function EnrollmentForm() {
         course: '',
         message: '',
       });
-    }, 1000);
+    } catch (error: any) {
+      setSubmitStatus('error');
+      const errorMsg = error.message || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.';
+      setErrorMessage(errorMsg);
+      toast.error(errorMsg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -139,7 +169,7 @@ export default function EnrollmentForm() {
 
         {submitStatus === 'error' && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-            خطایی رخ داد. لطفاً دوباره تلاش کنید.
+            {errorMessage || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.'}
           </div>
         )}
 

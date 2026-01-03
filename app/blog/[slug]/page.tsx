@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import SafeImage from '@/components/SafeImage';
 import { getPostBySlug, getAllPosts } from '@/lib/data/posts';
+import BlogComments from '@/components/BlogComments';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -65,8 +66,39 @@ export default function BlogPostPage({
     day: 'numeric',
   });
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.image.startsWith('http')
+      ? post.image
+      : `https://www.academy84.ir${post.image.startsWith('/') ? post.image : '/' + post.image}`,
+    datePublished: post.date,
+    author: {
+      '@type': 'Person',
+      name: post.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'آکادمی 84',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.academy84.ir/images/logos/logo-84.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://www.academy84.ir/blog/${post.slug}`,
+    },
+  };
+
   return (
     <div className="py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <div className="container mx-auto px-4 max-w-4xl">
         <Link
           href="/blog"
@@ -108,6 +140,8 @@ export default function BlogPostPage({
             </div>
           </div>
         </article>
+
+        <BlogComments postSlug={params.slug} />
       </div>
     </div>
   );

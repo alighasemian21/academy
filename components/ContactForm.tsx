@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'sonner';
+import { trackFormSubmission } from '@/lib/analytics';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -12,23 +14,43 @@ export default function ContactForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    if (submitStatus === 'error') {
+      setSubmitStatus('idle');
+      setErrorMessage('');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setErrorMessage('');
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'خطا در ارسال پیام');
+      }
+
       setSubmitStatus('success');
+      toast.success('پیام شما با موفقیت ارسال شد!');
+      trackFormSubmission('contact');
       setFormData({
         name: '',
         email: '',
@@ -36,7 +58,14 @@ export default function ContactForm() {
         subject: '',
         message: '',
       });
-    }, 1000);
+    } catch (error: any) {
+      setSubmitStatus('error');
+      const errorMsg = error.message || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.';
+      setErrorMessage(errorMsg);
+      toast.error(errorMsg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -141,7 +170,7 @@ export default function ContactForm() {
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
-              <span>خطایی رخ داد. لطفاً دوباره تلاش کنید.</span>
+              <span>{errorMessage || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.'}</span>
             </div>
           </div>
         )}

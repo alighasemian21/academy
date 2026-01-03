@@ -31,6 +31,7 @@ export default function SafeImage({
   if (isSVG) {
     if (fill) {
       return (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={src}
           alt={alt}
@@ -49,6 +50,7 @@ export default function SafeImage({
     }
 
     return (
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={src}
         alt={alt}

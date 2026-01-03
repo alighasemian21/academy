@@ -4,6 +4,7 @@ import Link from 'next/link';
 import SafeImage from '@/components/SafeImage';
 import { motion } from 'framer-motion';
 import { Course } from '@/lib/data/courses';
+import { trackCourseClick } from '@/lib/analytics';
 
 interface CourseCardProps {
   course: Course;
@@ -20,6 +21,7 @@ export default function CourseCard({ course, index = 0 }: CourseCardProps) {
     >
       <Link 
         href={`/academy/courses/${course.slug}`}
+        onClick={() => trackCourseClick(course.title)}
         className="group block bg-white rounded-2xl shadow-soft overflow-hidden border border-primary-100 h-full flex flex-col transition-all duration-300 hover:shadow-soft-xl hover:border-accent-200"
       >
         <div className="relative h-52 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">

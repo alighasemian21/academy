@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import CourseCard from '@/components/CourseCard';
 import { getAllCourses } from '@/lib/data/courses';
+import CoursesWithFilters from '@/components/CoursesWithFilters';
 
 export const metadata: Metadata = {
   title: 'دوره‌های آموزشی',
@@ -29,11 +30,7 @@ export default function CoursesPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {courses.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </div>
+        <CoursesWithFilters courses={courses} />
       </div>
     </div>
   );

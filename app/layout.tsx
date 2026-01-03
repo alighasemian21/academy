@@ -4,6 +4,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FontPreload from "@/components/FontPreload";
 import StructuredData from "@/components/StructuredData";
+import GoogleAnalyticsComponent from "@/components/GoogleAnalytics";
+import Providers from "@/components/Providers";
 
 export const metadata: Metadata = {
   title: {
@@ -61,11 +63,14 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body>
+        <Providers>
         <StructuredData />
         <FontPreload />
+          <GoogleAnalyticsComponent />
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
+        </Providers>
       </body>
     </html>
   );
