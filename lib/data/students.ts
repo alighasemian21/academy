@@ -15,7 +15,7 @@ export const students: Student[] = [
     course: 'برنامه‌نویسی وب',
     projectTitle: 'سایت فروشگاهی',
     projectDescription: 'پیاده‌سازی یک سایت فروشگاهی کامل با React و Next.js',
-    image: '/images/students/placeholder-student.svg',
+    image: '/images/students/project-1.jpg',
     achievement: 'پروژه برتر دوره',
   },
   {
@@ -24,7 +24,7 @@ export const students: Student[] = [
     course: 'طراحی UI/UX',
     projectTitle: 'طراحی اپلیکیشن موبایل',
     projectDescription: 'طراحی کامل رابط کاربری یک اپلیکیشن موبایل',
-    image: '/images/students/placeholder-student.svg',
+    image: '/images/students/project-2.jpg',
     achievement: 'طراحی خلاقانه',
   },
   {
@@ -33,7 +33,7 @@ export const students: Student[] = [
     course: 'بازاریابی دیجیتال',
     projectTitle: 'کمپین تبلیغاتی',
     projectDescription: 'راه‌اندازی و مدیریت یک کمپین تبلیغاتی موفق',
-    image: '/images/students/placeholder-student.svg',
+    image: '/images/students/project-3.jpg',
   },
   {
     id: '4',
@@ -41,7 +41,7 @@ export const students: Student[] = [
     course: 'مدیریت کسب‌وکار',
     projectTitle: 'بیزینس پلن',
     projectDescription: 'تهیه بیزینس پلن کامل برای استارتاپ',
-    image: '/images/students/placeholder-student.svg',
+    image: '/images/students/project-4.jpg',
   },
   {
     id: '5',
@@ -49,7 +49,7 @@ export const students: Student[] = [
     course: 'برنامه‌نویسی وب',
     projectTitle: 'پنل مدیریت',
     projectDescription: 'ساخت پنل مدیریت با React و TypeScript',
-    image: '/images/students/placeholder-student.svg',
+    image: '/images/students/project-5.jpg',
   },
   {
     id: '6',
@@ -57,7 +57,7 @@ export const students: Student[] = [
     course: 'طراحی UI/UX',
     projectTitle: 'طراحی وبسایت',
     projectDescription: 'طراحی رابط کاربری یک وبسایت شرکتی',
-    image: '/images/students/placeholder-student.svg',
+    image: '/images/students/project-6.jpg',
   },
 ];
 

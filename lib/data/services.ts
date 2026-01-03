@@ -18,7 +18,7 @@ export const services: Service[] = [
       'سرعت فوق‌العاده بالا',
       'پشتیبانی و نگهداری 24/7',
     ],
-    image: '/images/services/placeholder-service.svg',
+    image: '/images/services/web-design.jpg',
     featured: true,
   },
   {
@@ -31,7 +31,7 @@ export const services: Service[] = [
       'برنامه‌ریزی دقیق و اجرایی',
       'مشاوره مستمر و پشتیبانی',
     ],
-    image: '/images/services/placeholder-service.svg',
+    image: '/images/services/business-consulting.jpg',
     featured: true,
   },
   {
@@ -44,7 +44,7 @@ export const services: Service[] = [
       'طراحی کاتالوگ و بروشور',
       'راهنمای برند کامل',
     ],
-    image: '/images/services/placeholder-service.svg',
+    image: '/images/services/branding.jpg',
     featured: true,
   },
   {
@@ -57,7 +57,7 @@ export const services: Service[] = [
       'مدیریت حرفه‌ای شبکه‌های اجتماعی',
       'تحلیل و گزارش عملکرد',
     ],
-    image: '/images/services/placeholder-service.svg',
+    image: '/images/services/digital-marketing-service.jpg',
     featured: false,
   },
 ];

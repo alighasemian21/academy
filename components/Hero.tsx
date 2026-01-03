@@ -85,7 +85,7 @@ export default function Hero() {
           <motion.div variants={badgeVariants}>
             <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-900 text-white rounded-full text-sm font-medium mb-8 shadow-soft-lg">
               <span className="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></span>
-              <span>آکادمی 84 | آموزش تخصصی تصویر و رسانه</span>
+              <span>آکادمی 84 | آموزش تخصصی دنیای دیجیتال</span>
             </div>
           </motion.div>
           
@@ -94,6 +94,7 @@ export default function Hero() {
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-primary-900 mb-8 leading-[1.1] tracking-tight">
               <motion.span 
                 className="block mb-4"
+                style={{ fontSize: '45px' }}
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -102,6 +103,7 @@ export default function Hero() {
               </motion.span>
               <motion.span 
                 className="block bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600 bg-clip-text text-transparent animate-gradient"
+                style={{ fontSize: '60px', height: '100px' }}
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -113,9 +115,9 @@ export default function Hero() {
           
           {/* Description */}
           <motion.div variants={itemVariants}>
-            <p className="text-xl sm:text-2xl md:text-3xl text-primary-700 mb-14 max-w-4xl mx-auto leading-relaxed font-light">
+            <p className="text-xl sm:text-2xl md:text-3xl text-primary-700 mb-14 max-w-4xl mx-auto leading-relaxed font-light" style={{ fontSize: '17px' }}>
               در آکادمی 84، مهارت‌هایت را با روش‌های عملی و پروژه‌محور، از صفر تا حرفه‌ای یاد می‌گیری. 
-              <span className="block mt-3 font-semibold text-primary-900">ما ابزار آموزش نمی‌دهیم؛ ما انسان‌هایی می‌سازیم که می‌توانند در دنیای دیجیتال و هوش مصنوعی تصمیم درست بگیرند و خروجی واقعی بسازند.</span>
+              <span className="block mt-3 font-light text-primary-900" style={{ fontSize: '20px' }}>ما ابزار آموزش نمی‌دهیم؛ ما انسان‌هایی می‌سازیم که می‌توانند در دنیای دیجیتال و هوش مصنوعی تصمیم درست بگیرند و خروجی واقعی بسازند.</span>
             </p>
           </motion.div>
           

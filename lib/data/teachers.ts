@@ -13,7 +13,7 @@ export const teachers: Teacher[] = [
     name: 'علی قاسمیان',
     title: 'مدیر و مدرس اصلی',
     bio: 'با بیش از 10 سال تجربه در مدیریت و آموزش، متخصص در زمینه کسب‌وکار و تکنولوژی',
-    image: '/images/teachers/placeholder-teacher.svg',
+    image: '/images/teachers/ali-ghasemian.jpg',
     specialties: ['مدیریت کسب‌وکار', 'برنامه‌نویسی', 'استراتژی'],
   },
   {
@@ -21,7 +21,7 @@ export const teachers: Teacher[] = [
     name: 'فاطمه احمدی',
     title: 'مدرس طراحی و UI/UX',
     bio: 'طراح با تجربه در زمینه طراحی رابط کاربری و تجربه کاربری',
-    image: '/images/teachers/placeholder-teacher.svg',
+    image: '/images/teachers/fateme-ahmadi.jpg',
     specialties: ['طراحی UI/UX', 'طراحی گرافیک', 'طراحی تجربه کاربری'],
   },
   {
@@ -29,7 +29,7 @@ export const teachers: Teacher[] = [
     name: 'محمد رضایی',
     title: 'مدرس بازاریابی دیجیتال',
     bio: 'متخصص بازاریابی دیجیتال و سئو با تجربه در پروژه‌های بزرگ',
-    image: '/images/teachers/placeholder-teacher.svg',
+    image: '/images/teachers/mohammad-rezaei.jpg',
     specialties: ['بازاریابی دیجیتال', 'سئو', 'تبلیغات آنلاین'],
   },
 ];
