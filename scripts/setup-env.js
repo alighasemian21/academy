@@ -61,3 +61,6 @@ console.log('   1. Run: node scripts/create-admin.js');
 console.log('   2. Start the dev server: npm run dev');
 console.log('   3. Login at: http://localhost:3000/auth/signin');
 
+
+
+
