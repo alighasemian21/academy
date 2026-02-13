@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import DatePicker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
@@ -26,7 +26,34 @@ export default function StepPersonalInfo({ data, onNext }: StepPersonalInfoProps
     courseId: data.courseId || '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const courses = getAllCourses();
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleCourseSelect = (courseId: string) => {
+    setFormData((prev) => ({ ...prev, courseId }));
+    setIsDropdownOpen(false);
+    if (errors.courseId) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next.courseId;
+        return next;
+      });
+    }
+  };
+
+  const selectedCourse = courses.find((c) => c.id === formData.courseId);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -101,25 +128,103 @@ export default function StepPersonalInfo({ data, onNext }: StepPersonalInfoProps
       transition={{ duration: 0.3 }}
       className="space-y-5"
     >
-      {/* Course Selection */}
+      {/* Course Selection - Custom Dropdown */}
       <div>
-        <label htmlFor="courseId" className={labelClassName}>
+        <label className={labelClassName}>
           انتخاب دوره <span className="text-red-500">*</span>
         </label>
-        <select
-          id="courseId"
-          name="courseId"
-          value={formData.courseId}
-          onChange={handleChange}
-          className={inputClassName('courseId')}
-        >
-          <option value="">یک دوره را انتخاب کنید...</option>
-          {courses.map((course) => (
-            <option key={course.id} value={course.id}>
-              {course.title} — {course.instructor}
-            </option>
-          ))}
-        </select>
+        <div ref={dropdownRef} className="relative">
+          {/* Trigger Button */}
+          <button
+            type="button"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className={`w-full px-4 py-3 border rounded-xl text-sm text-right flex items-center justify-between transition-all duration-200 outline-none ${
+              errors.courseId
+                ? 'border-red-400 bg-red-50'
+                : isDropdownOpen
+                ? 'border-accent-500 ring-2 ring-accent-500/20 bg-white'
+                : 'border-gray-300 bg-white hover:border-gray-400'
+            }`}
+          >
+            {selectedCourse ? (
+              <span className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-accent-500 shrink-0" />
+                <span className="font-medium text-primary-800">{selectedCourse.title}</span>
+                <span className="text-primary-400 hidden sm:inline">—</span>
+                <span className="text-primary-400 text-xs hidden sm:inline">{selectedCourse.instructor}</span>
+              </span>
+            ) : (
+              <span className="text-gray-400">یک دوره را انتخاب کنید...</span>
+            )}
+            <motion.svg
+              animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+              className="w-4 h-4 text-gray-400 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </motion.svg>
+          </button>
+
+          {/* Dropdown Panel */}
+          <AnimatePresence>
+            {isDropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                transition={{ duration: 0.15, ease: 'easeOut' }}
+                className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-soft-lg overflow-hidden"
+              >
+                <div className="max-h-64 overflow-y-auto py-1">
+                  {courses.map((course, index) => {
+                    const isSelected = formData.courseId === course.id;
+                    return (
+                      <motion.button
+                        key={course.id}
+                        type="button"
+                        onClick={() => handleCourseSelect(course.id)}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.03, duration: 0.15 }}
+                        className={`w-full text-right px-4 py-3 flex items-center justify-between gap-3 transition-colors duration-150 ${
+                          isSelected
+                            ? 'bg-accent-50'
+                            : 'hover:bg-gray-50'
+                        }`}
+                      >
+                        <div className="flex flex-col gap-0.5 min-w-0">
+                          <span className={`text-sm truncate ${isSelected ? 'font-semibold text-accent-600' : 'font-medium text-primary-800'}`}>
+                            {course.title}
+                          </span>
+                          <span className="text-xs text-primary-400 truncate">
+                            {course.instructor} · {course.duration}
+                          </span>
+                        </div>
+                        {isSelected && (
+                          <motion.svg
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="w-5 h-5 text-accent-500 shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </motion.svg>
+                        )}
+                      </motion.button>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
         {errors.courseId && (
           <p className="text-red-500 text-xs mt-1">{errors.courseId}</p>
         )}
