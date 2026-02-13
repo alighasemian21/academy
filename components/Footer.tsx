@@ -152,6 +152,26 @@ export default function Footer() {
                   تماس با ما
                 </Link>
               </motion.li>
+              <motion.li
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.4 }}
+              >
+                <Link href="/academy/register" className="hover:text-white transition-colors inline-flex items-center gap-2 group">
+                  <motion.svg 
+                    className="w-4 h-4" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </motion.svg>
+                  ثبت‌نام دوره
+                </Link>
+              </motion.li>
             </ul>
           </div>
 

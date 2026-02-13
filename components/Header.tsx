@@ -98,10 +98,10 @@ export default function Header() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  href="/academy/enrollment"
+                  href="/academy/register"
                   className="mr-2 xl:mr-4 px-5 xl:px-6 py-2.5 bg-primary-900 text-white rounded-xl font-semibold text-sm whitespace-nowrap shadow-soft hover:shadow-soft-lg transition-all duration-300 block"
                 >
-                  ثبت‌نام
+                  ثبت‌نام دوره
                 </Link>
               </motion.div>
             </motion.div>
@@ -168,11 +168,11 @@ export default function Header() {
               transition={{ delay: navLinks.length * 0.05 }}
             >
               <Link
-                href="/academy/enrollment"
+                href="/academy/register"
                 className="block mx-4 mt-4 px-6 py-3.5 bg-primary-900 text-white text-center rounded-xl font-semibold hover:bg-primary-800 active:bg-primary-700 transition-colors duration-200 touch-manipulation min-h-[44px] flex items-center justify-center"
                 onClick={() => setIsMenuOpen(false)}
               >
-                ثبت‌نام
+                ثبت‌نام دوره
               </Link>
             </motion.div>
           </motion.div>
