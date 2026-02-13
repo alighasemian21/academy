@@ -3,7 +3,7 @@ export default function FontPreload() {
     <>
       <link
         rel="preload"
-        href="https://cdn.jsdelivr.net/npm/typeface-yekan@1.0.11/dist/Yekan.woff2"
+        href="https://cdn.sqp.ir/Plugins/fonts/IRANYekan/iran-yekan-400.woff2"
         as="font"
         type="font/woff2"
         crossOrigin="anonymous"
