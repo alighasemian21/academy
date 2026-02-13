@@ -2,15 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Vazir Font - Using CDN until local files are available */
-/* TODO: Download font files and place in public/fonts/ directory */
-@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirfont@v30.1.0/dist/font-face.css');
-
-/* Iranian Sans Font - Using CDN until local files are available */
+/* BYekan Font - Persian/Arabic font */
 @font-face {
-  font-family: 'Iranian Sans';
-  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/iranian-sans@latest/IranianSans.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/rastikerdar/iranian-sans@latest/IranianSans.woff') format('woff');
+  font-family: 'BYekan';
+  src: url('https://cdn.jsdelivr.net/npm/typeface-yekan@1.0.11/dist/Yekan.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/npm/typeface-yekan@1.0.11/dist/Yekan.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -36,7 +32,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'Vazir', 'Iranian Sans', system-ui, sans-serif;
+  font-family: 'BYekan', system-ui, sans-serif;
   direction: rtl;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
