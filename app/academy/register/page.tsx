@@ -1,5 +1,30 @@
 import { Metadata } from 'next';
-import CourseRegistrationWizard from '@/components/enrollment/CourseRegistrationWizard';
+import dynamic from 'next/dynamic';
+
+const CourseRegistrationWizard = dynamic(
+  () => import('@/components/enrollment/CourseRegistrationWizard'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="bg-white rounded-2xl shadow-soft p-8 max-w-3xl mx-auto">
+        <div className="animate-pulse space-y-6">
+          <div className="flex justify-between">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex flex-col items-center gap-2">
+                <div className="w-10 h-10 bg-gray-200 rounded-full" />
+                <div className="w-16 h-3 bg-gray-200 rounded" />
+              </div>
+            ))}
+          </div>
+          <div className="h-4 bg-gray-200 rounded w-3/4" />
+          <div className="h-10 bg-gray-200 rounded" />
+          <div className="h-10 bg-gray-200 rounded" />
+          <div className="h-10 bg-gray-200 rounded" />
+        </div>
+      </div>
+    ),
+  }
+);
 
 export const metadata: Metadata = {
   title: 'ثبت‌نام دوره',

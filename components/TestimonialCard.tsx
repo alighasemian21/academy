@@ -20,7 +20,7 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
       className="h-full"
     >
       <motion.div 
-        className="bg-white rounded-2xl shadow-soft p-8 border border-primary-100 h-full flex flex-col group transition-all duration-300"
+        className="bg-white rounded-2xl shadow-soft p-4 sm:p-6 md:p-8 border border-primary-100 h-full flex flex-col group transition-all duration-300"
         whileHover={{ 
           y: -8, 
           boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 20px -5px rgba(0, 0, 0, 0.1)',

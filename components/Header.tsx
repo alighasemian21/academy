@@ -54,11 +54,12 @@ export default function Header() {
               aria-hidden="true"
             >
               <Image
-                src="/images/logos/logo-84.png"
+                src="/images/logos/logo-84-black.png"
                 alt="لوگو آکادمی 84"
                 width={32}
                 height={32}
                 className="object-contain"
+                priority
               />
             </motion.div>
             <span className="text-2xl font-bold text-primary-900 hidden sm:inline tracking-tight group-hover:text-accent-600 transition-colors duration-200">آکادمی 84</span>

@@ -7,7 +7,7 @@ export default function StructuredData() {
     name: 'آکادمی 84',
     alternateName: ['Academy 84', 'آموزشگاه 84', 'آموزشگاه هشتاد و چهار', 'آکادمی هشتاد و چهار'],
     url: baseUrl,
-    logo: `${baseUrl}/images/logos/logo-84.png`,
+    logo: `${baseUrl}/images/logos/logo-84-black.png`,
     description: 'آکادمی 84 (آموزشگاه هشتاد و چهار) - مرکز تخصصی آموزش تصویر و رسانه در کاشان. دوره‌های حرفه‌ای و پروژه‌محور تولید محتوا، عکاسی، موبایگرافی، تدوین، طراحی وبسایت و مشاوره کسب‌وکار',
     address: {
       '@type': 'PostalAddress',

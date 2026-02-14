@@ -96,7 +96,7 @@ export default function CourseDetailPage({
         </Link>
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="relative h-96 bg-gray-200">
+          <div className="relative h-64 sm:h-80 md:h-96 bg-gray-200">
             <SafeImage
               src={course.image}
               alt={`تصویر دوره ${course.title} - آکادمی 84`}
@@ -137,7 +137,7 @@ export default function CourseDetailPage({
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/academy/enrollment"
+                href="/academy/register"
                 className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors text-center"
               >
                 ثبت‌نام در دوره

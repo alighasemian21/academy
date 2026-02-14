@@ -78,84 +78,97 @@ export default function BlogComments({ postSlug }: BlogCommentsProps) {
   };
 
   if (isLoading) {
-    return <div className="mt-8 text-center text-gray-600">در حال بارگذاری...</div>;
+    return (
+      <div className="mt-8">
+        <div className="animate-pulse space-y-4">
+          <div className="h-6 bg-gray-200 rounded w-40" />
+          <div className="h-24 bg-gray-100 rounded-2xl" />
+          <div className="h-24 bg-gray-100 rounded-2xl" />
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="mt-12">
-      <h3 className="text-2xl font-bold mb-6">نظرات ({comments.length})</h3>
+      <h3 className="text-2xl font-bold mb-6 text-primary-900">نظرات ({comments.length})</h3>
 
       {comments.length > 0 && (
-        <div className="space-y-6 mb-8">
+        <div className="space-y-4 mb-8">
           {comments.map((comment) => (
-            <div key={comment._id} className="bg-gray-50 rounded-lg p-6">
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <h4 className="font-semibold text-lg">{comment.authorName}</h4>
-                  <p className="text-sm text-gray-500">
-                    {new Date(comment.createdAt).toLocaleDateString('fa-IR', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </p>
+            <div key={comment._id} className="bg-gray-50/80 rounded-2xl p-4 sm:p-6 border border-gray-100">
+              <div className="flex justify-between items-start mb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-bold text-sm shrink-0">
+                    {comment.authorName.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-primary-900">{comment.authorName}</h4>
+                    <p className="text-xs text-primary-400">
+                      {new Date(comment.createdAt).toLocaleDateString('fa-IR', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </p>
+                  </div>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed">{comment.content}</p>
+              <p className="text-primary-600 leading-relaxed text-sm sm:text-base">{comment.content}</p>
             </div>
           ))}
         </div>
       )}
 
-      <div className="bg-white border rounded-lg p-6">
-        <h4 className="text-xl font-bold mb-4">ارسال نظر</h4>
+      <div className="bg-white rounded-2xl shadow-soft border border-gray-100 p-4 sm:p-6">
+        <h4 className="text-xl font-bold mb-5 text-primary-900">ارسال نظر</h4>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary-700 mb-1.5">
                 نام *
               </label>
               <input
                 type="text"
                 value={formData.authorName}
                 onChange={(e) => setFormData({ ...formData, authorName: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all duration-200 text-sm hover:border-gray-400"
                 required
                 disabled={!!session}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary-700 mb-1.5">
                 ایمیل *
               </label>
               <input
                 type="email"
                 value={formData.authorEmail}
                 onChange={(e) => setFormData({ ...formData, authorEmail: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all duration-200 text-sm hover:border-gray-400"
                 required
                 disabled={!!session}
               />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-primary-700 mb-1.5">
               نظر شما *
             </label>
             <textarea
               value={formData.content}
               onChange={(e) => setFormData({ ...formData, content: e.target.value })}
               rows={4}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all duration-200 text-sm hover:border-gray-400"
               required
             />
           </div>
           {message && (
             <div
-              className={`p-4 rounded-lg ${
+              className={`p-4 rounded-xl text-sm ${
                 message.type === 'success'
-                  ? 'bg-green-50 text-green-800'
-                  : 'bg-red-50 text-red-800'
+                  ? 'bg-green-50 text-green-800 border border-green-200'
+                  : 'bg-red-50 text-red-800 border border-red-200'
               }`}
             >
               {message.text}
@@ -164,7 +177,7 @@ export default function BlogComments({ postSlug }: BlogCommentsProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+            className="w-full bg-primary-900 text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-800 transition-all duration-200 shadow-soft hover:shadow-soft-lg disabled:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none text-sm"
           >
             {isSubmitting ? 'در حال ارسال...' : 'ارسال نظر'}
           </button>

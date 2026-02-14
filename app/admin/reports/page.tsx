@@ -93,7 +93,7 @@ export default async function AdminReportsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-2xl font-bold text-primary-900 mb-6">آمار تماس‌ها</h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-blue-50 rounded-lg p-4">
                 <p className="text-sm text-gray-600 mb-1">کل تماس‌ها</p>
                 <p className="text-3xl font-bold text-blue-600">{totalContacts}</p>
@@ -123,7 +123,7 @@ export default async function AdminReportsPage() {
 
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-2xl font-bold text-primary-900 mb-6">آمار ثبت‌نام‌ها</h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-blue-50 rounded-lg p-4">
                 <p className="text-sm text-gray-600 mb-1">کل ثبت‌نام‌ها</p>
                 <p className="text-3xl font-bold text-blue-600">{totalEnrollments}</p>

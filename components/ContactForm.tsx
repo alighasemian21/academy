@@ -69,7 +69,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-soft-lg p-8 md:p-12 max-w-2xl mx-auto border border-primary-100">
+    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-soft-lg p-4 sm:p-6 md:p-8 lg:p-12 max-w-2xl mx-auto border border-primary-100">
       <h2 className="text-3xl font-bold text-primary-900 mb-8 text-center">فرم تماس</h2>
 
       <div className="space-y-6">

@@ -50,7 +50,7 @@ export default function Hero() {
   };
 
   return (
-    <section ref={sectionRef} className="relative min-h-[95vh] flex items-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-primary-50">
+    <section ref={sectionRef} className="relative min-h-[80vh] sm:min-h-[90vh] lg:min-h-[95vh] flex items-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-primary-50">
       {/* Background Image with Overlay - Parallax */}
       <motion.div 
         className="absolute inset-0 z-0"
@@ -74,7 +74,7 @@ export default function Hero() {
         ></motion.div>
       </motion.div>
       
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 z-20">
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-32 z-20">
         <motion.div 
           className="max-w-5xl mx-auto text-center"
           variants={containerVariants}
@@ -93,8 +93,7 @@ export default function Hero() {
           <motion.div variants={itemVariants}>
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-primary-900 mb-8 leading-[1.1] tracking-tight">
               <motion.span 
-                className="block mb-4"
-                style={{ fontSize: '45px' }}
+                className="block mb-4 text-3xl sm:text-4xl md:text-5xl"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -102,8 +101,7 @@ export default function Hero() {
                 مسیر حرفه‌ای‌شدنت
               </motion.span>
               <motion.span 
-                className="block bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600 bg-clip-text text-transparent animate-gradient"
-                style={{ fontSize: '60px', height: '100px' }}
+                className="block bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600 bg-clip-text text-transparent animate-gradient text-4xl sm:text-5xl md:text-6xl leading-tight"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -115,9 +113,9 @@ export default function Hero() {
           
           {/* Description */}
           <motion.div variants={itemVariants}>
-            <p className="text-xl sm:text-2xl md:text-3xl text-primary-700 mb-14 max-w-4xl mx-auto leading-relaxed font-light" style={{ fontSize: '17px' }}>
+            <p className="text-base sm:text-lg md:text-xl text-primary-700 mb-10 sm:mb-14 max-w-4xl mx-auto leading-relaxed font-light">
               در آکادمی 84، مهارت‌هایت را با روش‌های عملی و پروژه‌محور، از صفر تا حرفه‌ای یاد می‌گیری. 
-              <span className="block mt-3 font-light text-primary-900" style={{ fontSize: '20px' }}>ما ابزار آموزش نمی‌دهیم؛ ما انسان‌هایی می‌سازیم که می‌توانند در دنیای دیجیتال و هوش مصنوعی تصمیم درست بگیرند و خروجی واقعی بسازند.</span>
+              <span className="block mt-3 font-light text-primary-900 text-lg sm:text-xl md:text-2xl">ما ابزار آموزش نمی‌دهیم؛ ما انسان‌هایی می‌سازیم که می‌توانند در دنیای دیجیتال و هوش مصنوعی تصمیم درست بگیرند و خروجی واقعی بسازند.</span>
             </p>
           </motion.div>
           
@@ -161,11 +159,11 @@ export default function Hero() {
             </MagneticButton>
             <MagneticButton strength={0.15}>
               <Link
-                href="/academy/enrollment"
+                href="/academy/register"
                 className="group px-10 py-5 bg-white text-primary-900 border-2 border-primary-900 rounded-2xl font-bold text-lg hover:bg-primary-50 hover:border-primary-800 transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-3 touch-manipulation min-h-[56px] shadow-soft hover:shadow-soft-lg"
                 aria-label="شروع یادگیری رایگان در آکادمی 84"
               >
-                شروع رایگان
+                شروع کن
                 <motion.svg 
                   className="w-5 h-5" 
                   fill="none" 
@@ -217,7 +215,7 @@ export default function Hero() {
       </div>
 
       {/* Floating Elements Animation */}
-      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden hidden sm:block">
         <motion.div
           className="absolute top-20 right-10 w-20 h-20 bg-accent-200/30 rounded-full blur-2xl"
           animate={{

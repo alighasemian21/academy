@@ -4,8 +4,8 @@ export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="text-center px-4">
-        <h1 className="text-6xl font-bold text-primary-600 mb-4">404</h1>
-        <h2 className="text-3xl font-bold mb-4">صفحه یافت نشد</h2>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-600 mb-4">404</h1>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4">صفحه یافت نشد</h2>
         <p className="text-gray-600 mb-8">
           متأسفانه صفحه‌ای که دنبال آن می‌گردید وجود ندارد.
         </p>

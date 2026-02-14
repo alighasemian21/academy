@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface FAQItem {
   question: string;
@@ -46,35 +47,56 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="space-y-4">
-      {faqs.map((faq, index) => (
-        <div key={index} className="bg-white rounded-lg shadow">
-          <button
-            onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            className="w-full px-6 py-4 text-right flex justify-between items-center hover:bg-gray-50 transition-colors"
+    <div className="space-y-3">
+      {faqs.map((faq, index) => {
+        const isOpen = openIndex === index;
+        return (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.05, duration: 0.3 }}
+            className={`bg-white rounded-2xl shadow-soft border transition-all duration-300 overflow-hidden ${
+              isOpen ? 'border-accent-300 shadow-soft-lg' : 'border-transparent hover:border-gray-200'
+            }`}
           >
-            <span className="font-semibold text-lg text-primary-900">{faq.question}</span>
-            <svg
-              className={`w-5 h-5 text-primary-600 transition-transform ${
-                openIndex === index ? 'transform rotate-180' : ''
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <button
+              onClick={() => setOpenIndex(isOpen ? null : index)}
+              className="w-full px-5 sm:px-6 py-4 sm:py-5 text-right flex justify-between items-center gap-4 transition-colors duration-200"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
-          {openIndex === index && (
-            <div className="px-6 pb-4 text-gray-700 leading-relaxed">{faq.answer}</div>
-          )}
-        </div>
-      ))}
+              <span className={`font-semibold text-base sm:text-lg transition-colors duration-200 ${isOpen ? 'text-accent-600' : 'text-primary-900'}`}>
+                {faq.question}
+              </span>
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+                className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
+                  isOpen ? 'bg-accent-100 text-accent-600' : 'bg-gray-100 text-gray-500'
+                }`}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
+              </motion.div>
+            </button>
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25, ease: 'easeInOut' }}
+                >
+                  <div className="px-5 sm:px-6 pb-5 text-primary-600 leading-relaxed text-sm sm:text-base">
+                    {faq.answer}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
