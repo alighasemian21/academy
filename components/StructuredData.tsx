@@ -21,9 +21,9 @@ export default function StructuredData() {
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+98-937-564-0513',
+      telephone: '+98-913-313-9424',
       contactType: 'Customer Service',
-      email: 'BYALIGHASEMIAN@GMAIL.COM',
+      email: 'acadeemy84@gmail.com',
       availableLanguage: 'Persian',
     },
     knowsAbout: [

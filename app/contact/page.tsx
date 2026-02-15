@@ -3,7 +3,7 @@ import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
   title: 'تماس با ما',
-  description: 'تماس با آکادمی 84 - سوالات، پیشنهادات و درخواست مشاوره. آدرس: قم، زنبیل آباد، خیابان عطاران. تلفن: 09375640513',
+  description: 'تماس با آکادمی 84 - سوالات، پیشنهادات و درخواست مشاوره. آدرس: کاشان، خیابان بهشتی، روبه‌رو سپاه. تلفن: 09133139424',
   keywords: ['تماس با آکادمی 84', 'آدرس آکادمی 84', 'شماره تماس آکادمی 84', 'ایمیل آکادمی 84', 'مشاوره رایگان'],
   openGraph: {
     title: 'تماس با ما | آکادمی 84',
@@ -37,8 +37,8 @@ export default function ContactPage() {
             </div>
             <h3 className="text-xl font-bold text-primary-900 mb-3">ایمیل</h3>
             <p className="text-primary-600">
-              <a href="mailto:BYALIGHASEMIAN@GMAIL.COM" className="hover:text-primary-900 transition-colors break-all">
-                BYALIGHASEMIAN@GMAIL.COM
+              <a href="mailto:acadeemy84@gmail.com" className="hover:text-primary-900 transition-colors break-all">
+                acadeemy84@gmail.com
               </a>
             </p>
           </div>
@@ -51,8 +51,8 @@ export default function ContactPage() {
             </div>
             <h3 className="text-xl font-bold text-primary-900 mb-3">تلفن</h3>
             <p className="text-primary-600">
-              <a href="tel:09375640513" className="hover:text-primary-900 transition-colors">
-                09375640513
+              <a href="tel:09133139424" className="hover:text-primary-900 transition-colors">
+                09133139424
               </a>
             </p>
           </div>
@@ -65,7 +65,7 @@ export default function ContactPage() {
               </svg>
             </div>
             <h3 className="text-xl font-bold text-primary-900 mb-3">آدرس</h3>
-            <p className="text-primary-600">قم، زنبیل آباد، خیابان عطاران</p>
+            <p className="text-primary-600">کاشان، خیابان بهشتی، روبه‌رو سپاه</p>
           </div>
         </div>
 

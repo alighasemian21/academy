@@ -21,7 +21,7 @@ export interface EnrollmentEmailParams {
 
 /**
  * Send enrollment notification email via EmailJS.
- * Emails are sent to kavand123456789@gmail.com (To) and BYALIGHASEMIAN@GMAIL.COM (BCC) as configured in the template.
+ * Emails are sent to kavand123456789@gmail.com (To) and acadeemy84@gmail.com (BCC) as configured in the template.
  */
 export async function sendEnrollmentEmail(params: EnrollmentEmailParams) {
   if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
