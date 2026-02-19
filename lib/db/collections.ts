@@ -14,6 +14,7 @@ export const COLLECTIONS = {
   STUDENTS: 'students',
   USERS: 'users',
   COMMENTS: 'comments',
+  SETTINGS: 'settings',
 } as const;
 
 /**

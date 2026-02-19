@@ -1,250 +1,248 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import CountUpWithDelay from './CountUpWithDelay';
-import MagneticButton from './MagneticButton';
+import Image from 'next/image';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, useEffect, useCallback } from 'react';
 
-export default function Hero() {
+export interface HeroSlide {
+  image: string;
+  alt: string;
+}
+
+interface HeroProps {
+  slides?: HeroSlide[];
+}
+
+const defaultSlides: HeroSlide[] = [
+  { image: '/images/hero/slide-1.jpg', alt: 'استودیو حرفه‌ای آکادمی 84' },
+  { image: '/images/hero/slide-2.jpg', alt: 'فضای آموزشی آکادمی 84' },
+  { image: '/images/hero/slide-3.jpg', alt: 'تیم خلاق آکادمی 84' },
+];
+
+const SLIDE_INTERVAL = 6000;
+
+export default function Hero({ slides }: HeroProps) {
+  const heroSlides = slides && slides.length > 0 ? slides : defaultSlides;
+  const [current, setCurrent] = useState(0);
   const sectionRef = useRef<HTMLElement | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   });
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+  const resetTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % heroSlides.length);
+    }, SLIDE_INTERVAL);
+  }, [heroSlides.length]);
+
+  useEffect(() => {
+    resetTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [resetTimer]);
+
+  const goToSlide = (index: number) => {
+    setCurrent(index);
+    resetTimer();
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.18, delayChildren: 0.3 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
-
-  const badgeVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
-      },
+      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   return (
-    <section ref={sectionRef} className="relative min-h-[80vh] sm:min-h-[90vh] lg:min-h-[95vh] flex items-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-primary-50">
-      {/* Background Image with Overlay - Parallax */}
-      <motion.div 
-        className="absolute inset-0 z-0"
-        style={{ y: backgroundY }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-50/95 via-white/90 to-primary-50/95 z-10"></div>
-        <motion.div 
-          className="absolute inset-0 opacity-[0.03] z-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, #171717 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }}
-          animate={{
-            backgroundPosition: ['0px 0px', '40px 40px'],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        ></motion.div>
-      </motion.div>
-      
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-32 z-20">
-        <motion.div 
-          className="max-w-5xl mx-auto text-center"
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
+      {/* Slide images */}
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={current}
+          className="absolute inset-0 z-0"
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          style={{ y: backgroundY }}
+        >
+          <Image
+            src={heroSlides[current].image}
+            alt={heroSlides[current].alt}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority={current === 0}
+            quality={85}
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Dark overlay -- bottom blends into Stats dark bg */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-primary-900/80 via-primary-900/60 to-primary-900" />
+
+      {/* Dot-pattern texture */}
+      <div
+        className="absolute inset-0 z-[2] opacity-[0.04]"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)',
+          backgroundSize: '48px 48px',
+        }}
+      />
+
+      {/* Floating elements */}
+      <div className="absolute inset-0 pointer-events-none z-[3] overflow-hidden hidden sm:block">
+        <motion.div
+          className="absolute top-20 right-10 w-24 h-24 bg-white/[0.06] rounded-full blur-2xl"
+          animate={{ y: [0, -25, 0], x: [0, 12, 0], scale: [1, 1.15, 1] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute bottom-24 left-10 w-36 h-36 bg-accent-500/[0.06] rounded-full blur-3xl"
+          animate={{ y: [0, 30, 0], x: [0, -18, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        />
+        <motion.div
+          className="absolute top-1/3 left-1/4 w-16 h-16 bg-white/[0.04] rounded-full blur-xl"
+          animate={{ y: [0, 18, 0], x: [0, -10, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32 z-10">
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Badge */}
-          <motion.div variants={badgeVariants}>
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-900 text-white rounded-full text-sm font-medium mb-8 shadow-soft-lg">
-              <span className="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></span>
-              <span>آکادمی 84 | آموزش تخصصی دنیای دیجیتال</span>
-            </div>
+          {/* Logo */}
+          <motion.div variants={itemVariants} className="mb-10 sm:mb-12">
+            <Image
+              src="/images/logos/logo-84-white.png"
+              alt="آکادمی هشتاد و چهار"
+              width={80}
+              height={80}
+              className="mx-auto opacity-90"
+              priority
+            />
           </motion.div>
-          
-          {/* Main Heading */}
-          <motion.div variants={itemVariants}>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-primary-900 mb-8 leading-[1.1] tracking-tight">
-              <motion.span 
-                className="block mb-4 text-3xl sm:text-4xl md:text-5xl"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              >
-                مسیر حرفه‌ای‌شدنت
-              </motion.span>
-              <motion.span 
-                className="block bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600 bg-clip-text text-transparent animate-gradient text-4xl sm:text-5xl md:text-6xl leading-tight"
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              >
-                از همین امروز شروع می‌شود
-              </motion.span>
-            </h1>
-          </motion.div>
-          
-          {/* Description */}
-          <motion.div variants={itemVariants}>
-            <p className="text-base sm:text-lg md:text-xl text-primary-700 mb-10 sm:mb-14 max-w-4xl mx-auto leading-relaxed font-light">
-              در آکادمی 84، مهارت‌هایت را با روش‌های عملی و پروژه‌محور، از صفر تا حرفه‌ای یاد می‌گیری. 
-              <span className="block mt-3 font-light text-primary-900 text-lg sm:text-xl md:text-2xl">ما ابزار آموزش نمی‌دهیم؛ ما انسان‌هایی می‌سازیم که می‌توانند در دنیای دیجیتال و هوش مصنوعی تصمیم درست بگیرند و خروجی واقعی بسازند.</span>
-            </p>
-          </motion.div>
-          
-          {/* CTA Buttons */}
-          <motion.div 
+
+          {/* Heading */}
+          <motion.h1
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 sm:mb-8 leading-[1.15] tracking-tight"
           >
-            <MagneticButton strength={0.15}>
-              <Link
-                href="/academy/courses"
-                className="group relative px-10 py-5 bg-primary-900 text-white rounded-2xl font-bold text-lg shadow-soft-lg hover:shadow-soft-xl transition-all duration-300 w-full sm:w-auto touch-manipulation min-h-[56px] flex items-center justify-center overflow-hidden"
-                aria-label="مشاهده دوره‌های آکادمی 84"
+            آکادمی هشتاد و چهار
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            variants={itemVariants}
+            className="text-lg sm:text-xl md:text-2xl text-white/60 font-light mb-4 sm:mb-6 max-w-2xl mx-auto leading-relaxed"
+          >
+            مرکز آموزش حضوری و پرمیوم مهارت‌های دیجیتال و تصویری
+          </motion.p>
+
+          {/* Tagline */}
+          <motion.p
+            variants={itemVariants}
+            className="text-sm sm:text-base text-white/40 mb-12 sm:mb-14 max-w-xl mx-auto"
+          >
+            ما ابزار آموزش نمی‌دهیم؛ ما انسان‌هایی می‌سازیم که تصمیم درست می‌گیرند.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 sm:mb-12"
+          >
+            <Link
+              href="/academy/courses"
+              className="group px-8 sm:px-10 py-4 sm:py-5 border border-white/20 text-white rounded-full font-medium text-base sm:text-lg hover:bg-white hover:text-primary-900 transition-all duration-300 w-full sm:w-auto text-center min-h-[52px] flex items-center justify-center gap-3"
+            >
+              مشاهده دوره‌ها
+              <svg
+                className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <span className="relative z-10 flex items-center justify-center gap-3">
-                  مشاهده دوره‌ها
-                  <motion.svg 
-                    className="w-5 h-5" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-                  </motion.svg>
-                </span>
-                <motion.span 
-                  className="absolute inset-0 bg-gradient-to-r from-primary-800 via-primary-900 to-primary-800 rounded-2xl"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.span 
-                  className="absolute inset-0 bg-white/10 rounded-2xl"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '100%' }}
-                  transition={{ duration: 0.7, ease: 'easeInOut' }}
-                />
-              </Link>
-            </MagneticButton>
-            <MagneticButton strength={0.15}>
-              <Link
-                href="/academy/register"
-                className="group px-10 py-5 bg-white text-primary-900 border-2 border-primary-900 rounded-2xl font-bold text-lg hover:bg-primary-50 hover:border-primary-800 transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-3 touch-manipulation min-h-[56px] shadow-soft hover:shadow-soft-lg"
-                aria-label="شروع یادگیری رایگان در آکادمی 84"
-              >
-                شروع کن
-                <motion.svg 
-                  className="w-5 h-5" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </Link>
+            <Link
+              href="/academy/register"
+              className="px-8 sm:px-10 py-4 sm:py-5 bg-white text-primary-900 rounded-full font-medium text-base sm:text-lg hover:bg-white/90 transition-all duration-300 w-full sm:w-auto text-center min-h-[52px] flex items-center justify-center"
+            >
+              ثبت‌نام
+            </Link>
+          </motion.div>
+
+          {/* Navigation dots */}
+          {heroSlides.length > 1 && (
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center justify-center gap-2.5"
+            >
+              {heroSlides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`اسلاید ${index + 1}`}
+                  className="relative p-1 group"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </motion.svg>
-              </Link>
-            </MagneticButton>
-          </motion.div>
-          
-          {/* Stats */}
-          <motion.div 
-            variants={itemVariants}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 lg:gap-16 max-w-4xl mx-auto pt-12 sm:pt-16 border-t-2 border-primary-200/50"
-          >
-            <div className="group min-h-[120px] flex flex-col justify-center">
-              <CountUpWithDelay 
-                end={10} 
-                suffix="+" 
-                delay={400}
-                className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-2 group-hover:text-accent-600 transition-colors duration-300"
-              />
-              <div className="text-base sm:text-lg text-primary-600 font-medium">سال تجربه</div>
-            </div>
-            <div className="group min-h-[120px] flex flex-col justify-center">
-              <CountUpWithDelay 
-                end={500} 
-                suffix="+" 
-                delay={600}
-                className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-2 group-hover:text-accent-600 transition-colors duration-300"
-              />
-              <div className="text-base sm:text-lg text-primary-600 font-medium">دانشجوی موفق</div>
-            </div>
-            <div className="group min-h-[120px] flex flex-col justify-center">
-              <CountUpWithDelay 
-                end={20} 
-                suffix="+" 
-                delay={800}
-                className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-2 group-hover:text-accent-600 transition-colors duration-300"
-              />
-              <div className="text-base sm:text-lg text-primary-600 font-medium">دوره تخصصی</div>
-            </div>
-          </motion.div>
+                  <span
+                    className={`block rounded-full transition-all duration-500 ${
+                      index === current
+                        ? 'w-8 h-2 bg-white'
+                        : 'w-2 h-2 bg-white/30 group-hover:bg-white/50'
+                    }`}
+                  />
+                </button>
+              ))}
+            </motion.div>
+          )}
         </motion.div>
       </div>
 
-      {/* Floating Elements Animation */}
-      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden hidden sm:block">
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8, duration: 1 }}
+      >
         <motion.div
-          className="absolute top-20 right-10 w-20 h-20 bg-accent-200/30 rounded-full blur-2xl"
-          animate={{
-            y: [0, -20, 0],
-            x: [0, 10, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-10 w-32 h-32 bg-primary-200/20 rounded-full blur-3xl"
-          animate={{
-            y: [0, 30, 0],
-            x: [0, -15, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
-      </div>
+          className="w-5 h-8 border border-white/20 rounded-full flex justify-center pt-1.5"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <div className="w-1 h-2 bg-white/40 rounded-full" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
-

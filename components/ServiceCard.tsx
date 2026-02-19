@@ -43,7 +43,7 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
         </div>
         
         <motion.div 
-          className="p-6 flex-grow flex flex-col"
+          className="p-4 sm:p-6 flex-grow flex flex-col"
           whileHover={{ y: -6 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
@@ -74,7 +74,7 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
           
           <Link href="/contact">
             <motion.div
-              className="w-full bg-primary-900 text-white text-center py-3.5 rounded-xl font-bold shadow-soft relative overflow-hidden group/button"
+              className="w-full bg-primary-900 text-white text-center py-3.5 rounded-full font-bold shadow-soft relative overflow-hidden group/button"
               whileHover={{ scale: 1.03, y: -2, boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.2)' }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}

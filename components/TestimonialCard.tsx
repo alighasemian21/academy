@@ -46,7 +46,7 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
       </div>
 
       {/* Text */}
-      <p className="text-primary-700 leading-relaxed mb-6 flex-grow text-lg group-hover:text-primary-900 transition-colors duration-300">
+      <p className="text-primary-700 leading-relaxed mb-6 flex-grow text-base sm:text-lg group-hover:text-primary-900 transition-colors duration-300">
         &ldquo;{testimonial.text}&rdquo;
       </p>
 

@@ -47,7 +47,7 @@ export default function CourseCard({ course, index = 0 }: CourseCardProps) {
         </div>
         
         <motion.div 
-          className="p-6 flex-grow flex flex-col"
+          className="p-4 sm:p-6 flex-grow flex flex-col"
           whileHover={{ y: -6 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
