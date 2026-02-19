@@ -1,15 +1,13 @@
-'use client';
-
 import Link from 'next/link';
 import SafeImage from '@/components/SafeImage';
-import { motion } from 'framer-motion';
 import { BlogPost } from '@/lib/data/posts';
 
 interface BlogCardProps {
   post: BlogPost;
+  index?: number;
 }
 
-export default function BlogCard({ post }: BlogCardProps) {
+export default function BlogCard({ post, index = 0 }: BlogCardProps) {
   const formattedDate = new Date(post.date).toLocaleDateString('fa-IR', {
     year: 'numeric',
     month: 'long',
@@ -17,16 +15,9 @@ export default function BlogCard({ post }: BlogCardProps) {
   });
 
   return (
-    <motion.div 
-      className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ 
-        y: -8, 
-        boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.15)',
-      }}
+    <div 
+      className="opacity-0 animate-fade-in-card bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)]"
+      style={{ animationDelay: `${index * 100}ms` }}
     >
       <div className="relative h-48 bg-gray-200">
         <SafeImage
@@ -54,6 +45,6 @@ export default function BlogCard({ post }: BlogCardProps) {
           ادامه مطلب →
         </Link>
       </div>
-    </motion.div>
+    </div>
   );
 }

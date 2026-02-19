@@ -1,75 +1,51 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { ReactNode, useRef, useEffect, useState } from 'react';
 
 interface AnimatedSectionProps {
   children: ReactNode;
   animation?: 'fade-in-up' | 'fade-in' | 'slide-in-right' | 'slide-in-left' | 'scale-in' | 'fade-in-down';
   className?: string;
   delay?: number;
-  duration?: number;
 }
-
-const animationVariants = {
-  'fade-in-up': {
-    hidden: { opacity: 0, y: 50, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1 },
-  },
-  'fade-in-down': {
-    hidden: { opacity: 0, y: -50, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1 },
-  },
-  'fade-in': {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  },
-  'slide-in-right': {
-    hidden: { opacity: 0, x: 50, scale: 0.95 },
-    visible: { opacity: 1, x: 0, scale: 1 },
-  },
-  'slide-in-left': {
-    hidden: { opacity: 0, x: -50, scale: 0.95 },
-    visible: { opacity: 1, x: 0, scale: 1 },
-  },
-  'scale-in': {
-    hidden: { opacity: 0, scale: 0.8, rotate: -5 },
-    visible: { opacity: 1, scale: 1, rotate: 0 },
-  },
-};
 
 export default function AnimatedSection({
   children,
   animation = 'fade-in-up',
   className = '',
   delay = 0,
-  duration = 0.8,
 }: AnimatedSectionProps) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { 
-    once: true, 
-    margin: '0px 0px -200px 0px',
-    amount: 0.4,
-  });
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const variants = animationVariants[animation] || animationVariants['fade-in-up'];
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (delay > 0) {
+            setTimeout(() => setIsVisible(true), delay);
+          } else {
+            setIsVisible(true);
+          }
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay]);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-      variants={variants}
-      transition={{
-        duration,
-        delay: delay / 1000,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={className}
+      className={`${animation} ${isVisible ? 'visible' : ''} ${className}`}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
-

@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import CountUpWithDelay from './CountUpWithDelay';
 import AnimatedSection from './AnimatedSection';
 import AnimatedHeading from './AnimatedHeading';
@@ -56,7 +55,6 @@ export default function StatsSection() {
   return (
     <div>
       <section className="pt-6 sm:pt-10 pb-24 sm:pb-28 lg:pb-32 bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 relative overflow-hidden">
-        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0)`,
@@ -82,20 +80,16 @@ export default function StatsSection() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
             {stats.map((stat, index) => (
               <AnimatedSection key={index} animation="scale-in" delay={index * 150}>
-                <motion.div
-                  className="text-center group"
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.3 }}
+                <div
+                  className="text-center group hover:-translate-y-1.5 transition-transform duration-300"
                 >
-                  <motion.div 
-                    className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-white/10 rounded-2xl mb-4 sm:mb-5 group-hover:bg-white/20 transition-all duration-300"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  <div 
+                    className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-white/10 rounded-2xl mb-4 sm:mb-5 group-hover:bg-white/20 group-hover:scale-110 group-hover:rotate-[5deg] transition-all duration-300"
                   >
                     <div className="text-white">
                       {stat.icon}
                     </div>
-                  </motion.div>
+                  </div>
                   <CountUpWithDelay
                     end={stat.number}
                     suffix={stat.suffix}
@@ -104,14 +98,13 @@ export default function StatsSection() {
                   />
                   <div className="text-base sm:text-lg font-bold text-white mb-1">{stat.label}</div>
                   <div className="text-white/60 text-xs sm:text-sm">{stat.description}</div>
-                </motion.div>
+                </div>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Bottom curve -- outside overflow-hidden, overlaps to kill subpixel gap */}
       <div className="relative -mt-1 z-10">
         <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block" preserveAspectRatio="none">
           <path d="M0 80V40C240 0 480 0 720 20C960 40 1200 60 1440 40V80H0Z" fill="white" />
@@ -120,4 +113,3 @@ export default function StatsSection() {
     </div>
   );
 }
-
