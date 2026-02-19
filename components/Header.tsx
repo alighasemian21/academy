@@ -47,23 +47,23 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center space-x-reverse space-x-3 group" aria-label="صفحه اصلی آکادمی 84">
             <motion.div 
-              className="w-12 h-12 flex items-center justify-center bg-gray-50 rounded-xl group-hover:bg-gray-100 p-2"
+              className="w-14 h-14 flex items-center justify-center bg-gray-50 rounded-xl group-hover:bg-gray-100 p-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
               aria-hidden="true"
             >
               <Image
-                src="/images/logos/logo-84-black.png"
-                alt="لوگو آکادمی 84"
-                width={32}
-                height={32}
-                className="object-contain"
+                src="/images/logos/logo-84-white.png"
+                alt="لوگو آکادمی هشتاد و چهار"
+                width={40}
+                height={40}
+                className="object-contain brightness-0"
                 priority
               />
             </motion.div>
-            <span className="text-2xl font-bold text-primary-900 hidden sm:inline tracking-tight group-hover:text-accent-600 transition-colors duration-200">آکادمی 84</span>
-            <span className="text-xl font-bold text-primary-900 sm:hidden group-hover:text-accent-600 transition-colors duration-200">84</span>
+            <span className="text-2xl font-bold text-primary-900 hidden sm:inline tracking-tight group-hover:text-accent-600 transition-colors duration-200">آکادمی هشتاد و چهار</span>
+            <span className="text-xl font-bold text-primary-900 sm:hidden group-hover:text-accent-600 transition-colors duration-200">آکادمی ۸۴</span>
           </Link>
 
           {/* Desktop Menu */}

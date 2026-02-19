@@ -84,7 +84,7 @@ export default function BlogPostPage({
       name: 'آکادمی 84',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.academy84.ir/images/logos/logo-84-black.png',
+        url: 'https://www.academy84.ir/images/logos/logo-84-white.png',
       },
     },
     mainEntityOfPage: {
