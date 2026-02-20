@@ -3,6 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
+  output: 'standalone',
+  experimental: {
+    optimizePackageImports: ['framer-motion', 'sonner', '@emailjs/browser'],
+  },
   images: {
     remotePatterns: [
       {

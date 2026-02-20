@@ -1,7 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
 
 interface FAQItem {
   question: string;
@@ -51,12 +50,8 @@ export default function FAQSection() {
       {faqs.map((faq, index) => {
         const isOpen = openIndex === index;
         return (
-          <motion.div
+          <div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.05, duration: 0.3 }}
             className={`bg-white rounded-2xl shadow-soft border transition-all duration-300 overflow-hidden ${
               isOpen ? 'border-accent-300 shadow-soft-lg' : 'border-transparent hover:border-gray-200'
             }`}
@@ -68,36 +63,29 @@ export default function FAQSection() {
               <span className={`font-semibold text-base sm:text-lg transition-colors duration-200 ${isOpen ? 'text-accent-600' : 'text-primary-900'}`}>
                 {faq.question}
               </span>
-              <motion.div
-                animate={{ rotate: isOpen ? 180 : 0 }}
-                transition={{ duration: 0.2 }}
-                className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
-                  isOpen ? 'bg-accent-100 text-accent-600' : 'bg-gray-100 text-gray-500'
+              <div
+                className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  isOpen ? 'bg-accent-100 text-accent-600 rotate-180' : 'bg-gray-100 text-gray-500 rotate-0'
                 }`}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
                 </svg>
-              </motion.div>
+              </div>
             </button>
-            <AnimatePresence>
-              {isOpen && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
-                >
-                  <div className="px-5 sm:px-6 pb-5 text-primary-600 leading-relaxed text-sm sm:text-base">
-                    {faq.answer}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
+            <div
+              className="grid transition-[grid-template-rows] duration-250 ease-out"
+              style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
+            >
+              <div className="overflow-hidden">
+                <div className="px-5 sm:px-6 pb-5 text-primary-600 leading-relaxed text-sm sm:text-base">
+                  {faq.answer}
+                </div>
+              </div>
+            </div>
+          </div>
         );
       })}
     </div>
   );
 }
-

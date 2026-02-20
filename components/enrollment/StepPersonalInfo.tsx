@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import DatePicker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
@@ -120,13 +119,9 @@ export default function StepPersonalInfo({ data, onNext }: StepPersonalInfoProps
   const labelClassName = 'block text-sm font-medium text-primary-700 mb-1.5';
 
   return (
-    <motion.form
+    <form
       onSubmit={handleSubmit}
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -50 }}
-      transition={{ duration: 0.3 }}
-      className="space-y-5"
+      className="space-y-5 animate-[fade-in_0.3s_ease-out]"
     >
       {/* Course Selection - Custom Dropdown */}
       <div>
@@ -156,74 +151,58 @@ export default function StepPersonalInfo({ data, onNext }: StepPersonalInfoProps
             ) : (
               <span className="text-gray-400">یک دوره را انتخاب کنید...</span>
             )}
-            <motion.svg
-              animate={{ rotate: isDropdownOpen ? 180 : 0 }}
-              transition={{ duration: 0.2 }}
-              className="w-4 h-4 text-gray-400 shrink-0"
+            <svg
+              className={`w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </motion.svg>
+            </svg>
           </button>
 
-          {/* Dropdown Panel */}
-          <AnimatePresence>
-            {isDropdownOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -8, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -8, scale: 0.98 }}
-                transition={{ duration: 0.15, ease: 'easeOut' }}
-                className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-soft-lg overflow-hidden"
-              >
-                <div className="max-h-64 overflow-y-auto py-1">
-                  {courses.map((course, index) => {
-                    const isSelected = formData.courseId === course.id;
-                    return (
-                      <motion.button
-                        key={course.id}
-                        type="button"
-                        onClick={() => handleCourseSelect(course.id)}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.03, duration: 0.15 }}
-                        className={`w-full text-right px-4 py-3 flex items-center justify-between gap-3 transition-colors duration-150 ${
-                          isSelected
-                            ? 'bg-accent-50'
-                            : 'hover:bg-gray-50'
-                        }`}
-                      >
-                        <div className="flex flex-col gap-0.5 min-w-0">
-                          <span className={`text-sm truncate ${isSelected ? 'font-semibold text-accent-600' : 'font-medium text-primary-800'}`}>
-                            {course.title}
-                          </span>
-                          <span className="text-xs text-primary-400 truncate">
-                            {course.instructor} · {course.duration}
-                          </span>
-                        </div>
-                        {isSelected && (
-                          <motion.svg
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className="w-5 h-5 text-accent-500 shrink-0"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2.5}
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </motion.svg>
-                        )}
-                      </motion.button>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {isDropdownOpen && (
+            <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-soft-lg overflow-hidden animate-[fade-in_0.15s_ease-out]">
+              <div className="max-h-64 overflow-y-auto py-1">
+                {courses.map((course) => {
+                  const isSelected = formData.courseId === course.id;
+                  return (
+                    <button
+                      key={course.id}
+                      type="button"
+                      onClick={() => handleCourseSelect(course.id)}
+                      className={`w-full text-right px-4 py-3 flex items-center justify-between gap-3 transition-colors duration-150 ${
+                        isSelected
+                          ? 'bg-accent-50'
+                          : 'hover:bg-gray-50'
+                      }`}
+                    >
+                      <div className="flex flex-col gap-0.5 min-w-0">
+                        <span className={`text-sm truncate ${isSelected ? 'font-semibold text-accent-600' : 'font-medium text-primary-800'}`}>
+                          {course.title}
+                        </span>
+                        <span className="text-xs text-primary-400 truncate">
+                          {course.instructor} · {course.duration}
+                        </span>
+                      </div>
+                      {isSelected && (
+                        <svg
+                          className="w-5 h-5 text-accent-500 shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2.5}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
         {errors.courseId && (
           <p className="text-red-500 text-xs mt-1">{errors.courseId}</p>
@@ -391,15 +370,13 @@ export default function StepPersonalInfo({ data, onNext }: StepPersonalInfoProps
 
       {/* Submit Button */}
       <div className="pt-4">
-        <motion.button
+        <button
           type="submit"
           className="w-full bg-accent-500 text-white px-6 py-3.5 rounded-xl font-semibold text-sm hover:bg-accent-600 transition-colors shadow-soft hover:shadow-soft-lg"
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.99 }}
         >
           مرحله بعد: اطلاعات دوره و پرداخت
-        </motion.button>
+        </button>
       </div>
-    </motion.form>
+    </form>
   );
 }

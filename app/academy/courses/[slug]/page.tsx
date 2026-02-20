@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import SafeImage from '@/components/SafeImage';
+import Breadcrumb from '@/components/Breadcrumb';
 import { getCourseBySlug, getAllCourses } from '@/lib/data/courses';
 
 export async function generateStaticParams() {
@@ -88,12 +89,14 @@ export default function CourseDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
       />
       <div className="container mx-auto px-4">
-        <Link
-          href="/academy/courses"
-          className="text-primary-600 hover:text-primary-700 mb-4 inline-block"
-        >
-          ← بازگشت به دوره‌ها
-        </Link>
+        <Breadcrumb
+          items={[
+            { label: 'خانه', href: '/' },
+            { label: 'آکادمی', href: '/academy' },
+            { label: 'دوره‌ها', href: '/academy/courses' },
+            { label: course.title },
+          ]}
+        />
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="relative h-64 sm:h-80 md:h-96 bg-gray-200">

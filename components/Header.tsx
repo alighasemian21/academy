@@ -3,18 +3,10 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollY } = useScroll();
-  const headerOpacity = useTransform(scrollY, [0, 100], [0.95, 0.98]);
-  const headerShadow = useTransform(
-    scrollY,
-    [0, 50],
-    ['0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)', '0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 16px -8px rgba(0, 0, 0, 0.1)']
-  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,21 +28,16 @@ export default function Header() {
   ];
 
   return (
-    <motion.header 
-      className="bg-white/95 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50"
-      style={{
-        opacity: headerOpacity,
-        boxShadow: headerShadow,
-      }}
+    <header
+      className={`bg-white/95 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'shadow-[0_10px_30px_-5px_rgba(0,0,0,0.1),0_8px_16px_-8px_rgba(0,0,0,0.1)]' : 'shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]'
+      }`}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center space-x-reverse space-x-3 group" aria-label="صفحه اصلی آکادمی 84">
-            <motion.div 
-              className="w-14 h-14 flex items-center justify-center bg-gray-50 rounded-xl group-hover:bg-gray-100 p-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2 }}
+            <div
+              className="w-14 h-14 flex items-center justify-center bg-gray-50 rounded-xl group-hover:bg-gray-100 p-2 transition-transform duration-200 hover:scale-105 active:scale-95"
               aria-hidden="true"
             >
               <Image
@@ -61,51 +48,32 @@ export default function Header() {
                 className="object-contain brightness-0"
                 priority
               />
-            </motion.div>
+            </div>
             <span className="text-2xl font-bold text-primary-900 hidden sm:inline tracking-tight group-hover:text-accent-600 transition-colors duration-200">آکادمی هشتاد و چهار</span>
             <span className="text-xl font-bold text-primary-900 sm:hidden group-hover:text-accent-600 transition-colors duration-200">آکادمی ۸۴</span>
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-reverse space-x-6 xl:space-x-8">
-            {navLinks.map((link, index) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-              >
+            {navLinks.map((link) => (
+              <div key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-primary-700 hover:text-primary-900 font-medium text-sm transition-colors duration-200 relative group block"
+                  className="text-primary-700 hover:text-primary-900 font-medium text-sm transition-colors duration-200 relative group/link block"
                 >
                   {link.label}
-                  <motion.span 
-                    className="absolute bottom-0 right-0 h-0.5 bg-gradient-to-l from-accent-500 to-accent-600"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: '100%' }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <span className="absolute bottom-0 right-0 h-0.5 bg-gradient-to-l from-accent-500 to-accent-600 w-0 group-hover/link:w-full transition-all duration-300" />
                 </Link>
-              </motion.div>
+              </div>
             ))}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navLinks.length * 0.05 }}
-            >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+            <div>
+              <Link
+                href="/academy/register"
+                className="mr-2 xl:mr-4 px-5 xl:px-6 py-2.5 bg-primary-900 text-white rounded-xl font-semibold text-sm whitespace-nowrap shadow-soft hover:shadow-soft-lg transition-all duration-300 block hover:scale-105 hover:-translate-y-0.5 active:scale-95"
               >
-                <Link
-                  href="/academy/register"
-                  className="mr-2 xl:mr-4 px-5 xl:px-6 py-2.5 bg-primary-900 text-white rounded-xl font-semibold text-sm whitespace-nowrap shadow-soft hover:shadow-soft-lg transition-all duration-300 block"
-                >
-                  ثبت‌نام دوره
-                </Link>
-              </motion.div>
-            </motion.div>
+                ثبت‌نام دوره
+              </Link>
+            </div>
           </div>
 
           {/* Mobile/Tablet Menu Button */}
@@ -139,47 +107,32 @@ export default function Header() {
         </div>
 
         {/* Mobile/Tablet Menu */}
-        {isMenuOpen && (
-          <motion.div 
-            className="lg:hidden border-t border-gray-100 mt-4 pt-4 pb-4 space-y-1"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {navLinks.map((link, index) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.05 }}
-              >
-                <Link
-                  href={link.href}
-                  className="block px-4 py-3.5 text-primary-700 hover:text-primary-900 active:text-primary-900 hover:bg-gray-50 active:bg-gray-100 rounded-lg font-medium transition-colors duration-200 touch-manipulation min-h-[44px] flex items-center"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: navLinks.length * 0.05 }}
-            >
+        <div
+          className={`lg:hidden border-t border-gray-100 overflow-hidden transition-all duration-300 ease-out ${
+            isMenuOpen ? 'max-h-[500px] opacity-100 mt-4 pt-4 pb-4' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="space-y-1">
+            {navLinks.map((link) => (
               <Link
-                href="/academy/register"
-                className="block mx-4 mt-4 px-6 py-3.5 bg-primary-900 text-white text-center rounded-xl font-semibold hover:bg-primary-800 active:bg-primary-700 transition-colors duration-200 touch-manipulation min-h-[44px] flex items-center justify-center"
+                key={link.href}
+                href={link.href}
+                className="block px-4 py-3.5 text-primary-700 hover:text-primary-900 active:text-primary-900 hover:bg-gray-50 active:bg-gray-100 rounded-lg font-medium transition-colors duration-200 touch-manipulation min-h-[44px] flex items-center"
                 onClick={() => setIsMenuOpen(false)}
               >
-                ثبت‌نام دوره
+                {link.label}
               </Link>
-            </motion.div>
-          </motion.div>
-        )}
+            ))}
+            <Link
+              href="/academy/register"
+              className="block mx-4 mt-4 px-6 py-3.5 bg-primary-900 text-white text-center rounded-xl font-semibold hover:bg-primary-800 active:bg-primary-700 transition-colors duration-200 touch-manipulation min-h-[44px] flex items-center justify-center"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              ثبت‌نام دوره
+            </Link>
+          </div>
+        </div>
       </nav>
-    </motion.header>
+    </header>
   );
 }
-

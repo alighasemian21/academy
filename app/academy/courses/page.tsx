@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
-import CourseCard from '@/components/CourseCard';
 import { getAllCourses } from '@/lib/data/courses';
 import CoursesWithFilters from '@/components/CoursesWithFilters';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'دوره‌های آموزشی',
@@ -23,6 +23,7 @@ export default function CoursesPage() {
   return (
     <div className="py-16 bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4">
+        <Breadcrumb items={[{ label: 'خانه', href: '/' }, { label: 'آکادمی', href: '/academy' }, { label: 'دوره‌ها' }]} />
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">دوره‌های آموزشی</h1>
           <p className="text-xl text-gray-700">

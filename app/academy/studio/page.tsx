@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'استودیو',
@@ -19,6 +20,7 @@ export default function CompanyPage() {
   return (
     <div className="py-16">
       <div className="container mx-auto px-4">
+        <Breadcrumb items={[{ label: 'خانه', href: '/' }, { label: 'آکادمی', href: '/academy' }, { label: 'استودیو' }]} />
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">شرکت ما</h1>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">

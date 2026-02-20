@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import ServiceCard from '@/components/ServiceCard';
 import { getAllServices } from '@/lib/data/services';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'خدمات',
@@ -22,6 +23,7 @@ export default function ServicesPage() {
   return (
     <div className="py-16 bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4">
+        <Breadcrumb items={[{ label: 'خانه', href: '/' }, { label: 'آکادمی', href: '/academy' }, { label: 'استودیو', href: '/academy/studio' }, { label: 'خدمات' }]} />
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">خدمات ما</h1>
           <p className="text-xl text-gray-700">

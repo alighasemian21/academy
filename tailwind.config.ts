@@ -36,7 +36,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['IRANYekan', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-iranyekan)', 'system-ui', 'sans-serif'],
       },
       spacing: {
         '18': '4.5rem',

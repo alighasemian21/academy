@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
-import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 import { getCourseById } from '@/lib/data/courses';
 
@@ -121,12 +120,7 @@ export default function StepCoursePayment({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -50 }}
-      transition={{ duration: 0.3 }}
-    >
+    <div className="animate-[fade-in_0.3s_ease-out]">
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Course Info Section */}
         <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 rounded-2xl p-6 border border-primary-200/50">
@@ -200,11 +194,10 @@ export default function StepCoursePayment({
                   {cardNumber}
                 </p>
               </div>
-              <motion.button
+              <button
                 type="button"
                 onClick={handleCopyCard}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-primary-700 transition-colors"
-                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-primary-700 transition-colors active:scale-95"
               >
                 {copied ? (
                   <>
@@ -221,7 +214,7 @@ export default function StepCoursePayment({
                     کپی
                   </>
                 )}
-              </motion.button>
+              </button>
             </div>
           </div>
         </div>
@@ -322,21 +315,17 @@ export default function StepCoursePayment({
 
         {/* Action Buttons */}
         <div className="flex gap-3 pt-4">
-          <motion.button
+          <button
             type="button"
             onClick={onBack}
-            className="flex-1 px-6 py-3.5 border border-gray-300 text-primary-700 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors"
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
+            className="flex-1 px-6 py-3.5 border border-gray-300 text-primary-700 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors disabled:opacity-50"
             disabled={isUploading}
           >
             بازگشت
-          </motion.button>
-          <motion.button
+          </button>
+          <button
             type="submit"
             className="flex-[2] bg-accent-500 text-white px-6 py-3.5 rounded-xl font-semibold text-sm hover:bg-accent-600 transition-colors shadow-soft hover:shadow-soft-lg disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            whileHover={{ scale: isUploading ? 1 : 1.01 }}
-            whileTap={{ scale: isUploading ? 1 : 0.99 }}
             disabled={isUploading}
           >
             {isUploading ? (
@@ -350,9 +339,9 @@ export default function StepCoursePayment({
             ) : (
               'ارسال و ثبت‌نام'
             )}
-          </motion.button>
+          </button>
         </div>
       </form>
-    </motion.div>
+    </div>
   );
 }

@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import Hero from '@/components/Hero';
 import EventBanner from '@/components/EventBanner';
-import StatsSection from '@/components/StatsSection';
 import CourseCard from '@/components/CourseCard';
 import ServiceCard from '@/components/ServiceCard';
 import TestimonialCard from '@/components/TestimonialCard';
@@ -11,6 +10,14 @@ import AnimatedHeading from '@/components/AnimatedHeading';
 import AnimatedFeatureCard from '@/components/AnimatedFeatureCard';
 import AnimatedCTAButton from '@/components/AnimatedCTAButton';
 import { getFeaturedCourses } from '@/lib/data/courses';
+
+const Hero = dynamic(() => import('@/components/Hero'), {
+  loading: () => <div className="min-h-screen bg-primary-900" aria-hidden="true" />,
+});
+
+const StatsSection = dynamic(() => import('@/components/StatsSection'), {
+  loading: () => <div className="h-48 bg-primary-900" aria-hidden="true" />,
+});
 import { getFeaturedServices } from '@/lib/data/services';
 import { getFeaturedTestimonials } from '@/lib/data/testimonials';
 import { getSiteSettings } from '@/lib/data/siteSettings';

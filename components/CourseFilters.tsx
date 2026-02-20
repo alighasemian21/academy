@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useMemo, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Course } from '@/lib/data/courses';
 
 interface CourseFiltersProps {
@@ -18,7 +17,6 @@ export default function CourseFilters({ courses, onFilteredCoursesChange }: Cour
   const instructorRef = useRef<HTMLDivElement>(null);
   const priceRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (instructorRef.current && !instructorRef.current.contains(e.target as Node)) {
@@ -119,69 +117,56 @@ export default function CourseFilters({ courses, onFilteredCoursesChange }: Cour
               ) : (
                 <span className="text-gray-400">همه اساتید</span>
               )}
-              <motion.svg
-                animate={{ rotate: isInstructorOpen ? 180 : 0 }}
-                transition={{ duration: 0.2 }}
-                className="w-4 h-4 text-gray-400 shrink-0"
-                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+              <svg
+                className={`w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200 ${isInstructorOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </motion.svg>
+              </svg>
             </button>
-            <AnimatePresence>
-              {isInstructorOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.98 }}
-                  transition={{ duration: 0.15, ease: 'easeOut' }}
-                  className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-soft-lg overflow-hidden"
-                >
-                  <div className="max-h-56 overflow-y-auto py-1">
-                    <motion.button
-                      type="button"
-                      onClick={() => { setSelectedInstructor(''); setIsInstructorOpen(false); }}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.15 }}
-                      className={`w-full text-right px-4 py-2.5 flex items-center justify-between text-sm transition-colors duration-150 ${
-                        !selectedInstructor ? 'bg-primary-50 font-semibold text-primary-700' : 'hover:bg-gray-50 text-primary-800'
-                      }`}
-                    >
-                      <span>همه اساتید</span>
-                      {!selectedInstructor && (
-                        <motion.svg initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-4 h-4 text-primary-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </motion.svg>
-                      )}
-                    </motion.button>
-                    {instructors.map((instructor, index) => {
-                      const isSelected = selectedInstructor === instructor;
-                      return (
-                        <motion.button
-                          key={instructor}
-                          type="button"
-                          onClick={() => { setSelectedInstructor(instructor); setIsInstructorOpen(false); }}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: (index + 1) * 0.03, duration: 0.15 }}
-                          className={`w-full text-right px-4 py-2.5 flex items-center justify-between text-sm transition-colors duration-150 ${
-                            isSelected ? 'bg-primary-50 font-semibold text-primary-700' : 'hover:bg-gray-50 text-primary-800'
-                          }`}
-                        >
-                          <span>{instructor}</span>
-                          {isSelected && (
-                            <motion.svg initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-4 h-4 text-primary-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                            </motion.svg>
-                          )}
-                        </motion.button>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {isInstructorOpen && (
+              <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-soft-lg overflow-hidden animate-[fade-in_0.15s_ease-out]">
+                <div className="max-h-56 overflow-y-auto py-1">
+                  <button
+                    type="button"
+                    onClick={() => { setSelectedInstructor(''); setIsInstructorOpen(false); }}
+                    className={`w-full text-right px-4 py-2.5 flex items-center justify-between text-sm transition-colors duration-150 ${
+                      !selectedInstructor ? 'bg-primary-50 font-semibold text-primary-700' : 'hover:bg-gray-50 text-primary-800'
+                    }`}
+                  >
+                    <span>همه اساتید</span>
+                    {!selectedInstructor && (
+                      <svg className="w-4 h-4 text-primary-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
+                  </button>
+                  {instructors.map((instructor) => {
+                    const isSelected = selectedInstructor === instructor;
+                    return (
+                      <button
+                        key={instructor}
+                        type="button"
+                        onClick={() => { setSelectedInstructor(instructor); setIsInstructorOpen(false); }}
+                        className={`w-full text-right px-4 py-2.5 flex items-center justify-between text-sm transition-colors duration-150 ${
+                          isSelected ? 'bg-primary-50 font-semibold text-primary-700' : 'hover:bg-gray-50 text-primary-800'
+                        }`}
+                      >
+                        <span>{instructor}</span>
+                        {isSelected && (
+                          <svg className="w-4 h-4 text-primary-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -209,52 +194,42 @@ export default function CourseFilters({ courses, onFilteredCoursesChange }: Cour
               ) : (
                 <span className="text-gray-400">همه قیمت‌ها</span>
               )}
-              <motion.svg
-                animate={{ rotate: isPriceOpen ? 180 : 0 }}
-                transition={{ duration: 0.2 }}
-                className="w-4 h-4 text-gray-400 shrink-0"
-                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+              <svg
+                className={`w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200 ${isPriceOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </motion.svg>
+              </svg>
             </button>
-            <AnimatePresence>
-              {isPriceOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.98 }}
-                  transition={{ duration: 0.15, ease: 'easeOut' }}
-                  className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-soft-lg overflow-hidden"
-                >
-                  <div className="py-1">
-                    {priceOptions.map((option, index) => {
-                      const isSelected = priceRange === option.value;
-                      return (
-                        <motion.button
-                          key={option.value}
-                          type="button"
-                          onClick={() => { setPriceRange(option.value as any); setIsPriceOpen(false); }}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.03, duration: 0.15 }}
-                          className={`w-full text-right px-4 py-2.5 flex items-center justify-between text-sm transition-colors duration-150 ${
-                            isSelected ? 'bg-primary-50 font-semibold text-primary-700' : 'hover:bg-gray-50 text-primary-800'
-                          }`}
-                        >
-                          <span>{option.label}</span>
-                          {isSelected && (
-                            <motion.svg initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-4 h-4 text-primary-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                            </motion.svg>
-                          )}
-                        </motion.button>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {isPriceOpen && (
+              <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-soft-lg overflow-hidden animate-[fade-in_0.15s_ease-out]">
+                <div className="py-1">
+                  {priceOptions.map((option) => {
+                    const isSelected = priceRange === option.value;
+                    return (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => { setPriceRange(option.value as 'all' | 'low' | 'medium' | 'high'); setIsPriceOpen(false); }}
+                        className={`w-full text-right px-4 py-2.5 flex items-center justify-between text-sm transition-colors duration-150 ${
+                          isSelected ? 'bg-primary-50 font-semibold text-primary-700' : 'hover:bg-gray-50 text-primary-800'
+                        }`}
+                      >
+                        <span>{option.label}</span>
+                        {isSelected && (
+                          <svg className="w-4 h-4 text-primary-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -275,4 +250,3 @@ export default function CourseFilters({ courses, onFilteredCoursesChange }: Cour
     </div>
   );
 }
-

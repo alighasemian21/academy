@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'درباره ما',
@@ -15,10 +16,28 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'درباره آکادمی 84',
+    description: 'آکادمی 84 - مرکز آموزش حضوری و پرمیوم مهارت‌های دیجیتال و تصویری',
+    url: 'https://www.academy84.ir/about',
+    mainEntity: {
+      '@type': 'EducationalOrganization',
+      name: 'آکادمی 84',
+      description: 'مرکز آموزش حضوری و پرمیوم مهارت‌های دیجیتال و تصویری. ما ابزار آموزش نمی‌دهیم؛ ما انسان‌هایی می‌سازیم که می‌توانند در دنیای دیجیتال و هوش مصنوعی تصمیم درست بگیرند و خروجی واقعی بسازند.',
+    },
+  };
+
   return (
     <div className="section-padding bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+      />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
+          <Breadcrumb items={[{ label: 'خانه', href: '/' }, { label: 'درباره ما' }]} />
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-6 tracking-tight">
               درباره آکادمی 84

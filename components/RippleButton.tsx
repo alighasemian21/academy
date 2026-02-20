@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ReactNode, useState } from 'react';
 
 interface RippleButtonProps {
@@ -11,12 +10,12 @@ interface RippleButtonProps {
   as?: 'button' | 'link';
 }
 
-export default function RippleButton({ 
-  children, 
-  className = '', 
+export default function RippleButton({
+  children,
+  className = '',
   onClick,
   href,
-  as = 'button'
+  as = 'button',
 }: RippleButtonProps) {
   const [ripples, setRipples] = useState<Array<{ x: number; y: number; id: number }>>([]);
   const [rippleId, setRippleId] = useState(0);
@@ -25,11 +24,11 @@ export default function RippleButton({
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const newRipple = { x, y, id: rippleId };
-    setRipples([...ripples, newRipple]);
-    setRippleId(rippleId + 1);
-    
+    setRipples((prev) => [...prev, newRipple]);
+    setRippleId((prev) => prev + 1);
+
     setTimeout(() => {
       setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
     }, 600);
@@ -43,18 +42,17 @@ export default function RippleButton({
     <>
       {children}
       {ripples.map((ripple) => (
-        <motion.span
+        <span
           key={ripple.id}
-          className="absolute rounded-full bg-white/30 pointer-events-none"
-          initial={{ width: 0, height: 0, x: ripple.x, y: ripple.y }}
-          animate={{
+          className="absolute rounded-full bg-white/30 pointer-events-none animate-ripple"
+          style={{
+            left: ripple.x,
+            top: ripple.y,
             width: 300,
             height: 300,
-            x: ripple.x - 150,
-            y: ripple.y - 150,
-            opacity: [0.5, 0],
+            marginLeft: -150,
+            marginTop: -150,
           }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
         />
       ))}
     </>
@@ -69,9 +67,8 @@ export default function RippleButton({
   }
 
   return (
-    <button className={baseClasses} onClick={handleClick}>
+    <button type="button" className={baseClasses} onClick={handleClick}>
       {content}
     </button>
   );
 }
-

@@ -1,7 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { ReactNode, useRef, useEffect, useState } from 'react';
 
 interface TextRevealProps {
   children: ReactNode;
@@ -10,20 +9,34 @@ interface TextRevealProps {
 }
 
 export default function TextReveal({ children, delay = 0, className = '' }: TextRevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          const t = setTimeout(() => setIsVisible(true), delay);
+          return () => clearTimeout(t);
+        }
+      },
+      { threshold: 0.1, rootMargin: '-50px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay]);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{
-        duration: 0.6,
-        delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={className}
+    <div
+      ref={ref}
+      className={`fade-in-up transition-all duration-500 ease-out ${isVisible ? 'visible' : ''} ${className}`}
+      style={{ transitionDelay: isVisible ? '0ms' : `${delay}ms` }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
-

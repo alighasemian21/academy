@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import StepIndicator from './StepIndicator';
 import StepPersonalInfo from './StepPersonalInfo';
@@ -166,8 +165,7 @@ export default function CourseRegistrationWizard() {
     <div className="bg-white rounded-2xl shadow-soft p-6 sm:p-8 max-w-3xl mx-auto">
       <StepIndicator currentStep={currentStep} steps={steps} />
 
-      <AnimatePresence mode="wait">
-        {currentStep === 1 && (
+      {currentStep === 1 && (
           <StepPersonalInfo
             key="step1"
             data={{
@@ -182,9 +180,9 @@ export default function CourseRegistrationWizard() {
             }}
             onNext={handlePersonalInfoNext}
           />
-        )}
+      )}
 
-        {currentStep === 2 && (
+      {currentStep === 2 && (
           <StepCoursePayment
             key="step2"
             courseId={formData.courseId}
@@ -192,16 +190,15 @@ export default function CourseRegistrationWizard() {
             onBack={handleBackToStep1}
             isUploading={isUploading}
           />
-        )}
+      )}
 
-        {currentStep === 3 && (
+      {currentStep === 3 && (
           <StepConfirmation
             key="step3"
             data={formData}
             onBack={handleBackToStep1}
           />
-        )}
-      </AnimatePresence>
+      )}
     </div>
   );
 }

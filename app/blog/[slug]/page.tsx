@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import SafeImage from '@/components/SafeImage';
+import Breadcrumb from '@/components/Breadcrumb';
 import { getPostBySlug, getAllPosts } from '@/lib/data/posts';
 import BlogComments from '@/components/BlogComments';
 
@@ -100,12 +101,13 @@ export default function BlogPostPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <div className="container mx-auto px-4 max-w-4xl">
-        <Link
-          href="/blog"
-          className="text-primary-600 hover:text-primary-700 mb-4 inline-block"
-        >
-          ← بازگشت به وبلاگ
-        </Link>
+        <Breadcrumb
+          items={[
+            { label: 'خانه', href: '/' },
+            { label: 'وبلاگ', href: '/blog' },
+            { label: post.title },
+          ]}
+        />
 
         <article className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="relative h-96 bg-gray-200">

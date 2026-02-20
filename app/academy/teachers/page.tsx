@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import TeacherCard from '@/components/TeacherCard';
 import { getAllTeachers } from '@/lib/data/teachers';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'اساتید',
@@ -19,9 +20,27 @@ export const metadata: Metadata = {
 export default function TeachersPage() {
   const teachers = getAllTeachers();
 
+  const personSchemas = teachers.map((t) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: t.name,
+    jobTitle: t.title,
+    description: t.bio,
+    image: t.image.startsWith('http') ? t.image : `https://www.academy84.ir${t.image.startsWith('/') ? t.image : '/' + t.image}`,
+    knowsAbout: t.specialties,
+  }));
+
   return (
     <div className="py-16 bg-gray-50 min-h-screen">
+      {personSchemas.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <div className="container mx-auto px-4">
+        <Breadcrumb items={[{ label: 'خانه', href: '/' }, { label: 'آکادمی', href: '/academy' }, { label: 'اساتید' }]} />
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">اساتید ما</h1>
           <p className="text-xl text-gray-700">

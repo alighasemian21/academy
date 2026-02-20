@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import type { RegistrationFormData } from '@/lib/validations/enrollment';
 import { getCourseById } from '@/lib/data/courses';
@@ -18,64 +17,21 @@ export default function StepConfirmation({ data, onBack }: StepConfirmationProps
   const course = getCourseById(data.courseId);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.4 }}
-      className="text-center"
-    >
-      {/* Success Animation */}
-      <motion.div
-        className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 15 }}
-      >
-        <motion.svg
-          className="w-10 h-10 text-green-500"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
-          <motion.path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={3}
-            d="M5 13l4 4L19 7"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-          />
-        </motion.svg>
-      </motion.div>
+    <div className="text-center animate-[fade-in_0.4s_ease-out]">
+      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-[scale-in_0.4s_ease-out_0.2s_both]">
+        <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
 
-      <motion.h2
-        className="text-2xl font-bold text-primary-900 mb-2"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-      >
+      <h2 className="text-2xl font-bold text-primary-900 mb-2">
         ثبت‌نام با موفقیت انجام شد!
-      </motion.h2>
-      <motion.p
-        className="text-primary-600 mb-8"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
+      </h2>
+      <p className="text-primary-600 mb-8">
         اطلاعات شما ارسال شد و به زودی با شما تماس خواهیم گرفت.
-      </motion.p>
+      </p>
 
-      {/* Summary Card */}
-      <motion.div
-        className="bg-gray-50 rounded-2xl p-6 text-right mb-8 border border-gray-100"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
-      >
+      <div className="bg-gray-50 rounded-2xl p-6 text-right mb-8 border border-gray-100">
         <h3 className="text-sm font-bold text-primary-900 mb-4 flex items-center gap-2">
           <svg className="w-4 h-4 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -128,15 +84,9 @@ export default function StepConfirmation({ data, onBack }: StepConfirmationProps
             <span className="font-medium text-primary-900">{data.address}</span>
           </div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Contact Info for Follow-up */}
-      <motion.div
-        className="bg-accent-50 rounded-2xl p-6 mb-8 border border-accent-200/50"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7 }}
-      >
+      <div className="bg-accent-50 rounded-2xl p-6 mb-8 border border-accent-200/50">
         <h3 className="text-sm font-bold text-primary-900 mb-3">پیگیری ثبت‌نام</h3>
         <p className="text-sm text-primary-600 mb-3">
           در صورت نیاز به پیگیری، با شماره زیر تماس بگیرید:
@@ -151,15 +101,9 @@ export default function StepConfirmation({ data, onBack }: StepConfirmationProps
           </svg>
           09133139424
         </a>
-      </motion.div>
+      </div>
 
-      {/* Action Buttons */}
-      <motion.div
-        className="flex gap-3"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-      >
+      <div className="flex gap-3">
         <Link
           href="/"
           className="flex-1 px-6 py-3.5 bg-primary-900 text-white rounded-xl font-semibold text-sm hover:bg-primary-800 transition-colors text-center"
@@ -172,7 +116,7 @@ export default function StepConfirmation({ data, onBack }: StepConfirmationProps
         >
           مشاهده دوره‌ها
         </Link>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

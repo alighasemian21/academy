@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import SafeImage from '@/components/SafeImage';
 import { Student } from '@/lib/data/students';
 
@@ -11,16 +8,11 @@ interface StudentGalleryProps {
 
 export default function StudentGallery({ student, index = 0 }: StudentGalleryProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.4 }}
+    <div
+      className="opacity-0 animate-fade-in-card h-full"
+      style={{ animationDelay: `${index * 100}ms` }}
     >
-      <motion.div
-        className="bg-white rounded-2xl shadow-soft overflow-hidden border border-transparent group transition-all duration-300 h-full"
-        whileHover={{ y: -6, boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.12)' }}
-      >
+      <div className="bg-white rounded-2xl shadow-soft overflow-hidden border border-transparent group transition-all duration-300 h-full hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.12)]">
         <div className="relative h-48 bg-gray-100 overflow-hidden">
           <SafeImage
             src={student.image}
@@ -42,7 +34,7 @@ export default function StudentGallery({ student, index = 0 }: StudentGalleryPro
           <p className="text-primary-400 text-xs mb-3">دوره: {student.course}</p>
           <p className="text-primary-500 line-clamp-2 text-sm leading-relaxed">{student.projectDescription}</p>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

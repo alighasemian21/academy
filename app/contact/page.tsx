@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import ContactForm from '@/components/ContactForm';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'تماس با ما',
@@ -16,9 +17,41 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const contactSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'تماس با ما | آکادمی 84',
+    description: 'تماس با آکادمی 84 - سوالات، پیشنهادات و درخواست مشاوره',
+    url: 'https://www.academy84.ir/contact',
+    mainEntity: {
+      '@type': 'LocalBusiness',
+      name: 'آکادمی 84',
+      telephone: '+98-913-313-9424',
+      email: 'acadeemy84@gmail.com',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'کاشان',
+        streetAddress: 'خیابان بهشتی، روبه‌رو سپاه',
+        addressRegion: 'اصفهان',
+        addressCountry: 'IR',
+      },
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+        opens: '09:00',
+        closes: '18:00',
+      },
+    },
+  };
+
   return (
     <div className="section-padding bg-primary-50 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <Breadcrumb items={[{ label: 'خانه', href: '/' }, { label: 'تماس با ما' }]} />
         <div className="text-center mb-16">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-900 mb-6 tracking-tight">
             تماس با ما

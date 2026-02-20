@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FontPreload from "@/components/FontPreload";
 import StructuredData from "@/components/StructuredData";
 import GoogleAnalyticsComponent from "@/components/GoogleAnalytics";
 import Providers from "@/components/Providers";
+
+const iranYekan = localFont({
+  src: [
+    { path: "../public/fonts/iran-yekan-400.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/iran-yekan-500.woff2", weight: "500", style: "normal" },
+    { path: "../public/fonts/iran-yekan-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-iranyekan",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -29,7 +39,7 @@ export const metadata: Metadata = {
     description: 'آکادمی 84 (آموزشگاه هشتاد و چهار) - مرکز تخصصی آموزش تصویر و رسانه در کاشان. دوره‌های حرفه‌ای تولید محتوا، عکاسی، موبایگرافی، تدوین، طراحی وبسایت و مشاوره کسب‌وکار',
     images: [
       {
-        url: 'https://www.academy84.ir/images/og-image.svg',
+        url: 'https://www.academy84.ir/images/og-image.png',
         width: 1200,
         height: 630,
         alt: 'آکادمی 84 - آموزشگاه تخصصی تصویر و رسانه در کاشان',
@@ -40,7 +50,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'آکادمی 84 | آموزشگاه تخصصی تصویر و رسانه در کاشان',
     description: 'آکادمی 84 (آموزشگاه هشتاد و چهار) - مرکز تخصصی آموزش تصویر و رسانه در کاشان. دوره‌های حرفه‌ای تولید محتوا، عکاسی، موبایگرافی و طراحی وبسایت',
-    images: ['https://www.academy84.ir/images/og-image.svg'],
+    images: ['https://www.academy84.ir/images/og-image.png'],
   },
   icons: {
     icon: [
@@ -68,15 +78,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fa" dir="rtl">
-      <body>
-        <Providers>
+    <html lang="fa" dir="rtl" className={iranYekan.variable}>
+      <head>
+        <meta name="theme-color" content="#171717" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      </head>
+      <body className="font-sans">
         <StructuredData />
-        <FontPreload />
-          <GoogleAnalyticsComponent />
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <GoogleAnalyticsComponent />
+        <Providers>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>

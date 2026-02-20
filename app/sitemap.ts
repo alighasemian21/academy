@@ -82,23 +82,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Dynamic course pages
+  // Dynamic course pages (with images for Google Image search)
   const courses = getAllCourses();
-  const coursePages = courses.map((course) => ({
-    url: `${baseUrl}/academy/courses/${course.slug}`,
-    lastModified: currentDate,
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  }));
+  const coursePages = courses.map((course) => {
+    const imageUrl = course.image.startsWith('http')
+      ? course.image
+      : `${baseUrl}${course.image.startsWith('/') ? course.image : '/' + course.image}`;
+    return {
+      url: `${baseUrl}/academy/courses/${course.slug}`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+      images: [{ url: imageUrl, alt: course.title }],
+    };
+  });
 
-  // Dynamic blog post pages
+  // Dynamic blog post pages (with images)
   const posts = getAllPosts();
-  const blogPages = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  const blogPages = posts.map((post) => {
+    const imageUrl = post.image.startsWith('http')
+      ? post.image
+      : `${baseUrl}${post.image.startsWith('/') ? post.image : '/' + post.image}`;
+    return {
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+      images: [{ url: imageUrl, alt: post.title }],
+    };
+  });
 
   return [...staticPages, ...coursePages, ...blogPages];
 }

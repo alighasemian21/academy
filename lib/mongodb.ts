@@ -6,9 +6,10 @@ const options: MongoClientOptions = {
     strict: true,
     deprecationErrors: true,
   },
-  // Optional: Add connection timeout
   connectTimeoutMS: 10000,
   socketTimeoutMS: 45000,
+  maxPoolSize: 10,
+  maxIdleTimeMS: 10000,
 };
 
 let client: MongoClient;
