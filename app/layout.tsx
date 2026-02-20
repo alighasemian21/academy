@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description: 'آکادمی 84 (آموزشگاه هشتاد و چهار) - مرکز تخصصی آموزش تصویر و رسانه در کاشان. دوره‌های حرفه‌ای تولید محتوا، عکاسی، موبایگرافی، تدوین، طراحی وبسایت و مشاوره کسب‌وکار',
     images: [
       {
-        url: 'https://www.academy84.ir/images/og-image.png',
+        url: '/images/og-image.png',
         width: 1200,
         height: 630,
         alt: 'آکادمی 84 - آموزشگاه تخصصی تصویر و رسانه در کاشان',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'آکادمی 84 | آموزشگاه تخصصی تصویر و رسانه در کاشان',
     description: 'آکادمی 84 (آموزشگاه هشتاد و چهار) - مرکز تخصصی آموزش تصویر و رسانه در کاشان. دوره‌های حرفه‌ای تولید محتوا، عکاسی، موبایگرافی و طراحی وبسایت',
-    images: ['https://www.academy84.ir/images/og-image.png'],
+    images: ['/images/og-image.png'],
   },
   icons: {
     icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
