@@ -1,13 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'sonner';
 import StepIndicator from './StepIndicator';
 import StepPersonalInfo from './StepPersonalInfo';
 import StepConfirmation from './StepConfirmation';
+import { sendEnrollmentEmail } from '@/lib/emailjs';
 import type { PersonalInfoData, RegistrationFormData } from '@/lib/validations/enrollment';
 
 export const WORKSHOP_COURSE_ID = 'workshop-kashan-mobile-clip';
+const WORKSHOP_DISPLAY_TITLE = 'ورکشاپ کلیپ‌سازی با موبایل - کاشان';
+const STORAGE_KEY = 'academy84_prereg_draft';
 
 const steps = [
   { title: 'اطلاعات شخصی', description: 'ورود مشخصات فردی' },
@@ -30,9 +33,45 @@ export default function WorkshopPreregWizard() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationFormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setFormData((prev) => ({ ...prev, ...parsed }));
+      }
+    } catch {
+      // Ignore parse errors
+    }
+    setIsHydrated(true);
+  }, []);
+
+  const saveDraft = useCallback(
+    (data: Partial<RegistrationFormData>) => {
+      const updated = { ...formData, ...data };
+      setFormData(updated);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      } catch {
+        // Ignore storage errors
+      }
+    },
+    [formData]
+  );
+
+  const clearDraft = useCallback(() => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // Ignore
+    }
+  }, []);
 
   const handlePersonalInfoNext = async (data: PersonalInfoData & { courseId: string; referralCode?: string }) => {
     setIsSubmitting(true);
+    saveDraft(data);
     try {
       const res = await fetch('/api/enrollments', {
         method: 'POST',
@@ -53,6 +92,31 @@ export default function WorkshopPreregWizard() {
       if (!res.ok || !json.success) {
         throw new Error(json.message || 'خطا در ثبت پیش‌ثبت‌نام');
       }
+
+      const now = new Date();
+      const timeString = new Intl.DateTimeFormat('fa-IR', {
+        dateStyle: 'full',
+        timeStyle: 'short',
+      }).format(now);
+
+      const emailParams = {
+        name: data.name,
+        national_number: data.nationalId || '',
+        mobile: data.phone,
+        email: data.email,
+        gender: data.gender === 'male' ? 'مرد' : 'زن',
+        birth_date: data.birthDate || '',
+        address: data.address || '',
+        course: WORKSHOP_DISPLAY_TITLE,
+        deposite_receipt: '—',
+        time: timeString,
+        message: `پیش‌ثبت‌نام ${WORKSHOP_DISPLAY_TITLE}`,
+      };
+
+      toast.info('در حال ارسال اطلاعات...');
+      await sendEnrollmentEmail(emailParams);
+
+      clearDraft();
       setFormData((prev) => ({ ...prev, ...data }));
       setCurrentStep(2);
       toast.success('پیش‌ثبت‌نام با موفقیت انجام شد.');
@@ -69,6 +133,27 @@ export default function WorkshopPreregWizard() {
     setCurrentStep(1);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  if (!isHydrated) {
+    return (
+      <div className="bg-white rounded-2xl shadow-soft p-8 max-w-3xl mx-auto">
+        <div className="animate-pulse space-y-6">
+          <div className="flex justify-between">
+            {[1, 2].map((i) => (
+              <div key={i} className="flex flex-col items-center gap-2">
+                <div className="w-10 h-10 bg-gray-200 rounded-full" />
+                <div className="w-16 h-3 bg-gray-200 rounded" />
+              </div>
+            ))}
+          </div>
+          <div className="h-4 bg-gray-200 rounded w-3/4" />
+          <div className="h-10 bg-gray-200 rounded" />
+          <div className="h-10 bg-gray-200 rounded" />
+          <div className="h-10 bg-gray-200 rounded" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white rounded-2xl shadow-soft p-6 sm:p-8 max-w-3xl mx-auto mb-8">

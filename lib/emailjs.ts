@@ -14,7 +14,7 @@ export interface EnrollmentEmailParams {
   birth_date: string;
   address: string;
   course: string;
-  deposite_receipt: string;
+  deposite_receipt?: string;
   time: string;
   message: string;
 }
