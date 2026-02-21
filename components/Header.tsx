@@ -19,7 +19,7 @@ export default function Header() {
   const navLinks = [
     { href: '/', label: 'خانه' },
     { href: '/academy', label: 'آکادمی' },
-    { href: '/workshop/kashan-mobile-clip', label: 'ورکشاپ موج' },
+    { href: '/workshop/kashan-mobile-clip', label: 'ایونت موج' },
     { href: '/academy/courses', label: 'دوره‌ها' },
     { href: '/academy/teachers', label: 'اساتید' },
     { href: '/blog', label: 'وبلاگ' },

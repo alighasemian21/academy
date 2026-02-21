@@ -180,10 +180,10 @@ export default function Hero({ slides }: HeroProps) {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 sm:mb-12"
           >
             <Link
-              href="/academy/courses"
+              href="/workshop/kashan-mobile-clip"
               className="group px-8 sm:px-10 py-4 sm:py-5 border border-white/20 text-white rounded-full font-medium text-base sm:text-lg hover:bg-white hover:text-primary-900 transition-all duration-300 w-full sm:w-auto text-center min-h-[52px] flex items-center justify-center gap-3"
             >
-              مشاهده دوره‌ها
+              ایونت موج
               <svg
                 className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1"
                 fill="none"
@@ -194,10 +194,10 @@ export default function Hero({ slides }: HeroProps) {
               </svg>
             </Link>
             <Link
-              href="/academy/register"
+              href="/workshop/kashan-mobile-clip"
               className="px-8 sm:px-10 py-4 sm:py-5 bg-white text-primary-900 rounded-full font-medium text-base sm:text-lg hover:bg-white/90 transition-all duration-300 w-full sm:w-auto text-center min-h-[52px] flex items-center justify-center"
             >
-              ثبت‌نام
+              پیش‌ثبت‌نام
             </Link>
           </motion.div>
 
