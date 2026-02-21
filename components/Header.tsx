@@ -62,7 +62,7 @@ export default function Header() {
                   className="text-primary-700 hover:text-primary-900 font-medium text-sm transition-colors duration-200 relative group/link block"
                 >
                   {link.label}
-                  <span className="absolute bottom-0 right-0 h-0.5 bg-gradient-to-l from-accent-500 to-accent-600 w-0 group-hover/link:w-full transition-all duration-300" />
+                  <span className="absolute bottom-0 left-0 right-0 h-1 rounded-full bg-gradient-to-r from-accent-400 via-accent-500 to-accent-600 origin-center scale-x-0 transition-transform duration-200 ease-out group-hover/link:animate-navUnderlineDraw" />
                 </Link>
               </div>
             ))}
@@ -108,11 +108,11 @@ export default function Header() {
 
         {/* Mobile/Tablet Menu */}
         <div
-          className={`lg:hidden border-t border-gray-100 overflow-hidden transition-all duration-300 ease-out ${
-            isMenuOpen ? 'max-h-[500px] opacity-100 mt-4 pt-4 pb-4' : 'max-h-0 opacity-0'
+          className={`lg:hidden border-t border-gray-100 transition-all duration-300 ease-out ${
+            isMenuOpen ? 'max-h-[min(500px,70vh)] opacity-100 mt-4 pt-4 pb-4 overflow-y-auto' : 'max-h-0 opacity-0 overflow-hidden'
           }`}
         >
-          <div className="space-y-1">
+          <div className="space-y-1 pb-2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}

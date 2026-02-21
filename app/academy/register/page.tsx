@@ -6,7 +6,7 @@ const CourseRegistrationWizard = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="bg-white rounded-2xl shadow-soft p-8 max-w-3xl mx-auto">
+      <div className="bg-white rounded-2xl shadow-soft p-8 max-w-3xl mx-auto mb-8">
         <div className="animate-pulse space-y-6">
           <div className="flex justify-between">
             {[1, 2, 3].map((i) => (
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
 
 export default function RegisterPage() {
   return (
-    <div className="py-16 bg-gray-50 min-h-screen">
-      <div className="container mx-auto px-4">
+    <div className="pt-16 pb-12 sm:pb-16 bg-gray-50 min-h-screen">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary-900">
             ثبت‌نام دوره

@@ -58,6 +58,16 @@ const config: Config = {
       borderRadius: {
         '4xl': '2rem',
       },
+      keyframes: {
+        navUnderlineDraw: {
+          '0%': { transform: 'scaleX(0)' },
+          '70%': { transform: 'scaleX(1.05)' },
+          '100%': { transform: 'scaleX(1)' },
+        },
+      },
+      animation: {
+        navUnderlineDraw: 'navUnderlineDraw 0.35s ease-out forwards',
+      },
     },
   },
   plugins: [],

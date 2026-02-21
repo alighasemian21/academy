@@ -162,7 +162,7 @@ export default function CourseRegistrationWizard() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-soft p-6 sm:p-8 max-w-3xl mx-auto">
+    <div className="bg-white rounded-2xl shadow-soft p-6 sm:p-8 max-w-3xl mx-auto mb-8">
       <StepIndicator currentStep={currentStep} steps={steps} />
 
       {currentStep === 1 && (

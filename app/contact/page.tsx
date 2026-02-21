@@ -102,7 +102,9 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <ContactForm />
+        <div className="pb-8 sm:pb-12">
+          <ContactForm />
+        </div>
       </div>
     </div>
   );
