@@ -195,7 +195,7 @@ export default function Hero({ slides }: HeroProps) {
               </svg>
             </Link>
             <Link
-              href="/workshop/kashan-mobile-clip"
+              href="/workshop/kashan-mobile-clip/register"
               className="px-8 sm:px-10 py-4 sm:py-5 bg-white text-primary-900 rounded-full font-medium text-base sm:text-lg hover:bg-white/90 transition-all duration-300 w-full sm:w-auto text-center min-h-[52px] flex items-center justify-center"
             >
               پیش‌ثبت‌نام

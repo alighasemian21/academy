@@ -36,7 +36,7 @@ export async function generateMetadata({
       images: [post.image.startsWith('http') ? post.image : `https://www.academy84.ir${post.image.startsWith('/') ? post.image : '/' + post.image}`],
       type: 'article',
       publishedTime: post.date,
-      authors: [post.author],
+      authors: ['آکادمی 84'],
     },
     twitter: {
       card: 'summary_large_image',
@@ -77,8 +77,8 @@ export default function BlogPostPage({
       : `https://www.academy84.ir${post.image.startsWith('/') ? post.image : '/' + post.image}`,
     datePublished: post.date,
     author: {
-      '@type': 'Person',
-      name: post.author,
+      '@type': 'Organization',
+      name: 'آکادمی 84',
     },
     publisher: {
       '@type': 'Organization',
@@ -131,7 +131,6 @@ export default function BlogPostPage({
             <h1 className="text-3xl md:text-4xl font-bold mb-4">{post.title}</h1>
 
             <div className="flex items-center text-gray-600 mb-8 border-b pb-4">
-              <span className="ml-4">نویسنده: {post.author}</span>
               <span>تاریخ: {formattedDate}</span>
             </div>
 

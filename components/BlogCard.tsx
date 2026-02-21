@@ -34,8 +34,7 @@ export default function BlogCard({ post, index = 0 }: BlogCardProps) {
       <div className="p-6">
         <h3 className="text-xl font-bold mb-2">{post.title}</h3>
         <p className="text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
-        <div className="flex items-center justify-between text-sm text-gray-500">
-          <span>{post.author}</span>
+        <div className="flex items-center justify-end text-sm text-gray-500">
           <span>{formattedDate}</span>
         </div>
         <Link

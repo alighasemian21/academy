@@ -18,7 +18,7 @@ export default function TeacherCard({ teacher, index = 0 }: TeacherCardProps) {
             src={teacher.image}
             alt={`عکس استاد ${teacher.name} - ${teacher.title} - آکادمی 84`}
             fill
-            className="object-cover teacher-image-offset transition-transform duration-500 group-hover:scale-105"
+            className={`object-cover teacher-image-offset transition-transform duration-500 group-hover:scale-105 ${['حسین کاوند', 'داوود ملک'].includes(teacher.name) ? 'object-top' : ''}`}
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 300px"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
