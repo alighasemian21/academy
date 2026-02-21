@@ -7,13 +7,15 @@ import { getCourseById } from '@/lib/data/courses';
 interface StepConfirmationProps {
   data: RegistrationFormData;
   onBack: () => void;
+  successTitle?: string;
+  successDescription?: string;
 }
 
 function formatPricePersian(price: number): string {
   return `${price.toLocaleString('fa-IR')} تومان`;
 }
 
-export default function StepConfirmation({ data, onBack }: StepConfirmationProps) {
+export default function StepConfirmation({ data, onBack, successTitle, successDescription }: StepConfirmationProps) {
   const course = getCourseById(data.courseId);
 
   return (
@@ -25,10 +27,10 @@ export default function StepConfirmation({ data, onBack }: StepConfirmationProps
       </div>
 
       <h2 className="text-2xl font-bold text-primary-900 mb-2">
-        ثبت‌نام با موفقیت انجام شد!
+        {successTitle ?? 'ثبت‌نام با موفقیت انجام شد!'}
       </h2>
       <p className="text-primary-600 mb-8">
-        اطلاعات شما ارسال شد و به زودی با شما تماس خواهیم گرفت.
+        {successDescription ?? 'اطلاعات شما ارسال شد و به زودی با شما تماس خواهیم گرفت.'}
       </p>
 
       <div className="bg-gray-50 rounded-2xl p-6 text-right mb-8 border border-gray-100">
@@ -83,6 +85,12 @@ export default function StepConfirmation({ data, onBack }: StepConfirmationProps
             <span className="text-primary-500">آدرس:</span>
             <span className="font-medium text-primary-900">{data.address}</span>
           </div>
+          {'referralCode' in data && data.referralCode && (
+            <div className="flex gap-2">
+              <span className="text-primary-500">کد معرف:</span>
+              <span className="font-medium text-primary-900" dir="ltr">{data.referralCode}</span>
+            </div>
+          )}
         </div>
       </div>
 

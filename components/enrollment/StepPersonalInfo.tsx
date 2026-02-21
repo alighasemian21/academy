@@ -8,26 +8,37 @@ import type { PersonalInfoData } from '@/lib/validations/enrollment';
 import { personalInfoSchema } from '@/lib/validations/enrollment';
 import { getAllCourses } from '@/lib/data/courses';
 
+const REFERRAL_CODE_REGEX = /^[a-zA-Z0-9]{4}$/;
+
 interface StepPersonalInfoProps {
-  data: PersonalInfoData & { courseId: string };
-  onNext: (data: PersonalInfoData & { courseId: string }) => void;
+  data: PersonalInfoData & { courseId: string; referralCode?: string };
+  onNext: (data: PersonalInfoData & { courseId: string; referralCode?: string }) => void;
+  hideCourseSelect?: boolean;
+  fixedCourseId?: string;
+  submitDisabled?: boolean;
+  showReferralCode?: boolean;
 }
 
-export default function StepPersonalInfo({ data, onNext }: StepPersonalInfoProps) {
-  const [formData, setFormData] = useState<PersonalInfoData & { courseId: string }>({
-    name: data.name || '',
-    phone: data.phone || '',
-    email: data.email || '',
-    nationalId: data.nationalId || '',
-    gender: data.gender || '' as any,
-    birthDate: data.birthDate || '',
-    address: data.address || '',
-    courseId: data.courseId || '',
+export default function StepPersonalInfo({ data, onNext, hideCourseSelect, fixedCourseId, submitDisabled, showReferralCode }: StepPersonalInfoProps) {
+  const [formData, setFormData] = useState<PersonalInfoData & { courseId: string; referralCode?: string }>(() => {
+    const courseId = hideCourseSelect && fixedCourseId ? fixedCourseId : (data.courseId || '');
+    return {
+      name: data.name || '',
+      phone: data.phone || '',
+      email: data.email || '',
+      nationalId: data.nationalId || '',
+      gender: data.gender || '' as any,
+      birthDate: data.birthDate || '',
+      address: data.address || '',
+      courseId,
+      ...(showReferralCode && { referralCode: data.referralCode || '' }),
+    };
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const courses = getAllCourses();
+  const showCourseSelect = !(hideCourseSelect && fixedCourseId);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -86,10 +97,17 @@ export default function StepPersonalInfo({ data, onNext }: StepPersonalInfoProps
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate courseId separately
-    if (!formData.courseId) {
+    if (showCourseSelect && !formData.courseId) {
       setErrors((prev) => ({ ...prev, courseId: 'لطفاً یک دوره انتخاب کنید' }));
       return;
+    }
+
+    if (showReferralCode && formData.referralCode?.trim()) {
+      const code = formData.referralCode.trim();
+      if (code.length !== 4 || !REFERRAL_CODE_REGEX.test(code)) {
+        setErrors((prev) => ({ ...prev, referralCode: 'کد معرف باید دقیقاً ۴ کاراکتر (حرف و عدد انگلیسی) باشد' }));
+        return;
+      }
     }
 
     const result = personalInfoSchema.safeParse(formData);
@@ -106,7 +124,11 @@ export default function StepPersonalInfo({ data, onNext }: StepPersonalInfoProps
     }
 
     setErrors({});
-    onNext(formData);
+    const payload = { ...formData, courseId: showCourseSelect ? formData.courseId : (fixedCourseId || formData.courseId) };
+    if (showReferralCode) {
+      (payload as { referralCode?: string }).referralCode = formData.referralCode?.trim() || undefined;
+    }
+    onNext(payload);
   };
 
   const inputClassName = (field: string) =>
@@ -123,91 +145,92 @@ export default function StepPersonalInfo({ data, onNext }: StepPersonalInfoProps
       onSubmit={handleSubmit}
       className="space-y-5 animate-[fade-in_0.3s_ease-out]"
     >
-      {/* Course Selection - Custom Dropdown */}
-      <div>
-        <label className={labelClassName}>
-          انتخاب دوره <span className="text-red-500">*</span>
-        </label>
-        <div ref={dropdownRef} className="relative">
-          {/* Trigger Button */}
-          <button
-            type="button"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className={`w-full px-4 py-3 border rounded-xl text-sm text-right flex items-center justify-between transition-all duration-200 outline-none ${
-              errors.courseId
-                ? 'border-red-400 bg-red-50'
-                : isDropdownOpen
-                ? 'border-accent-500 ring-2 ring-accent-500/20 bg-white'
-                : 'border-gray-300 bg-white hover:border-gray-400'
-            }`}
-          >
-            {selectedCourse ? (
-              <span className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-accent-500 shrink-0" />
-                <span className="font-medium text-primary-800">{selectedCourse.title}</span>
-                <span className="text-primary-400 hidden sm:inline">—</span>
-                <span className="text-primary-400 text-xs hidden sm:inline">{selectedCourse.instructor}</span>
-              </span>
-            ) : (
-              <span className="text-gray-400">یک دوره را انتخاب کنید...</span>
-            )}
-            <svg
-              className={`w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
+      {/* Course Selection - Custom Dropdown (hidden when fixed course for workshop) */}
+      {showCourseSelect && (
+        <div>
+          <label className={labelClassName}>
+            انتخاب دوره <span className="text-red-500">*</span>
+          </label>
+          <div ref={dropdownRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className={`w-full px-4 py-3 border rounded-xl text-sm text-right flex items-center justify-between transition-all duration-200 outline-none ${
+                errors.courseId
+                  ? 'border-red-400 bg-red-50'
+                  : isDropdownOpen
+                  ? 'border-accent-500 ring-2 ring-accent-500/20 bg-white'
+                  : 'border-gray-300 bg-white hover:border-gray-400'
+              }`}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
+              {selectedCourse ? (
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-accent-500 shrink-0" />
+                  <span className="font-medium text-primary-800">{selectedCourse.title}</span>
+                  <span className="text-primary-400 hidden sm:inline">—</span>
+                  <span className="text-primary-400 text-xs hidden sm:inline">{selectedCourse.instructor}</span>
+                </span>
+              ) : (
+                <span className="text-gray-400">یک دوره را انتخاب کنید...</span>
+              )}
+              <svg
+                className={`w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
 
-          {isDropdownOpen && (
-            <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-soft-lg overflow-hidden animate-[fade-in_0.15s_ease-out]">
-              <div className="max-h-64 overflow-y-auto py-1">
-                {courses.map((course) => {
-                  const isSelected = formData.courseId === course.id;
-                  return (
-                    <button
-                      key={course.id}
-                      type="button"
-                      onClick={() => handleCourseSelect(course.id)}
-                      className={`w-full text-right px-4 py-3 flex items-center justify-between gap-3 transition-colors duration-150 ${
-                        isSelected
-                          ? 'bg-accent-50'
-                          : 'hover:bg-gray-50'
-                      }`}
-                    >
-                      <div className="flex flex-col gap-0.5 min-w-0">
-                        <span className={`text-sm truncate ${isSelected ? 'font-semibold text-accent-600' : 'font-medium text-primary-800'}`}>
-                          {course.title}
-                        </span>
-                        <span className="text-xs text-primary-400 truncate">
-                          {course.instructor} · {course.duration}
-                        </span>
-                      </div>
-                      {isSelected && (
-                        <svg
-                          className="w-5 h-5 text-accent-500 shrink-0"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2.5}
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      )}
-                    </button>
-                  );
-                })}
+            {isDropdownOpen && (
+              <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-soft-lg overflow-hidden animate-[fade-in_0.15s_ease-out]">
+                <div className="max-h-64 overflow-y-auto py-1">
+                  {courses.map((course) => {
+                    const isSelected = formData.courseId === course.id;
+                    return (
+                      <button
+                        key={course.id}
+                        type="button"
+                        onClick={() => handleCourseSelect(course.id)}
+                        className={`w-full text-right px-4 py-3 flex items-center justify-between gap-3 transition-colors duration-150 ${
+                          isSelected
+                            ? 'bg-accent-50'
+                            : 'hover:bg-gray-50'
+                        }`}
+                      >
+                        <div className="flex flex-col gap-0.5 min-w-0">
+                          <span className={`text-sm truncate ${isSelected ? 'font-semibold text-accent-600' : 'font-medium text-primary-800'}`}>
+                            {course.title}
+                          </span>
+                          <span className="text-xs text-primary-400 truncate">
+                            {course.instructor} · {course.duration}
+                          </span>
+                        </div>
+                        {isSelected && (
+                          <svg
+                            className="w-5 h-5 text-accent-500 shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
+          </div>
+          {errors.courseId && (
+            <p className="text-red-500 text-xs mt-1">{errors.courseId}</p>
           )}
         </div>
-        {errors.courseId && (
-          <p className="text-red-500 text-xs mt-1">{errors.courseId}</p>
-        )}
-      </div>
+      )}
 
       {/* Name */}
       <div>
@@ -368,13 +391,42 @@ export default function StepPersonalInfo({ data, onNext }: StepPersonalInfoProps
         )}
       </div>
 
+      {/* Referral code (workshop pre-reg only) */}
+      {showReferralCode && (
+        <div>
+          <label htmlFor="referralCode" className={labelClassName}>
+            کد معرف
+          </label>
+          <input
+            type="text"
+            id="referralCode"
+            name="referralCode"
+            value={formData.referralCode || ''}
+            onChange={(e) => {
+              const v = e.target.value.replace(/[^a-zA-Z0-9]/g, '').slice(0, 4);
+              setFormData((prev) => ({ ...prev, referralCode: v }));
+              if (errors.referralCode) setErrors((prev) => { const next = { ...prev }; delete next.referralCode; return next; });
+            }}
+            className={`${inputClassName('referralCode')} text-left dir-ltr`}
+            placeholder="۴ کاراکتر حرف یا عدد"
+            dir="ltr"
+            maxLength={4}
+            autoComplete="off"
+          />
+          {errors.referralCode && (
+            <p className="text-red-500 text-xs mt-1">{errors.referralCode}</p>
+          )}
+        </div>
+      )}
+
       {/* Submit Button */}
       <div className="pt-4">
         <button
           type="submit"
-          className="w-full bg-accent-500 text-white px-6 py-3.5 rounded-xl font-semibold text-sm hover:bg-accent-600 transition-colors shadow-soft hover:shadow-soft-lg"
+          disabled={submitDisabled}
+          className="w-full bg-accent-500 text-white px-6 py-3.5 rounded-xl font-semibold text-sm hover:bg-accent-600 transition-colors shadow-soft hover:shadow-soft-lg disabled:opacity-60 disabled:pointer-events-none"
         >
-          مرحله بعد: اطلاعات دوره و پرداخت
+          {showCourseSelect ? 'مرحله بعد: اطلاعات دوره و پرداخت' : 'ثبت پیش‌ثبت‌نام'}
         </button>
       </div>
     </form>

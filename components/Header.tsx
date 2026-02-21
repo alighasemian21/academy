@@ -18,11 +18,10 @@ export default function Header() {
 
   const navLinks = [
     { href: '/', label: 'خانه' },
-    { href: '/about', label: 'درباره ما' },
     { href: '/academy', label: 'آکادمی' },
+    { href: '/workshop/kashan-mobile-clip', label: 'ورکشاپ موج' },
     { href: '/academy/courses', label: 'دوره‌ها' },
     { href: '/academy/teachers', label: 'اساتید' },
-    { href: '/academy/studio', label: 'استودیو' },
     { href: '/blog', label: 'وبلاگ' },
     { href: '/contact', label: 'تماس با ما' },
   ];
@@ -54,7 +53,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-reverse space-x-8 xl:space-x-10">
+          <div className="hidden lg:flex items-center gap-x-8 xl:gap-x-10">
             {navLinks.map((link) => (
               <div key={link.href}>
                 <Link

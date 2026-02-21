@@ -8,6 +8,14 @@ const enrollmentSchema = z.object({
   phone: z.string().regex(/^09\d{9}$/, 'شماره تماس نامعتبر است'),
   course: z.string().min(1, 'لطفاً یک دوره انتخاب کنید'),
   message: z.string().max(1000).optional(),
+  nationalId: z.string().max(20).optional(),
+  gender: z.enum(['male', 'female']).optional(),
+  birthDate: z.string().max(20).optional(),
+  address: z.string().max(500).optional(),
+  referralCode: z
+    .union([z.string().length(4).regex(/^[a-zA-Z0-9]{4}$/), z.literal('')])
+    .optional()
+    .transform((s) => (s === '' ? undefined : s)),
 });
 
 export async function POST(request: NextRequest) {

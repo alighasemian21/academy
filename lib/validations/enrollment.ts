@@ -77,4 +77,5 @@ export type PaymentData = z.infer<typeof paymentSchema>;
 export interface RegistrationFormData extends PersonalInfoData {
   courseId: string;
   receiptUrl?: string;
+  referralCode?: string;
 }
