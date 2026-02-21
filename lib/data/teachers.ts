@@ -32,6 +32,38 @@ export const teachers: Teacher[] = [
     image: '/images/teachers/mohammad-rezaei.png',
     specialties: ['بازاریابی دیجیتال', 'سئو', 'تبلیغات آنلاین'],
   },
+  {
+    id: '4',
+    name: 'داوود ملک',
+    title: 'مدرس تصویربرداری',
+    bio: 'مدرس دوره تصویربرداری در آکادمی 84',
+    image: '/images/teachers/placeholder-teacher.svg',
+    specialties: ['تصویربرداری', 'فیلمبرداری'],
+  },
+  {
+    id: '5',
+    name: 'رضا نصیری',
+    title: 'مدرس تولید محتوا و موبایلگرافی',
+    bio: 'مدرس دوره‌های تولید محتوا و موبایلگرافی در آکادمی 84',
+    image: '/images/teachers/placeholder-teacher.svg',
+    specialties: ['تولید محتوا', 'موبایلگرافی'],
+  },
+  {
+    id: '6',
+    name: 'حسین کاوند',
+    title: 'مدرس برنامه نویسی وب',
+    bio: 'مدرس دوره برنامه نویسی وب در آکادمی 84',
+    image: '/images/teachers/placeholder-teacher.svg',
+    specialties: ['برنامه نویسی وب'],
+  },
+  {
+    id: '7',
+    name: 'یوسف صادقی',
+    title: 'مدرس طراحی و گرافیک',
+    bio: 'مدرس دوره طراحی و گرافیک در آکادمی 84',
+    image: '/images/teachers/placeholder-teacher.svg',
+    specialties: ['طراحی گرافیک'],
+  },
 ];
 
 export function getAllTeachers(): Teacher[] {
