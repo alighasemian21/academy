@@ -153,9 +153,10 @@ export default function Hero({ slides }: HeroProps) {
           {/* Heading */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 sm:mb-8 leading-[1.15] tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 leading-[1.25] tracking-tight max-w-4xl mx-auto drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
           >
-            آکادمی هشتاد و چهار
+            <span className="block">اولین ایونت تخصصی</span>
+            <span className="block mt-1 sm:mt-1.5">تولید محتوا با موبایل</span>
           </motion.h1>
 
           {/* Subtitle */}
