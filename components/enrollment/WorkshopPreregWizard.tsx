@@ -12,6 +12,13 @@ export const WORKSHOP_COURSE_ID = 'workshop-kashan-mobile-clip';
 const WORKSHOP_DISPLAY_TITLE = 'ورکشاپ کلیپ‌سازی با موبایل - کاشان';
 const STORAGE_KEY = 'academy84_prereg_draft';
 
+function normalizeReferralCodeForApi(value: string | undefined): string | undefined {
+  const trimmed = value?.trim();
+  if (!trimmed) return undefined;
+  const normalized = trimmed.replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d).toString());
+  return normalized.length === 4 && /^[a-zA-Z0-9]{4}$/.test(normalized) ? normalized : undefined;
+}
+
 const steps = [
   { title: 'اطلاعات شخصی', description: 'ورود مشخصات فردی' },
   { title: 'تایید نهایی', description: 'ثبت موفق' },
@@ -73,24 +80,30 @@ export default function WorkshopPreregWizard() {
     setIsSubmitting(true);
     saveDraft(data);
     try {
-      const res = await fetch('/api/enrollments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          course: data.courseId,
-          nationalId: data.nationalId || undefined,
-          gender: data.gender || undefined,
-          birthDate: data.birthDate || undefined,
-          address: data.address || undefined,
-          referralCode: data.referralCode?.trim() || undefined,
-        }),
-      });
-      const json = await res.json();
-      if (!res.ok || !json.success) {
-        throw new Error(json.message || 'خطا در ثبت پیش‌ثبت‌نام');
+      const referralForApi = normalizeReferralCodeForApi(data.referralCode);
+      const apiBody = {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        course: data.courseId,
+        nationalId: data.nationalId || undefined,
+        gender: data.gender || undefined,
+        birthDate: data.birthDate || undefined,
+        address: data.address || undefined,
+        referralCode: referralForApi,
+      };
+      try {
+        const res = await fetch('/api/enrollments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(apiBody),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || !json.success) {
+          // API failure is ignored; we still send email and show success
+        }
+      } catch {
+        // Network or API error ignored; email is the source of truth
       }
 
       const now = new Date();
