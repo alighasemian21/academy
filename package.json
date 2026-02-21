@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "og:png": "node scripts/og-svg-to-png.mjs"
+    "og:png": "node scripts/og-svg-to-png.mjs",
+    "favicon": "node scripts/generate-favicon.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

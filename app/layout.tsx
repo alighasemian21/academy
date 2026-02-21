@@ -53,7 +53,10 @@ export const metadata: Metadata = {
     images: ['/images/og-image.png'],
   },
   icons: {
-    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
     apple: [{ url: '/icon.svg', sizes: '180x180', type: 'image/svg+xml' }],
   },
   robots: {
@@ -78,6 +81,7 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" className={iranYekan.variable}>
       <head>
         <meta name="theme-color" content="#171717" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
