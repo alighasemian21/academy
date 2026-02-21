@@ -54,15 +54,15 @@ export default function Header() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-reverse space-x-6 xl:space-x-8">
+          <div className="hidden lg:flex items-center space-x-reverse space-x-8 xl:space-x-10">
             {navLinks.map((link) => (
               <div key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-primary-700 hover:text-primary-900 font-medium text-sm transition-colors duration-200 relative group/link block"
+                  className="text-primary-700 hover:text-primary-900 font-medium text-sm transition-colors duration-200 relative group/link block pb-2.5"
                 >
                   {link.label}
-                  <span className="absolute bottom-0 left-0 right-0 h-1 rounded-full bg-gradient-to-r from-accent-400 via-accent-500 to-accent-600 origin-center scale-x-0 transition-transform duration-200 ease-out group-hover/link:animate-navUnderlineDraw" />
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-gradient-to-r from-accent-500 to-accent-600 origin-center scale-x-0 transition-transform duration-200 ease-out group-hover/link:animate-navUnderlineDraw" />
                 </Link>
               </div>
             ))}
