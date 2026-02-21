@@ -4,7 +4,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'تماس با ما',
-  description: 'تماس با آکادمی 84 - سوالات، پیشنهادات و درخواست مشاوره. شعبه ۱: کاشان، خیابان بهشتی. شعبه ۲: قم، سالاریه. تلفن: 09133139424',
+  description: 'تماس با آکادمی 84 - سوالات، پیشنهادات و درخواست مشاوره. آدرس: کاشان- خیابان شهید بهشتی. تلفن: 0913-313-9424',
   keywords: ['تماس با آکادمی 84', 'آدرس آکادمی 84', 'شماره تماس آکادمی 84', 'ایمیل آکادمی 84', 'مشاوره رایگان'],
   openGraph: {
     title: 'تماس با ما | آکادمی 84',
@@ -28,10 +28,13 @@ export default function ContactPage() {
       name: 'آکادمی 84',
       telephone: '+98-913-313-9424',
       email: 'acadeemy84@gmail.com',
-      address: [
-        { '@type': 'PostalAddress', addressLocality: 'کاشان', streetAddress: 'خیابان بهشتی', addressRegion: 'اصفهان', addressCountry: 'IR' },
-        { '@type': 'PostalAddress', addressLocality: 'قم', streetAddress: 'سالاریه', addressRegion: 'قم', addressCountry: 'IR' },
-      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'کاشان',
+        streetAddress: 'خیابان شهید بهشتی',
+        addressRegion: 'اصفهان',
+        addressCountry: 'IR',
+      },
       openingHoursSpecification: {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
@@ -82,7 +85,7 @@ export default function ContactPage() {
             <h3 className="text-xl font-bold text-primary-900 mb-3">تلفن</h3>
             <p className="text-primary-600">
               <a href="tel:09133139424" className="hover:text-primary-900 transition-colors">
-                09133139424
+                0913-313-9424
               </a>
             </p>
           </div>
@@ -95,10 +98,7 @@ export default function ContactPage() {
               </svg>
             </div>
             <h3 className="text-xl font-bold text-primary-900 mb-3">آدرس</h3>
-            <p className="text-primary-600">
-              شعبه ۱: کاشان، خیابان بهشتی<br />
-              شعبه ۲: قم، سالاریه
-            </p>
+            <p className="text-primary-600">کاشان- خیابان شهید بهشتی</p>
           </div>
         </div>
 

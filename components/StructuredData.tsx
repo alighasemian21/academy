@@ -9,14 +9,17 @@ export default function StructuredData() {
     url: baseUrl,
     logo: `${baseUrl}/images/logos/logo-84-white.png`,
     description: 'آکادمی 84 (آموزشگاه هشتاد و چهار) - مرکز تخصصی آموزش تصویر و رسانه در کاشان. دوره‌های حرفه‌ای و پروژه‌محور تولید محتوا، عکاسی، موبایگرافی، تدوین، طراحی وبسایت و مشاوره کسب‌وکار',
-    address: [
-      { '@type': 'PostalAddress', addressLocality: 'کاشان', streetAddress: 'خیابان بهشتی', addressRegion: 'اصفهان', addressCountry: 'IR' },
-      { '@type': 'PostalAddress', addressLocality: 'قم', streetAddress: 'سالاریه', addressRegion: 'قم', addressCountry: 'IR' },
-    ],
-    areaServed: [
-      { '@type': 'City', name: 'کاشان' },
-      { '@type': 'City', name: 'قم' },
-    ],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'کاشان',
+      streetAddress: 'خیابان شهید بهشتی',
+      addressRegion: 'اصفهان',
+      addressCountry: 'IR',
+    },
+    areaServed: {
+      '@type': 'City',
+      name: 'کاشان',
+    },
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+98-913-313-9424',
