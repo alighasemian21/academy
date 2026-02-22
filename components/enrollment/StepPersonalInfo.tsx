@@ -273,7 +273,7 @@ export default function StepPersonalInfo({ data, onNext, hideCourseSelect, fixed
         </div>
         <div>
           <label htmlFor="email" className={labelClassName}>
-            ایمیل <span className="text-red-500">*</span>
+            ایمیل
           </label>
           <input
             type="email"
@@ -383,7 +383,7 @@ export default function StepPersonalInfo({ data, onNext, hideCourseSelect, fixed
           value={formData.address}
           onChange={handleChange}
           rows={3}
-          className={inputClassName('address')}
+          className={`${inputClassName('address')} resize-none`}
           placeholder="آدرس کامل محل سکونت خود را وارد کنید..."
         />
         {errors.address && (
@@ -407,9 +407,12 @@ export default function StepPersonalInfo({ data, onNext, hideCourseSelect, fixed
               setFormData((prev) => ({ ...prev, referralCode: v }));
               if (errors.referralCode) setErrors((prev) => { const next = { ...prev }; delete next.referralCode; return next; });
             }}
-            className={`${inputClassName('referralCode')} text-left dir-ltr`}
+            className={`${inputClassName('referralCode')} text-right dir-ltr`}
             placeholder="۴ کاراکتر حرف یا عدد"
             dir="ltr"
+            style={{
+              direction: 'rtl',
+            }}
             maxLength={4}
             autoComplete="off"
           />

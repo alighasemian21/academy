@@ -9,7 +9,7 @@ export interface EnrollmentEmailParams {
   name: string;
   national_number: string;
   mobile: string;
-  email: string;
+  email?: string;
   gender: string;
   birth_date: string;
   address: string;
@@ -17,6 +17,7 @@ export interface EnrollmentEmailParams {
   deposite_receipt?: string;
   time: string;
   message: string;
+  referral_code?: string;
 }
 
 /**

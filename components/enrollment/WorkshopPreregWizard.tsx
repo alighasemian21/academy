@@ -124,6 +124,7 @@ export default function WorkshopPreregWizard() {
         deposite_receipt: '—',
         time: timeString,
         message: `پیش‌ثبت‌نام ${WORKSHOP_DISPLAY_TITLE}`,
+        referral_code: referralForApi,
       };
 
       toast.info('در حال ارسال اطلاعات...');
@@ -169,7 +170,7 @@ export default function WorkshopPreregWizard() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-soft p-6 sm:p-8 max-w-3xl mx-auto mb-8">
+    <div className="bg-white rounded-2xl p-6 max-w-3xl mx-auto mb-8">
       <StepIndicator currentStep={currentStep} steps={steps} />
 
       {currentStep === 1 && (

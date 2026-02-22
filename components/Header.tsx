@@ -49,7 +49,7 @@ export default function Header() {
               />
             </div>
             <span className="text-2xl font-bold text-primary-900 hidden sm:inline tracking-tight group-hover:text-accent-600 transition-colors duration-200">آکادمی هشتاد و چهار</span>
-            <span className="text-xl font-bold text-primary-900 sm:hidden group-hover:text-accent-600 transition-colors duration-200">آکادمی ۸۴</span>
+            <span className="text-xl font-bold text-primary-900 sm:hidden group-hover:text-accent-600 transition-colors duration-200">آکادمی هشتاد و چهار</span>
           </Link>
 
           {/* Desktop Menu */}

@@ -25,8 +25,8 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function WorkshopAnimatedContent({ children }: { children: React.ReactNode }) {
   return (
     <div className="pt-14 sm:pt-16 pb-8 sm:pb-12 lg:pb-0 bg-gradient-to-b from-primary-50/50 to-primary-50/20 min-h-screen lg:min-h-[calc(100vh-4rem)] overflow-x-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-6xl py-6 sm:py-8 lg:py-12 w-full min-w-0">
-        <div className="flex flex-col gap-8 sm:gap-10 lg:grid lg:grid-cols-[1.05fr_1fr] lg:gap-x-20 lg:gap-y-0 lg:items-center lg:min-h-[calc(100vh-10rem)] lg:min-w-0 w-full">
+      <div className="container mx-auto px-4 pb-8 lg:pb-12 sm:px-6 lg:px-12 max-w-6xl w-full min-w-0">
+        <div className="flex flex-col gap-8 sm:gap-10 lg:grid lg:grid-cols-[1.05fr_1fr] lg:gap-x-20 lg:gap-y-0 lg:min-h-[calc(100vh-10rem)] lg:min-w-0 w-full">
           {/* Left column: intro + summary (stacks first on mobile) */}
           <div className="flex flex-col gap-6 sm:gap-8 lg:gap-10 min-w-0 order-1">
             <motion.header

@@ -35,7 +35,7 @@ export const personalInfoSchema = z.object({
     .regex(/^09\d{9}$/, 'شماره همراه باید با ۰۹ شروع شود و ۱۱ رقم باشد'),
   email: z
     .string()
-    .email('ایمیل معتبر نیست'),
+    .optional(),
   nationalId: z
     .string()
     .length(10, 'کد ملی باید ۱۰ رقم باشد')
